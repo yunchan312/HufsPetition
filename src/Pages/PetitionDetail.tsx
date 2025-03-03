@@ -1,12 +1,16 @@
 import { useForm } from "react-hook-form";
 import StatusBar from "../Components/StatusBar";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AgreeModal from "../Components/AgreeModal";
 
 interface AgreeForm {
   agree: string;
 }
+const statusEnum = {
+  ONGOING: "ongoing",
+  DONE: "waiting",
+  WAITING: "done",
+};
 const PetitionDetail = () => {
   const detail = `BTS는 단순한 K-pop 그룹을 넘어 전 세계적으로 한국 문화를 대표하는 아이콘이 되었습니다. 그들의 음악, 활동, 그리고 메시지는 많은 사람들에게 영감을 주며, 한국의 이미지를 세계에 긍정적으로 알리는 데 큰 기여를 했습니다. 그렇기에 BTS가 군 면제를 받을 자격이 충분하다고 생각합니다.\n\n
 
@@ -31,7 +35,7 @@ const PetitionDetail = () => {
 국민 여러분, BTS는 단순한 연예인이 아니라, 우리나라의 소중한 자산입니다. 그들이 더 큰 무대에서 활동을 이어나갈 수 있도록 함께 응원합시다. 감사합니다.\n\n`;
 
   const links = `https://www.ytn.co.kr/_ln/0103_20200622100051799 youtube.com`;
-  const status = "done";
+  const status = statusEnum.DONE;
 
   const {
     register,
@@ -45,7 +49,6 @@ const PetitionDetail = () => {
   };
 
   const [isModal, setIsModal] = useState(false);
-  const [viewPort, setViewPort] = useState(0);
 
   return (
     <div className="py-[80px] px-10">
@@ -131,7 +134,6 @@ const PetitionDetail = () => {
       <div
         className="border-2 border-Point w-[300px] text-center mx-auto py-1 px-2 cursor-pointer bg-Point text-white font-bold"
         onClick={() => {
-          setViewPort(window.scrollY);
           setIsModal(true);
         }}
       >
