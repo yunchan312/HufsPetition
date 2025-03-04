@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import StatusBar from "../Components/StatusBar";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import AgreeModal from "../Components/AgreeModal";
 
 interface AgreeForm {
