@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div>
       <HomeBanner />
-      <div className="px-10 py-5">
+      <div className="phone:px-10 phone:py-5 flex items-center justify-center">
         <OnGoing />
       </div>
     </div>

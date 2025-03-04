@@ -98,10 +98,10 @@ const OnGoing = () => {
   ];
   const [typeNum, setTypeNum] = useState(0);
   return (
-    <div className="pt-[80px] px-5">
+    <div className="phone:pt-[80px] pt-20 px-5 ">
       <div>
         <div className="text-[25px] mb-5">청원 분류 선택</div>
-        <div className="border-2 grid grid-cols-5 py-3 px-3">
+        <div className="border-2 grid phone:grid-cols-6 grid-cols-3 py-3 px-3 w-full">
           {types.map((t, i) => (
             <div
               onClick={() => setTypeNum(i)}

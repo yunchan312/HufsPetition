@@ -12,7 +12,7 @@ const PetitionCard = (props: PetitionCardProps) => {
   const navigate = useNavigate();
   return (
     <div
-      className="mx-10 py-5 *:py-2 border-b-2 cursor-pointer"
+      className="phone:mx-10 mx-5 phone:py-5 *:py-2 border-b-2 cursor-pointer"
       onClick={() => {
         navigate(`/detail/${props.id}`);
       }}

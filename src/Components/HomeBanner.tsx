@@ -1,16 +1,24 @@
+import gsap from "gsap";
 import Banner from "../assets/Banner.png";
 import Status from "./Status";
+import { useGSAP } from "@gsap/react";
 
 const HomeBanner = () => {
+  gsap.registerPlugin(useGSAP);
+  useGSAP(() => {
+    gsap.fromTo(".Banner", { opacity: 0 }, { opacity: 1, duration: 3 });
+  }, []);
   return (
     <div>
       <div
-        className="h-[600px] flex flex-col justify-end bg-cover bg-center"
+        className="Banner phone:h-[600px] h-[300px] flex flex-col justify-end bg-cover bg-center w-screen"
         style={{
           backgroundImage: `url(${Banner})`,
         }}
       >
-        <Status />
+        <div className="phone:flex hidden items-center justify-center w-full">
+          <Status />
+        </div>
       </div>
     </div>
   );

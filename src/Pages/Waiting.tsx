@@ -78,16 +78,18 @@ const Waiting = () => {
     },
   ];
   return (
-    <div className="pt-[80px] px-5">
-      <div className="text-[25px]">청원 현황</div>
-      <div className="border-2 py-5">
+    <div className="phone:pt-[80px] pt-20 px-5">
+      <div className="text-[25px] phone:block hidden">청원 현황</div>
+      <div className="border-2 py-5 phone:block hidden">
         <Status />
       </div>
 
       <PageTitle title="답변 대기 / 만료 청원" options={["a", "b", "c", "d"]} />
 
-      {petitions.map((petition) => (
-        <PetitionCard {...petition} />
+      {petitions.map((petition, i) => (
+        <div key={i}>
+          <PetitionCard {...petition} />
+        </div>
       ))}
     </div>
   );

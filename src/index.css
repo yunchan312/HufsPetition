@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 @theme {
+  /*color palette*/
   --color-Point: #00677f;
   --color-Hufs: #013642;
+
+  /*break point*/
+  --breakpoint-phone: 900px;
 }
 
 .input {
@@ -26,8 +30,8 @@
 }
 
 .hufsBtn {
-  @apply border-2 border-Hufs bg-Hufs text-white w-[250px] py-1 text-center cursor-pointer;
+  @apply border-2 border-Hufs bg-Hufs text-white w-[139px] phone:w-[250px] py-1 text-center cursor-pointer;
 }
 .hufsLightBtn {
-  @apply border-2 text-Hufs w-[250px] py-1 text-center cursor-pointer;
+  @apply border-2 text-Hufs phone:w-[250px] w-[139px] py-1 text-center cursor-pointer;
 }

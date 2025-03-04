@@ -19,12 +19,12 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
   const navigate = useNavigate();
   return (
     <div
-      className="mx-10 flex justify-between py-5 border-b-2 cursor-pointer"
+      className="phone:mx-10 mx-5 flex phone:flex-row flex-col-reverse items-center phone:justify-between phone:py-5 py-3 border-b-2 cursor-pointer phone:w-[850px]"
       onClick={() => navigate(`/detail/${props.id}`)}
     >
-      <div className="flex flex-col justify-around gap-4">
-        <div>
-          <div className="bg-Hufs text-white px-4 py-2 rounded-md w-[130px] text-center">
+      <div className="flex flex-col justify-around gap-4 w-[340px]">
+        <div className="my-2">
+          <div className="bg-Hufs text-white px-4 py-2 rounded-md w-[150px] text-center">
             청원답변 {props.id}호
           </div>
           <div className="text-[20px] text-Hufs font-semibold mt-5">
@@ -74,19 +74,21 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
       </div>
 
       <div className="relative *:rounded-lg">
-        <div className="px-5 py-2 bg-black/50 w-[400px] h-[250px] absolute text-white font-bold text-[25px] flex justify-end flex-col">
-          <div className="w-[60%]">구급차 막아세운 택시 기사 처벌 청원</div>
+        <div className="px-5 py-2 bg-black/50 phone:w-[400px] phone:h-[250px] w-[340px] h-[150px] absolute text-white font-bold phone:text-[25px] text-[20px] flex justify-end flex-col">
+          <div className="phone:w-[60%]">
+            구급차 막아세운 택시 기사 처벌 청원
+          </div>
         </div>
         {props.src ? (
           <div
             style={{
               backgroundImage: `url("${props.src}")`,
             }}
-            className="w-[400px] h-[250px] bg-center bg-cover"
+            className="phone:w-[400px] phone:h-[250px] w-[340px] h-[150px] bg-center bg-cover"
           />
         ) : (
           <div
-            className="w-[400px] h-[250px] bg-center bg-cover"
+            className="phone:w-[400px] phone:h-[250px] w-[340px] h-[150px] bg-center bg-cover"
             style={{
               backgroundImage: `url(${Default})`,
             }}

@@ -51,7 +51,7 @@ function App() {
     },
   ]);
   return (
-    <div className="mx-auto max-w-[1500px] relative">
+    <div className="mx-auto relative">
       <RouterProvider router={router} />
     </div>
   );

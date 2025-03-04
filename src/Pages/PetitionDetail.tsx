@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import StatusBar from "../Components/StatusBar";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import AgreeModal from "../Components/AgreeModal";
 
 interface AgreeForm {
@@ -8,8 +9,8 @@ interface AgreeForm {
 }
 const statusEnum = {
   ONGOING: "ongoing",
-  DONE: "waiting",
-  WAITING: "done",
+  WAITING: "waiting",
+  DONE: "done",
 };
 const PetitionDetail = () => {
   const detail = `BTS는 단순한 K-pop 그룹을 넘어 전 세계적으로 한국 문화를 대표하는 아이콘이 되었습니다. 그들의 음악, 활동, 그리고 메시지는 많은 사람들에게 영감을 주며, 한국의 이미지를 세계에 긍정적으로 알리는 데 큰 기여를 했습니다. 그렇기에 BTS가 군 면제를 받을 자격이 충분하다고 생각합니다.\n\n
@@ -35,7 +36,7 @@ const PetitionDetail = () => {
 국민 여러분, BTS는 단순한 연예인이 아니라, 우리나라의 소중한 자산입니다. 그들이 더 큰 무대에서 활동을 이어나갈 수 있도록 함께 응원합시다. 감사합니다.\n\n`;
 
   const links = `https://www.ytn.co.kr/_ln/0103_20200622100051799 youtube.com`;
-  const status = statusEnum.DONE;
+  const status = statusEnum.ONGOING;
 
   const {
     register,
@@ -47,26 +48,27 @@ const PetitionDetail = () => {
     console.log(data);
     alert("정상적으로 처리되었습니다.");
   };
-
   const [isModal, setIsModal] = useState(false);
 
   return (
-    <div className="py-[80px] px-10">
+    <div className="py-[80px] phone:px-10 px-1 w-[90%]">
       {isModal ? (
         <div className="bg-black/40 fixed top-0 left-0 w-screen h-screen flex items-center justify-center">
           <AgreeModal setter={setIsModal} />
         </div>
       ) : null}
-      <div className="text-[30px] my-5">
+      <div className="text-[30px] my-5 border-b-2 phone:border-0">
         국위선양 BTS 멤버들 군면제 해주세요
       </div>
-      <StatusBar
-        status={status}
-        counts={1234556}
-        category={"인권/환경"}
-        startdate="2020.01.01"
-        enddate="2020.02.01"
-      />
+      <div className="">
+        <StatusBar
+          status={status}
+          counts={1234556}
+          category={"인권/환경"}
+          startdate="2020.01.01"
+          enddate="2020.02.01"
+        />
+      </div>
 
       {status === "done" ? (
         <div>
@@ -92,13 +94,16 @@ const PetitionDetail = () => {
         </div>
       </div>
 
-      <div className="border-y-2 px-5 border-Point mb-5">
-        {links.split(" ").map((l, i) => (
-          <li className="my-5" key={i}>
-            <a href={l}>{l}</a>
-            <br />
-          </li>
-        ))}
+      <div className="border-y-2 w-full border-Point mb-5">
+        <div className="text-[20px] text-Point pt-3">관련 링크</div>
+        <div className="flex flex-col">
+          {links.split(" ").map((l, i) => (
+            <div key={i} className="pt-2 overflow-hidden w-[90%]">
+              <div>링크{i + 1}</div>
+              <li className="list-none text-blue-400">{l}</li>
+            </div>
+          ))}
+        </div>
       </div>
 
       {status === "ongoing" ? (

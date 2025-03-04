@@ -1,10 +1,12 @@
 const DropDown = ({ options }: { options: string[] }) => {
   return (
-    <div className="absolute top-7 bg-white w-full *:px-1 left-0 shadow-2xl">
-      {options.map((option) => (
-        <div className="option">{option}</div>
+    <select className="bg-white w-[200px] *:px-1 left-0 shadow-2xl border-2 rounded-md">
+      {options.map((option, i) => (
+        <option key={i} value={option} className="option">
+          {option}
+        </option>
       ))}
-    </div>
+    </select>
   );
 };
 

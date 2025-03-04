@@ -20,7 +20,7 @@ const LoginForm = ({
     console.log(data);
   };
   return (
-    <div className="border-2 w-[50%] px-10 border-neutral-300 h-[300px] flex flex-col py-10 justify-between">
+    <div className="border-2 phone:w-[90%] w-[300px] px-10 border-neutral-300 h-[300px] flex flex-col py-10 justify-between">
       <div>로그인</div>
       <form
         className="flex flex-col items-center gap-2"

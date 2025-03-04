@@ -81,7 +81,7 @@ const AgreeModal = ({
     },
   ];
   return (
-    <div className="w-[600px] h-[700px] bg-white border-2 overflow-y-scroll px-5 py-3">
+    <div className="phone:w-[600px] phone:h-[700px] h-[500px] w-[300px] bg-white border-2 overflow-y-scroll px-5 py-3">
       <div className="flex justify-end">
         <FaXmark
           className="text-[30px] text-neutral-400 cursor-pointer"
