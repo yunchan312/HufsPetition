@@ -97,7 +97,7 @@ const PetitionDetail = () => {
         <div className="text-[20px] text-Point pt-3">관련 링크</div>
         <div className="flex flex-col">
           {links.split(" ").map((l, i) => (
-            <div key={i} className="pt-2 overflow-hidden w-[90%]">
+            <div key={i} className="py-2 overflow-hidden w-[90%]">
               <div>링크{i + 1}</div>
               <li className="list-none text-blue-400">{l}</li>
             </div>
@@ -106,8 +106,8 @@ const PetitionDetail = () => {
       </div>
 
       {status === "ongoing" ? (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex items-center mb-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
+          <div className="flex items-center">
             <input
               type="text"
               {...register("agree", {
@@ -121,7 +121,7 @@ const PetitionDetail = () => {
                 },
               })}
               className="border-2 border-Point w-full placeholder:text-Point/50 py-1 px-2"
-              placeholder="동의합니다.를 입력해주세요."
+              placeholder="동의합니다. 를 입력해주세요."
             />
             <input
               type="submit"
@@ -130,13 +130,15 @@ const PetitionDetail = () => {
             />
           </div>
           {errors.agree ? (
-            <div className="error">동의합니다.를 입력해주세요</div>
+            <div className="error">
+              <strong>동의합니다.</strong> 를 입력해주세요
+            </div>
           ) : null}
         </form>
       ) : null}
 
       <div
-        className="border-2 border-Point w-[300px] text-center mx-auto py-1 px-2 cursor-pointer bg-Point text-white font-bold"
+        className="border-2 border-Point w-full text-center mx-auto py-1 px-2 cursor-pointer bg-Point text-white font-bold"
         onClick={() => {
           setIsModal(true);
         }}
