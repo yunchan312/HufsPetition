@@ -4,10 +4,13 @@ import { LiaDrumSolid } from "react-icons/lia";
 import { MdMenu } from "react-icons/md";
 import { useState } from "react";
 import MenuBar from "./Components/MenuBar";
+import { useRecoilValue } from "recoil";
+import { isAdmin } from "./atom";
 
 const Navigator = () => {
   const navigate = useNavigate();
   const [isMenu, setIsMenu] = useState(false);
+  const user = useRecoilValue(isAdmin);
   return (
     <>
       {isMenu ? <MenuBar setter={setIsMenu} state={isMenu} /> : null}
@@ -45,6 +48,14 @@ const Navigator = () => {
             >
               답변된 청원
             </div>
+            {user ? (
+              <div
+                className="hover:bg-black/20 rounded-md px-2 py-1"
+                onClick={() => navigate("/manager")}
+              >
+                서비스 관리
+              </div>
+            ) : null}
             <div
               className="hover:bg-black/20 rounded-md px-2 py-1"
               onClick={() => navigate("/login")}

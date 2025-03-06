@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form";
 import StatusBar from "../Components/StatusBar";
 import { useState } from "react";
 import AgreeModal from "../Components/AgreeModal";
+import { useRecoilValue } from "recoil";
+import { isAdmin } from "../atom";
+import PetitionDetailBtn from "../Components/PetitionDetailBtn";
 
 interface AgreeForm {
   agree: string;
@@ -48,6 +51,7 @@ const PetitionDetail = () => {
     alert("정상적으로 처리되었습니다.");
   };
   const [isModal, setIsModal] = useState(false);
+  const user = useRecoilValue(isAdmin);
 
   return (
     <div className="py-[80px] phone:px-10 px-1 w-[90%]">
@@ -99,13 +103,15 @@ const PetitionDetail = () => {
           {links.split(" ").map((l, i) => (
             <div key={i} className="py-2 overflow-hidden w-[90%]">
               <div>링크{i + 1}</div>
-              <li className="list-none text-blue-400">{l}</li>
+              <a href={l} className="list-none text-blue-400">
+                {l}
+              </a>
             </div>
           ))}
         </div>
       </div>
 
-      {status === "ongoing" ? (
+      {status === "ongoing" && !user ? (
         <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
           <div className="flex items-center">
             <input
@@ -137,14 +143,18 @@ const PetitionDetail = () => {
         </form>
       ) : null}
 
-      <div
-        className="border-2 border-Point w-full text-center mx-auto py-1 px-2 cursor-pointer bg-Point text-white font-bold"
-        onClick={() => {
-          setIsModal(true);
-        }}
-      >
-        동의 내용 보기
-      </div>
+      {user ? (
+        <PetitionDetailBtn setter={setIsModal} status={status} />
+      ) : (
+        <div
+          className="border-2 border-Point w-full text-center mx-auto py-1 px-2 cursor-pointer bg-Point text-white font-bold"
+          onClick={() => {
+            setIsModal(true);
+          }}
+        >
+          동의 내용 보기
+        </div>
+      )}
     </div>
   );
 };

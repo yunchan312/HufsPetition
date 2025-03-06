@@ -35,3 +35,9 @@
 .hufsLightBtn {
   @apply border-2 text-Hufs phone:w-[250px] w-[139px] py-1 text-center cursor-pointer;
 }
+.adminBtn {
+  @apply px-3 py-1 bg-Point text-white select-none active:scale-[0.95] transition;
+}
+.adminBtnRed {
+  @apply px-3 py-1 bg-red-500 text-white select-none active:scale-[0.95] transition;
+}

@@ -8,6 +8,8 @@ import Done from "./Pages/Done";
 import Petition from "./Pages/Petition";
 import PetitionDetail from "./Pages/PetitionDetail";
 import Test from "./Test";
+import Service from "./Pages/Service";
+import Reply from "./Components/Reply";
 
 function App() {
   const router = createBrowserRouter([
@@ -45,6 +47,14 @@ function App() {
         {
           path: "/test",
           element: <Test />,
+        },
+        {
+          path: "/manager",
+          element: <Service />,
+        },
+        {
+          path: "/reply",
+          element: <Reply />,
         },
       ],
       element: <Layout />,

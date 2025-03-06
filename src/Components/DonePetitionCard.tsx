@@ -5,6 +5,8 @@ import { RiUserVoiceFill } from "react-icons/ri";
 import { FaUserCheck } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { isAdmin } from "../atom";
 
 interface DonePetitionCardProps {
   title: string;
@@ -17,6 +19,7 @@ interface DonePetitionCardProps {
 }
 const DonePetitionCard = (props: DonePetitionCardProps) => {
   const navigate = useNavigate();
+  const user = useRecoilValue(isAdmin);
   return (
     <div
       className="phone:mx-10 mx-5 flex phone:flex-row flex-col-reverse items-center phone:justify-between phone:py-5 py-3 border-b-2 cursor-pointer phone:w-[850px]"
@@ -24,8 +27,35 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
     >
       <div className="flex flex-col justify-around gap-4 w-[340px]">
         <div className="my-2">
-          <div className="bg-Hufs text-white px-4 py-2 rounded-md w-[150px] text-center">
-            청원답변 {props.id}호
+          <div className="flex items-center justify-between">
+            <div className="bg-Hufs text-white px-4 py-2 rounded-md w-[150px] text-center">
+              청원답변 {props.id}호
+            </div>
+            {user ? (
+              <div className="flex items-center gap-3">
+                <div
+                  className="adminBtn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate("/reply");
+                  }}
+                >
+                  수정
+                </div>
+                <div
+                  className="adminBtnRed"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const ok = confirm("정말로 삭제하시겠습니까?");
+                    if (ok) {
+                      alert("삭제되었습니다.");
+                    }
+                  }}
+                >
+                  삭제
+                </div>
+              </div>
+            ) : null}
           </div>
           <div className="text-[20px] text-Hufs font-semibold mt-5">
             {props.title}
