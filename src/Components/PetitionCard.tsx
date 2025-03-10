@@ -21,7 +21,7 @@ const PetitionCard = (props: PetitionCardProps) => {
       }}
     >
       <div className="text-[20px] text-Hufs flex items-center justify-between">
-        <div>{props.types}</div>
+        <div className="font-G">{props.types}</div>
         {user ? (
           <div className="flex gap-3">
             <div
@@ -48,7 +48,7 @@ const PetitionCard = (props: PetitionCardProps) => {
           </div>
         ) : null}
       </div>
-      <div className="text-[15px]">{props.title}</div>
+      <div className="text-[15px] text-black/50">{props.title}</div>
       <div className="flex items-center justify-between">
         <div className="text-Point">~ {props.enddate}</div>
         <div className="text-Point">{props.count}명</div>

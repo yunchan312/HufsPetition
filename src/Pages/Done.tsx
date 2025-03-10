@@ -96,7 +96,7 @@ const Done = () => {
   return (
     <div className="phone:pt-[80px] pt-20 px-5">
       <div className="py-5 border-b-2 mx-5">
-        <div className="text-[25px]">답변된 청원</div>
+        <div className="text-[25px] font-G">답변된 청원</div>
       </div>
 
       {DonePetitions.map((done, i) => (

@@ -100,8 +100,8 @@ const OnGoing = () => {
   return (
     <div className="phone:pt-[80px] pt-20 px-5 ">
       <div>
-        <div className="text-[25px] mb-5">청원 분류 선택</div>
-        <div className="border-2 grid phone:grid-cols-6 grid-cols-3 py-3 px-3 w-full">
+        <div className="text-[25px] mb-5 font-G">청원 분류 선택</div>
+        <div className="border-2 border-neutral-400 rounded-xl grid phone:grid-cols-6 grid-cols-3 py-3 px-3 w-full">
           {types.map((t, i) => (
             <div
               onClick={() => setTypeNum(i)}
@@ -112,6 +112,7 @@ const OnGoing = () => {
                 backgroundColor: typeNum === i ? "#00677F40" : "white",
                 color: typeNum === i ? "#00677F" : "#00677F40",
                 fontWeight: typeNum === i ? "bold" : "",
+                fontFamily: typeNum === i ? "G" : "",
               }}
             >
               {t}

@@ -66,7 +66,7 @@ const Petition = () => {
 
   return (
     <div className="pt-[70px] px-10">
-      <div className="text-[25px] py-3 border-b-2">청원하기</div>
+      <div className="text-[25px] py-3 border-b-2 font-G">청원하기</div>
 
       <form
         className="pt-5 flex flex-col gap-5"

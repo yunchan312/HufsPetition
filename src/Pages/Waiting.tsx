@@ -79,12 +79,12 @@ const Waiting = () => {
   ];
   return (
     <div className="phone:pt-[80px] pt-20 px-5">
-      <div className="text-[25px] phone:block hidden">청원 현황</div>
-      <div className="border-2 py-5 phone:block hidden">
+      <div className="text-[25px] phone:block hidden font-G">청원 현황</div>
+      <div className="border-2 border-neutral-400 rounded-xl py-5 phone:block hidden">
         <Status />
       </div>
 
-      <PageTitle title="답변 대기 / 만료 청원" options={["a", "b", "c", "d"]} />
+      <PageTitle title="답변중/만료 청원" options={["a", "b", "c", "d"]} />
 
       {petitions.map((petition, i) => (
         <div key={i}>

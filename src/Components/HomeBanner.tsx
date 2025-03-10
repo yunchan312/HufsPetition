@@ -2,6 +2,7 @@ import gsap from "gsap";
 import Banner from "../assets/Banner.png";
 import Status from "./Status";
 import { useGSAP } from "@gsap/react";
+import HomeSwiper from "./HomeSwiper";
 
 const HomeBanner = () => {
   gsap.registerPlugin(useGSAP);
@@ -18,6 +19,9 @@ const HomeBanner = () => {
       >
         <div className="phone:flex hidden items-center justify-center w-full">
           <Status />
+        </div>
+        <div className="relative phone:hidden w-full h-full bg-white/60">
+          <HomeSwiper />
         </div>
       </div>
     </div>

@@ -10,6 +10,9 @@ import PetitionDetail from "./Pages/PetitionDetail";
 import Test from "./Test";
 import Service from "./Pages/Service";
 import Reply from "./Components/Reply";
+import Announcement from "./Pages/Announcement";
+import FandQ from "./Pages/FandQ";
+import AnnouncementDetail from "./Pages/AnnouncementDetail";
 
 function App() {
   const router = createBrowserRouter([
@@ -44,10 +47,7 @@ function App() {
           path: "/detail/:id",
           element: <PetitionDetail />,
         },
-        {
-          path: "/test",
-          element: <Test />,
-        },
+
         {
           path: "/manager",
           element: <Service />,
@@ -56,8 +56,24 @@ function App() {
           path: "/reply",
           element: <Reply />,
         },
+        {
+          path: "/announcement",
+          element: <Announcement />,
+        },
+        {
+          path: "/announcement/:id",
+          element: <AnnouncementDetail />,
+        },
+        {
+          path: "/fq",
+          element: <FandQ />,
+        },
       ],
       element: <Layout />,
+    },
+    {
+      path: "/test",
+      element: <Test />,
     },
   ]);
   return (

@@ -1,10 +1,7 @@
-import { LiaDrumSolid } from "react-icons/lia";
-
 const Footer = () => {
   return (
     <div className="bg-neutral-200 text-neutral-600 h-[300px] py-5 px-10 mt-10">
       <div className="flex items-center phone:text-[30px] text-[25px] font-bold mb-5">
-        <LiaDrumSolid className="phone:text-[40px] text-[30px]" />
         한국외대 신문고
       </div>
       <div className="pb-5 border-b-2 text-[13px]">© Team Hufstory. 2025.</div>

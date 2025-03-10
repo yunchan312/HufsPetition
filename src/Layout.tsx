@@ -4,11 +4,11 @@ import Footer from "./Footer";
 
 const Layout = () => {
   return (
-    <div className="min-h-[100vh] flex flex-col justify-between items-center">
+    <div className="min-h-[100vh] flex flex-col justify-between items-center font-GL">
       <div className="relative z-50 w-[100%]">
         <Navigator />
       </div>
-      <div className="max-w-[1500px] z-40 flex items-center justify-center">
+      <div className="phone:w-[900px] w-[100%] z-40 flex items-center justify-center pt-10">
         <Outlet />
       </div>
 

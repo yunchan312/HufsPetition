@@ -60,10 +60,10 @@ const PetitionDetail = () => {
           <AgreeModal setter={setIsModal} />
         </div>
       ) : null}
-      <div className="text-[30px] my-5 border-b-2 phone:border-0">
+      <div className="text-[30px] my-5 font-G py-2">
         국위선양 BTS 멤버들 군면제 해주세요
       </div>
-      <div className="">
+      <div className="border-b-2 pb-2 border-neutral-400">
         <StatusBar
           status={status}
           counts={1234556}
@@ -75,7 +75,7 @@ const PetitionDetail = () => {
 
       {status === "done" ? (
         <div>
-          <div className="mt-10 text-[30px]">답변 내용</div>
+          <div className="mt-10 text-[30px] font-G">답변 내용</div>
           <div>
             {answer.split("\n").map((d, i) => (
               <div key={i} className="my-5">
@@ -87,7 +87,7 @@ const PetitionDetail = () => {
       ) : null}
 
       <div>
-        <div className="mt-10 text-[30px]">청원 내용</div>
+        <div className="mt-10 text-[30px] font-G">청원 내용</div>
         <div>
           {detail.split("\n").map((d, i) => (
             <div className="my-5" key={i}>

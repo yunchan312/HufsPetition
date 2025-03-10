@@ -1,12 +1,11 @@
 import Default from "../assets/photo.png";
-import { FaClockRotateLeft } from "react-icons/fa6";
-import { FaRegCircleCheck } from "react-icons/fa6";
-import { RiUserVoiceFill } from "react-icons/ri";
-import { FaUserCheck } from "react-icons/fa";
-import { FaChevronRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { isAdmin } from "../atom";
+import PDeparture from "../assets/PlaneDeparture.svg";
+import PeopleIcon from "../assets/Peaple.svg";
+import AnswerDateIcon from "../assets/AnswerDate.svg";
+import PArrivalDone from "../assets/PlaneArrivalDone.svg";
 
 interface DonePetitionCardProps {
   title: string;
@@ -22,10 +21,10 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
   const user = useRecoilValue(isAdmin);
   return (
     <div
-      className="phone:mx-10 mx-5 flex phone:flex-row flex-col-reverse items-center phone:justify-between phone:py-5 py-3 border-b-2 cursor-pointer phone:w-[850px]"
+      className="phone:mx-10 mx-5 flex phone:flex-row flex-col-reverse items-center phone:justify-between phone:py-5 py-3 border-b-2 cursor-pointer phone:w-[850px] gap-3"
       onClick={() => navigate(`/detail/${props.id}`)}
     >
-      <div className="flex flex-col justify-around gap-4 w-[340px]">
+      <div className="flex flex-col justify-around gap-2 w-[340px] phone:w-full">
         <div className="my-2">
           <div className="flex items-center justify-between">
             <div className="bg-Hufs text-white px-4 py-2 rounded-md w-[150px] text-center">
@@ -62,28 +61,26 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="grid grid-cols-4">
           <div>
             <div className="flex flex-col items-center text-[13px]">
-              <FaClockRotateLeft className="text-[50px]" />
-              <div>청원 시작</div>
+              <img src={PDeparture} className="size-[50px]" />
+              <div>청원시작</div>
               <div>[{props.startdate}]</div>
             </div>
           </div>
-          <FaChevronRight className="text-[30px]" />
           <div>
             <div className="flex flex-col items-center text-[13px]">
-              <FaRegCircleCheck className="text-[50px]" />
-              <div>청원 마감</div>
+              <img src={PArrivalDone} className="size-[50px]" />
+              <div>청원마감</div>
               <div>[{props.enddate}]</div>
             </div>
           </div>
-          <FaChevronRight className="text-[30px]" />
 
           <div>
             <div className="flex flex-col items-center text-[13px]">
-              <RiUserVoiceFill className="text-[50px]" />
-              <div>청원 인원</div>
+              <img src={PeopleIcon} className="size-[50px]" />
+              <div>청원인원</div>
               <div>
                 {props.count
                   .toString()
@@ -91,11 +88,10 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
               </div>
             </div>
           </div>
-          <FaChevronRight className="text-[30px]" />
 
           <div>
             <div className="flex flex-col items-center text-[13px]">
-              <FaUserCheck className="text-[50px]" />
+              <img src={AnswerDateIcon} className="size-[50px]" />
               <div>답변일</div>
               <div>[{props.donedate}]</div>
             </div>
@@ -104,10 +100,8 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
       </div>
 
       <div className="relative *:rounded-lg">
-        <div className="px-5 py-2 bg-black/50 phone:w-[400px] phone:h-[250px] w-[340px] h-[150px] absolute text-white font-bold phone:text-[25px] text-[20px] flex justify-end flex-col">
-          <div className="phone:w-[60%]">
-            구급차 막아세운 택시 기사 처벌 청원
-          </div>
+        <div className="px-5 py-2 bg-black/50 phone:w-[400px] phone:h-[250px] w-[340px] h-[150px] absolute text-white font-G phone:text-[25px] text-[20px] flex justify-end flex-col">
+          <div className="pr-5">구급차 막아세운 택시 기사 처벌</div>
         </div>
         {props.src ? (
           <div

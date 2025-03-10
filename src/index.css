@@ -7,6 +7,11 @@
 
   /*break point*/
   --breakpoint-phone: 900px;
+
+  /*Fonts*/
+  --font-GL: GL;
+  --font-G: G;
+  --font-GB: GB;
 }
 
 .input {
@@ -40,4 +45,28 @@
 }
 .adminBtnRed {
   @apply px-3 py-1 bg-red-500 text-white select-none active:scale-[0.95] transition;
+}
+.homeElement {
+  @apply border-2 border-neutral-400 rounded-md shadow-md w-full h-[310px] px-3 py-2 flex flex-col gap-3;
+}
+@font-face {
+  font-family: "G";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GL";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff")
+    format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GB";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+    format("woff");
+  font-weight: 700;
+  font-style: normal;
 }

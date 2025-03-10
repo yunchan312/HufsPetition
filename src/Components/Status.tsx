@@ -1,9 +1,9 @@
-import { GiBackwardTime } from "react-icons/gi";
-import { RiDeleteBin7Line } from "react-icons/ri";
-import { MdHourglassTop } from "react-icons/md";
-import { FaCheck } from "react-icons/fa";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import OnGoingIcon from "../assets/OnGoing.svg";
+import CancelIcon from "../assets/Cancel.svg";
+import DoneIcon from "../assets/Done.svg";
+import ReplyIcon from "../assets/Reply.svg";
 
 const Status = () => {
   gsap.registerPlugin(useGSAP);
@@ -37,47 +37,48 @@ const Status = () => {
   }, []);
   return (
     <div className="h-[200px] bg-white/60 w-full flex items-center justify-center">
-      <div className="grid grid-cols-5 max-w-[1500px]">
+      <div className="grid grid-cols-5 phone:w-[900px]">
         <div className="S1 flex flex-col items-center justify-center gap-5">
-          <div className="text-Point w-full px-10">
+          <div className="text-Point w-full px-10 font-G">
             누적 동의 수 <br />
-            <span className="text-black text-[20px]">159,347 명</span>
+            <span className="text-black text-[18px] font-GL">159,347 명</span>
           </div>
-          <div className="text-Point w-full px-10">
-            5만건 이상 도달 청원 수 <br />
-            <span className="text-black text-[20px]">194 건</span>
+          <div className="text-Point w-full px-10 font-G">
+            5만건 이상 <br />
+            도달 청원 수 <br />
+            <span className="text-black text-[20px] font-GL">194 건</span>
           </div>
         </div>
 
-        <div className="S2 flex flex-col items-end justify-center">
-          <GiBackwardTime className="size-[100px] text-Point mx-10" />
-          <div className="text-Point w-full px-10">
+        <div className="S2 flex flex-col items-center justify-center">
+          <img src={OnGoingIcon} className="size-[80px] text-Point mx-10" />
+          <div className="text-Point px-10 font-G">
             진행중 <br />
-            <span className="text-black text-[20px]">194 건</span>
+            <span className="text-black text-[20px] font-GL">194 건</span>
           </div>
         </div>
 
-        <div className="S3 flex flex-col items-end justify-center">
-          <RiDeleteBin7Line className="size-[100px] text-Point mx-10" />
-          <div className="text-Point w-full px-10">
+        <div className="S3 flex flex-col items-center justify-center">
+          <img src={CancelIcon} className="size-[80px] text-Point mx-10" />
+          <div className="text-Point px-10 font-G">
             만료 <br />
-            <span className="text-black text-[20px]">194 건</span>
+            <span className="text-black text-[20px] font-GL">194 건</span>
           </div>
         </div>
 
-        <div className="S4 flex flex-col items-end justify-center">
-          <MdHourglassTop className="size-[100px] text-Point mx-10" />
-          <div className="text-Point w-full px-10">
-            답변 대기 <br />
-            <span className="text-black text-[20px]">194 건</span>
+        <div className="S4 flex flex-col items-center justify-center">
+          <img src={ReplyIcon} className="size-[80px] text-Point mx-10" />
+          <div className="text-Point px-10 font-G">
+            답변중 <br />
+            <span className="text-black text-[20px] font-GL">194 건</span>
           </div>
         </div>
 
-        <div className="S5 flex flex-col items-end justify-center">
-          <FaCheck className="size-[100px] text-Point mx-10" />
-          <div className="text-Point w-full px-10">
+        <div className="S5 flex flex-col items-center justify-center">
+          <img src={DoneIcon} className="size-[80px] text-Point mx-10" />
+          <div className="text-Point px-10 font-G">
             답변 완료 <br />
-            <span className="text-black text-[20px]">194 건</span>
+            <span className="text-black text-[20px] font-GL">194 건</span>
           </div>
         </div>
       </div>

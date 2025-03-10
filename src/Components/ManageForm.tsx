@@ -20,7 +20,7 @@ const ManageForm = () => {
   };
   return (
     <div className="w-full pt-[80px] px-5 min-h-screen">
-      <div className="text-[30px] border-b-2 pb-2">서비스 관리</div>
+      <div className="text-[30px] border-b-2 pb-2 font-G">서비스 관리</div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="py-5">
