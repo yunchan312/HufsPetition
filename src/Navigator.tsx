@@ -12,7 +12,7 @@ const Navigator = () => {
 
   const [isMenu, setIsMenu] = useState(false);
   const [selected, setSelected] = useState("");
-  let loc = window.location.href;
+  let loc = location.pathname;
   useEffect(() => {
     console.log(loc);
     if (loc.includes("petition")) {
