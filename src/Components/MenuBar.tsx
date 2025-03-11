@@ -81,7 +81,7 @@ const MenuBar = ({
                 className="hover:bg-black/20"
                 onClick={() => {
                   setter(false);
-                  navigate("/ongoing");
+                  navigate("/manager");
                 }}
               >
                 서비스 관리

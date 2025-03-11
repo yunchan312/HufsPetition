@@ -44,7 +44,7 @@ const Status = () => {
             <span className="text-black text-[18px] font-GL">159,347 명</span>
           </div>
           <div className="text-Point w-full px-10 font-G">
-            5만건 이상 <br />
+            5천건 이상 <br />
             도달 청원 수 <br />
             <span className="text-black text-[20px] font-GL">194 건</span>
           </div>

@@ -35,7 +35,7 @@ const HomeSwiper = () => {
             <span className="text-black text-[25px]">159,347 명</span>
           </div>
           <div className="text-Point px-10 font-G text-[25px]">
-            5만건 이상 도달 청원 수 <br />
+            5천건 이상 도달 청원 수 <br />
             <div className="text-center text-black text-[25px]">194 건</div>
           </div>
         </div>

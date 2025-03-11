@@ -14,6 +14,7 @@ const Navigator = () => {
   const [selected, setSelected] = useState("");
   let loc = window.location.href;
   useEffect(() => {
+    console.log(loc);
     if (loc.includes("petition")) {
       setSelected("petition");
     } else if (loc.includes("ongoing")) {
