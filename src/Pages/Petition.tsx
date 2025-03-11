@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 
 interface PetitionFormProps {
@@ -59,10 +59,6 @@ const Petition = () => {
 
   const [tempLink, setTempLink] = useState("");
   const [err, setErr] = useState(false);
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <div className="pt-[70px] px-10">

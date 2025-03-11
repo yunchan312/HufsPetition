@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // import Logo from "./assets/logo-top-white.png";
 import { MdMenu } from "react-icons/md";
 import { useEffect, useState } from "react";
@@ -12,7 +12,8 @@ const Navigator = () => {
 
   const [isMenu, setIsMenu] = useState(false);
   const [selected, setSelected] = useState("");
-  let loc = location.pathname;
+  // let loc = location.pathname;
+  let loc = useLocation().pathname;
   useEffect(() => {
     console.log(loc);
     if (loc.includes("petition")) {
