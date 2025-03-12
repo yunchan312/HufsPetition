@@ -54,7 +54,7 @@ const SignUpForm = () => {
             메일 인증
           </div>
           <input
-            type="submit w-full"
+            type="submit"
             value="회원가입"
             className="w-full border-2 rounded-md py-1 text-Point active:bg-Point/50 select-none cursor-pointer transition text-center"
           />
