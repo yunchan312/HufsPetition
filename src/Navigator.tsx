@@ -15,7 +15,6 @@ const Navigator = () => {
   // let loc = location.pathname;
   let loc = useLocation().pathname;
   useEffect(() => {
-    console.log(loc);
     if (loc.includes("petition")) {
       setSelected("petition");
     } else if (loc.includes("ongoing")) {

@@ -12,7 +12,7 @@ const HomeBanner = () => {
   return (
     <div>
       <div
-        className="Banner phone:h-[600px] h-[300px] flex flex-col justify-end gap-10 bg-cover bg-center w-screen"
+        className="Banner phone:h-[600px] h-[300px] flex flex-col justify-end gap-10 bg-cover bg-center w-[99vw]"
         style={{
           backgroundImage: `url(${Banner})`,
         }}

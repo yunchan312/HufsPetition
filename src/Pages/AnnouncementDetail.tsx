@@ -28,8 +28,10 @@ const AnnouncementDetail = () => {
       </div>
 
       <div>
-        {Detail.detail.split("\n").map((d) => (
-          <div className="py-2">{d}</div>
+        {Detail.detail.split("\n").map((d, i) => (
+          <div key={i} className="py-2">
+            {d}
+          </div>
         ))}
       </div>
     </div>
