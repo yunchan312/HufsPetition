@@ -5,16 +5,16 @@ import MoreIcon from "../assets/More.svg";
 const AnnouncementCard = () => {
   const navigate = useNavigate();
   const announcement = [
-    { title: "제목", id: 0 },
-    { title: "제목", id: 0 },
-    { title: "제목", id: 0 },
-    { title: "제목", id: 0 },
-    { title: "제목", id: 0 },
-    { title: "제목", id: 0 },
-    { title: "제목", id: 0 },
-    { title: "제목", id: 0 },
-    { title: "제목", id: 0 },
-    { title: "제목", id: 0 },
+    { title: "제목", id: 0, date: "2025-03-12" },
+    { title: "제목", id: 0, date: "2025-03-12" },
+    { title: "제목", id: 0, date: "2025-03-12" },
+    { title: "제목", id: 0, date: "2025-03-12" },
+    { title: "제목", id: 0, date: "2025-03-12" },
+    { title: "제목", id: 0, date: "2025-03-12" },
+    { title: "제목", id: 0, date: "2025-03-12" },
+    { title: "제목", id: 0, date: "2025-03-12" },
+    { title: "제목", id: 0, date: "2025-03-12" },
+    { title: "제목", id: 0, date: "2025-03-12" },
   ];
   return (
     <div className="homeElement">
@@ -29,14 +29,15 @@ const AnnouncementCard = () => {
         <img src={MoreIcon} alt="icon" className="border-2 rounded-md" />
       </div>
 
-      <div className="px-3">
+      <div>
         {announcement.map((a, i) => (
           <li
             key={i}
-            className="cursor-pointer transition phone:hover:font-G"
+            className="cursor-pointer transition phone:hover:font-G phone:hover:bg-Point/20 flex items-center justify-between list-none"
             onClick={() => navigate(`/announcement/${a.id}`)}
           >
-            {a.title + (i + 1)}
+            <span>{a.title + (i + 1)}</span>
+            <span className="text-black/20 text-[10px]">{a.date}</span>
           </li>
         ))}
       </div>

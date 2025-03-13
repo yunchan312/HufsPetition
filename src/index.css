@@ -49,6 +49,9 @@
 .homeElement {
   @apply border-2 border-neutral-400 rounded-md shadow-md w-full h-[310px] px-3 py-2 flex flex-col gap-3;
 }
+.overlay {
+  @apply bg-black/40 fixed top-0 left-0 w-screen h-screen flex items-center justify-center;
+}
 @font-face {
   font-family: "G";
   src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")

@@ -5,6 +5,8 @@ import AgreeModal from "../Components/AgreeModal";
 import { useRecoilValue } from "recoil";
 import { isAdmin } from "../atom";
 import PetitionDetailBtn from "../Components/PetitionDetailBtn";
+import BackIcon from "../assets/Back.svg";
+import { useNavigate } from "react-router-dom";
 
 interface AgreeForm {
   agree: string;
@@ -52,14 +54,21 @@ const PetitionDetail = () => {
   };
   const [isModal, setIsModal] = useState(false);
   const user = useRecoilValue(isAdmin);
+  const navigate = useNavigate();
 
   return (
-    <div className="py-[80px] phone:px-10 px-1 w-[90%]">
+    <div className="py-10 phone:px-10 px-3 w-full phone:w-[900px] mx-auto">
       {isModal ? (
-        <div className="bg-black/40 fixed top-0 left-0 w-screen h-screen flex items-center justify-center">
+        <div className="overlay">
           <AgreeModal setter={setIsModal} />
         </div>
       ) : null}
+      <div
+        className="flex items-center cursor-pointer phone:hover:scale-[1.01] transition"
+        onClick={() => navigate(-1)}
+      >
+        <img src={BackIcon} alt="icon" className="size-[23px]" /> 뒤로가기
+      </div>
       <div className="text-[30px] my-5 font-G py-2">
         국위선양 BTS 멤버들 군면제 해주세요
       </div>

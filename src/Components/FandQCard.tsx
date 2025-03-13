@@ -24,16 +24,16 @@ const FandQCard = () => {
       >
         <div className="flex items-start gap-2 ">
           <img src={BulbIcon} alt="icon" className="size-[25px]" />
-          <span className="text-[20px]">공지사항</span>
+          <span className="text-[20px]">자주 하는 질문</span>
         </div>
         <img src={MoreIcon} alt="icon" className="border-2 rounded-md" />
       </div>
 
-      <div className="px-3">
+      <div className="">
         {FandQ.map((a, i) => (
           <li
             key={i}
-            className="cursor-pointer transition phone:hover:font-G"
+            className="cursor-pointer transition phone:hover:font-G phone:hover:bg-Point/20 flex items-center justify-between list-none"
             onClick={() => navigate(`/fq`)}
           >
             {a.title + (i + 1)}

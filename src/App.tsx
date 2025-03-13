@@ -43,10 +43,6 @@ function App() {
           path: "/petition",
           element: <Petition />,
         },
-        {
-          path: "/detail/:id",
-          element: <PetitionDetail />,
-        },
 
         {
           path: "/manager",
@@ -74,6 +70,10 @@ function App() {
     {
       path: "/test",
       element: <Test />,
+    },
+    {
+      path: "/detail/:id",
+      element: <PetitionDetail />,
     },
   ]);
   return (

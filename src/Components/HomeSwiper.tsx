@@ -21,7 +21,7 @@ const HomeSwiper = () => {
         opacity: 0,
         duration: 1.5,
         delay: 3,
-        onComplete: () => setNow((now + 1) % 5),
+        onComplete: () => setNow((now + 1) % 3),
       }
     );
   }, [now]);
@@ -42,34 +42,32 @@ const HomeSwiper = () => {
       );
     } else if (target === 1) {
       return (
-        <div className="font-G flex flex-col items-center justify-center pt-5">
-          <div className="text-Point px-10 text-[30px]">진행중</div>
-          <img src={OnGoingIcon} className="size-[100px] text-Point mx-10" />
-          <span className="text-black text-[25px] py-2">194 건</span>
+        <div className="flex items-center justify-center gap-3">
+          <div className="font-G flex flex-col items-center justify-center pt-5">
+            <div className="text-Point px-10 text-[30px]">진행중</div>
+            <img src={OnGoingIcon} className="size-[100px] text-Point mx-10" />
+            <span className="text-black text-[25px] py-2">194 건</span>
+          </div>
+          <div className="font-G flex flex-col items-center justify-center pt-5">
+            <div className="text-Point px-10 text-[30px]">만료</div>
+            <img src={CancelIcon} className="size-[100px] text-Point mx-10" />
+            <span className="text-black text-[25px] py-2">194 건</span>
+          </div>
         </div>
       );
     } else if (target === 2) {
       return (
-        <div className="font-G flex flex-col items-center justify-center pt-5">
-          <div className="text-Point px-10 text-[30px]">만료</div>
-          <img src={CancelIcon} className="size-[100px] text-Point mx-10" />
-          <span className="text-black text-[25px] py-2">194 건</span>
-        </div>
-      );
-    } else if (target === 3) {
-      return (
-        <div className="font-G flex flex-col items-center justify-center pt-5">
-          <div className="text-Point px-10 text-[30px]">답변중</div>
-          <img src={ReplyIcon} className="size-[100px] text-Point mx-10" />
-          <span className="text-black text-[25px] py-2">194 건</span>
-        </div>
-      );
-    } else if (target === 4) {
-      return (
-        <div className="font-G flex flex-col items-center justify-center pt-5">
-          <div className="text-Point px-10 text-[30px]">답변 완료</div>
-          <img src={DoneIcon} className="size-[100px] text-Point mx-10" />
-          <span className="text-black text-[25px] py-2">194 건</span>
+        <div className="flex items-center justify-center gap-3">
+          <div className="font-G flex flex-col items-center justify-center pt-5">
+            <div className="text-Point px-10 text-[30px]">답변중</div>
+            <img src={ReplyIcon} className="size-[100px] text-Point mx-10" />
+            <span className="text-black text-[25px] py-2">194 건</span>
+          </div>
+          <div className="font-G flex flex-col items-center justify-center pt-5">
+            <div className="text-Point px-10 text-[30px]">답변 완료</div>
+            <img src={DoneIcon} className="size-[100px] text-Point mx-10" />
+            <span className="text-black text-[25px] py-2">194 건</span>
+          </div>
         </div>
       );
     }
