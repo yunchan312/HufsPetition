@@ -12,27 +12,27 @@ const Status = () => {
     tl.fromTo(
       ".S1",
       { y: "10%", opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.3, delay: 0.5 }
+      { y: 0, opacity: 1, duration: 0.2, delay: 0.5 }
     );
     tl.fromTo(
       ".S2",
-      { y: "10%", opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.3 }
+      { x: "-10%", opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.2 }
     );
     tl.fromTo(
       ".S3",
       { y: "10%", opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.3 }
+      { y: 0, opacity: 1, duration: 0.2 }
     );
     tl.fromTo(
       ".S4",
-      { y: "10%", opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.3 }
+      { x: "10%", opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.2 }
     );
     tl.fromTo(
       ".S5",
-      { y: "10%", opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.3 }
+      { y: "-10%", opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.2 }
     );
   }, []);
   return (
