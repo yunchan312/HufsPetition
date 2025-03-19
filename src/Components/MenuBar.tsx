@@ -2,17 +2,24 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Dispatch, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
+import { LogOut } from "../utils/Auth";
 
 const MenuBar = ({
   state,
   setter,
   selected,
   user,
+  isLogged,
+  setIsLogged,
+  setMode,
 }: {
+  setMode: Dispatch<SetStateAction<boolean>>;
+  setIsLogged: Dispatch<SetStateAction<boolean>>;
   setter: Dispatch<SetStateAction<boolean>>;
   state: boolean;
   selected: string;
   user: boolean;
+  isLogged: boolean;
 }) => {
   gsap.registerPlugin(useGSAP);
   useGSAP(() => {
@@ -41,7 +48,7 @@ const MenuBar = ({
           한국외대 신문고
         </div>
         <div className="flex flex-col *:cursor-pointer *:px-3 *:py-3 *:border-b-2 *:border-neutral-300">
-          {selected === "petition" ? (
+          {user ? null : selected === "petition" ? (
             <div className="px-2 py-1 text-white font-G border-b-2 bg-Point/40">
               청원하기
             </div>
@@ -120,17 +127,24 @@ const MenuBar = ({
           )}
           {selected === "login" ? (
             <div className="px-2 py-1 text-white font-G border-b-2 bg-Point/40">
-              로그인
+              {isLogged ? "로그아웃" : "로그인"}
             </div>
           ) : (
             <div
               className="hover:bg-black/20"
               onClick={() => {
-                setter(false);
-                navigate("/login");
+                if (!isLogged) {
+                  setter(false);
+                  navigate("/login");
+                } else {
+                  setter(false);
+                  setMode(false);
+                  setIsLogged(false);
+                  LogOut();
+                }
               }}
             >
-              로그인
+              {isLogged ? "로그아웃" : "로그인"}
             </div>
           )}
         </div>

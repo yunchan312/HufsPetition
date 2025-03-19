@@ -7,6 +7,7 @@
 
   /*break point*/
   --breakpoint-phone: 900px;
+  --breakpoint-done: 450px;
 
   /*Fonts*/
   --font-GL: GL;
@@ -35,19 +36,22 @@
 }
 
 .hufsBtn {
-  @apply border-2 border-Hufs bg-Hufs text-white w-[139px] phone:w-[250px] py-1 text-center cursor-pointer;
+  @apply border-2 border-Hufs bg-Hufs text-white w-full py-1 text-center cursor-pointer;
 }
 .hufsLightBtn {
-  @apply border-2 text-Hufs phone:w-[250px] w-[139px] py-1 text-center cursor-pointer;
+  @apply border-2 text-Hufs w-full py-1 text-center cursor-pointer;
 }
 .adminBtn {
-  @apply px-3 py-1 bg-Point text-white select-none active:scale-[0.95] transition;
+  @apply px-3 py-1 bg-Hufs text-white select-none active:scale-[0.95] transition text-[13px] rounded-md;
 }
 .adminBtnRed {
-  @apply px-3 py-1 bg-red-500 text-white select-none active:scale-[0.95] transition;
+  @apply px-3 py-1 bg-red-500 text-white select-none active:scale-[0.95] transition text-[13px] rounded-md;
 }
 .homeElement {
-  @apply border-2 border-neutral-400 rounded-md shadow-md w-full h-[310px] px-3 py-2 flex flex-col gap-3;
+  @apply w-full px-3 py-2 flex flex-col gap-3;
+}
+.homeElementLists {
+  @apply cursor-pointer transition phone:hover:font-G phone:hover:shadow-xl py-1 px-2 rounded-md flex items-center justify-between list-none;
 }
 .overlay {
   @apply bg-black/40 fixed top-0 left-0 w-screen h-screen flex items-center justify-center;

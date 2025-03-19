@@ -6,25 +6,17 @@ import PDeparture from "../assets/PlaneDeparture.svg";
 import PeopleIcon from "../assets/Peaple.svg";
 import AnswerDateIcon from "../assets/AnswerDate.svg";
 import PArrivalDone from "../assets/PlaneArrivalDone.svg";
+import { petitionsDataInterface } from "../Interfaces";
 
-interface DonePetitionCardProps {
-  title: string;
-  id: number;
-  startdate: string;
-  enddate: string;
-  count: number;
-  donedate: string;
-  src?: string;
-}
-const DonePetitionCard = (props: DonePetitionCardProps) => {
+const DonePetitionCard = (props: petitionsDataInterface) => {
   const navigate = useNavigate();
   const user = useRecoilValue(isAdmin);
   return (
     <div
-      className="phone:mx-10 mx-5 flex phone:flex-row flex-col-reverse items-center phone:justify-between phone:py-5 py-3 border-b-2 cursor-pointer phone:w-[850px] gap-3"
+      className="flex phone:flex-row flex-col-reverse items-center phone:justify-between phone:py-5 py-3 border-b-2 cursor-pointer phone:w-[850px] gap-3"
       onClick={() => navigate(`/detail/${props.id}`)}
     >
-      <div className="flex flex-col justify-around gap-2 w-[340px] phone:w-full">
+      <div className="flex flex-col justify-around gap-2 phone:w-[340px] w-full">
         <div className="my-2">
           <div className="flex items-center justify-between">
             <div className="bg-Hufs text-white px-4 py-2 rounded-md w-[150px] text-center">
@@ -57,7 +49,7 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
             ) : null}
           </div>
           <div className="text-[20px] text-Hufs font-semibold mt-5">
-            {props.title}
+            {props.content}
           </div>
         </div>
 
@@ -66,14 +58,14 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
             <div className="flex flex-col items-center text-[13px]">
               <img src={PDeparture} className="size-[50px]" />
               <div>청원시작</div>
-              <div>[{props.startdate}]</div>
+              <div>[{`2020.03.12`}]</div>
             </div>
           </div>
           <div>
             <div className="flex flex-col items-center text-[13px]">
               <img src={PArrivalDone} className="size-[50px]" />
               <div>청원마감</div>
-              <div>[{props.enddate}]</div>
+              <div>[{`2020.03.12`}]</div>
             </div>
           </div>
 
@@ -82,7 +74,7 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
               <img src={PeopleIcon} className="size-[50px]" />
               <div>청원인원</div>
               <div>
-                {props.count
+                {props.agreeCount
                   .toString()
                   .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
               </div>
@@ -93,7 +85,7 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
             <div className="flex flex-col items-center text-[13px]">
               <img src={AnswerDateIcon} className="size-[50px]" />
               <div>답변일</div>
-              <div>[{props.donedate}]</div>
+              <div>[{`2020.03.12`}]</div>
             </div>
           </div>
         </div>
@@ -101,23 +93,15 @@ const DonePetitionCard = (props: DonePetitionCardProps) => {
 
       <div className="relative *:rounded-lg">
         <div className="px-5 py-2 bg-black/50 phone:w-[400px] phone:h-[250px] w-[340px] h-[150px] absolute text-white font-G phone:text-[25px] text-[20px] flex justify-end flex-col">
-          <div className="pr-5">구급차 막아세운 택시 기사 처벌</div>
+          <div className="pr-5">{props.title}</div>
         </div>
-        {props.src ? (
-          <div
-            style={{
-              backgroundImage: `url("${props.src}")`,
-            }}
-            className="phone:w-[400px] phone:h-[250px] w-[340px] h-[150px] bg-center bg-cover"
-          />
-        ) : (
-          <div
-            className="phone:w-[400px] phone:h-[250px] w-[340px] h-[150px] bg-center bg-cover"
-            style={{
-              backgroundImage: `url(${Default})`,
-            }}
-          />
-        )}
+
+        <div
+          className="phone:w-[400px] phone:h-[250px] w-[340px] h-[150px] bg-center bg-cover"
+          style={{
+            backgroundImage: `url(${Default})`,
+          }}
+        />
       </div>
     </div>
   );

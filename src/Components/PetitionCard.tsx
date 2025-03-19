@@ -1,16 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { isAdmin } from "../atom";
+import { petitionsDataInterface } from "../Interfaces";
+import { CategoryEnum } from "../Enums";
+import { ReportPetition } from "../utils/Report";
+import ReportIcon from "../assets/Report.svg";
+import { throwErr } from "../utils/ThrowErr";
 
-interface PetitionCardProps {
-  types: string;
-  title: string;
-  id: number;
-  enddate: string;
-  count: number;
-}
+const categoryEnum = CategoryEnum;
 
-const PetitionCard = (props: PetitionCardProps) => {
+const PetitionCard = (props: petitionsDataInterface) => {
   const navigate = useNavigate();
   const user = useRecoilValue(isAdmin);
   return (
@@ -21,9 +20,28 @@ const PetitionCard = (props: PetitionCardProps) => {
       }}
     >
       <div className="text-[20px] text-Hufs flex items-center justify-between">
-        <div className="font-G">{props.types}</div>
+        <div className="font-G flex items-center justify-between w-full">
+          <div>{categoryEnum[props.category as keyof typeof categoryEnum]}</div>
+          {!user ? (
+            <div
+              className="text-[13px] text-neutral-300 flex items-center gap-1"
+              onClick={async (e) => {
+                e.stopPropagation();
+                try {
+                  const temp = await ReportPetition(props.id);
+                  console.log(temp);
+                } catch (err) {
+                  throwErr(err);
+                }
+              }}
+            >
+              <img src={ReportIcon} alt="icon" />
+              신고
+            </div>
+          ) : null}
+        </div>
         {user ? (
-          <div className="flex gap-3">
+          <div className="flex justify-end gap-3 w-[200px]">
             <div
               className="adminBtn"
               onClick={(e) => {
@@ -48,10 +66,12 @@ const PetitionCard = (props: PetitionCardProps) => {
           </div>
         ) : null}
       </div>
-      <div className="text-[15px] text-black/50">{props.title}</div>
+      <div className="text-[15px] text-black/50 overflow-ellipsis truncate">
+        {props.title}
+      </div>
       <div className="flex items-center justify-between">
-        <div className="text-Point">~ {props.enddate}</div>
-        <div className="text-Point">{props.count}명</div>
+        <div className="text-Point">조회: {props.viewCount}</div>
+        <div className="text-Point">동의: {props.agreeCount}명</div>
       </div>
     </div>
   );

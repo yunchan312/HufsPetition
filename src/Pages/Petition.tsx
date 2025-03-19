@@ -1,67 +1,70 @@
-import { useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-
-interface PetitionFormProps {
-  title: string;
-  type: string;
-  detail: string;
-  links: { value: string }[];
-  tags: { value: string }[];
-}
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { IsLogged } from "../utils/Auth";
+import { useNavigate } from "react-router-dom";
+import { PetitionFormProps } from "../Interfaces";
+import { CategoryEnum } from "../Enums";
+import { RegisterPetition } from "../utils/Petitions";
+import { throwErr } from "../utils/ThrowErr";
 
 const Petition = () => {
-  const types = [
-    "분야1",
-    "분야2",
-    "분야3",
-    "분야4",
-    "분야5",
-    "분야1",
-    "분야2",
-    "분야3",
-    "분야4",
-    "분야5",
-    "분야1",
-    "분야2",
-    "분야3",
-    "분야4",
-    "분야5",
-    "기타",
-  ];
+  const navigate = useNavigate();
+  const categories = Object.values(CategoryEnum);
+  const categoryKeys = Object.keys(CategoryEnum);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    control,
+    watch,
+    setValue,
+    getValues,
   } = useForm<PetitionFormProps>({
     defaultValues: {
-      tags: [{ value: "" }, { value: "" }, { value: "" }, { value: "" }],
+      links: [],
     },
   });
 
-  const onSubmit = (data: PetitionFormProps) => {
-    console.log(data);
+  const onSubmit = async (data: PetitionFormProps) => {
+    try {
+      await RegisterPetition(data);
+      navigate("/ongoing");
+    } catch (err) {
+      throwErr(err);
+    }
   };
-
-  const {
-    fields: linkFields,
-    append: addLink,
-    remove: removeLink,
-  } = useFieldArray({
-    control,
-    name: "links",
-  });
-
-  const { fields: tagFields } = useFieldArray({
-    control,
-    name: "tags",
-  });
 
   const [tempLink, setTempLink] = useState("");
   const [err, setErr] = useState(false);
 
+  useEffect(() => {
+    const isLogged = IsLogged();
+    if (!isLogged) {
+      const ok = confirm("로그인이 필요합니다. \n로그인하러 가시겠습니까?");
+      if (ok) {
+        navigate("/login");
+      } else {
+        navigate("/");
+      }
+    }
+  }, []);
+
+  const addLink = (newLink: string) => {
+    const currentLinks = getValues("links"); // 현재 배열 가져오기
+    setValue("links", [...currentLinks, newLink]); // 배열 업데이트
+  };
+
+  const removeLink = (index: number) => {
+    const currentLinks = getValues("links");
+    setValue(
+      "links",
+      currentLinks.filter((_, i) => i !== index)
+    );
+  };
+
+  const links = watch("links");
+
   return (
-    <div className="pt-[70px] px-10">
+    <div className="pt-[70px] px-10 w-full phone:w-[900px]">
       <div className="text-[25px] py-3 border-b-2 font-G">청원하기</div>
 
       <form
@@ -82,7 +85,7 @@ const Petition = () => {
         <div>
           <div>청원 분야</div>
           <select
-            {...register("type", {
+            {...register("category", {
               required: true,
               validate: {
                 notValid: (val) => {
@@ -97,26 +100,28 @@ const Petition = () => {
             className="input"
             defaultValue="분야를 선택해주세요"
           >
-            <option disabled hidden selected>
+            <option disabled hidden>
               분야를 선택해주세요
             </option>
-            {types.map((t, i) => (
-              <option key={i} value={i}>
+            {categories.map((t, i) => (
+              <option key={i} value={categoryKeys[i]}>
                 {t}
               </option>
             ))}
           </select>
-          {errors.type ? <p className="error">{errors.type.message}</p> : null}
+          {errors.category ? (
+            <p className="error">{errors.category.message}</p>
+          ) : null}
         </div>
 
         <div>
           <div>청원 내용</div>
           <textarea
-            {...register("detail", { required: true })}
+            {...register("content", { required: true })}
             placeholder="입력해주세요."
             className="input resize-none h-[300px]"
           />
-          {errors.detail ? <p className="error">내용을 입력해주세요</p> : null}
+          {errors.content ? <p className="error">내용을 입력해주세요</p> : null}
         </div>
 
         <div>
@@ -135,11 +140,11 @@ const Petition = () => {
                   setErr(true);
                   return;
                 }
-                addLink({ value: tempLink });
+                addLink(tempLink);
                 setTempLink("");
                 setErr(false);
               }}
-              className="hufsBtn"
+              className="border-2 border-Hufs bg-Hufs text-white w-[50%] py-1 text-center cursor-pointer"
             >
               + 링크 추가
             </button>
@@ -147,37 +152,22 @@ const Petition = () => {
           {err ? (
             <div className="text-red-400">링크가 입력되지 않았습니다.</div>
           ) : null}
-          {linkFields.map((field, index) => {
+          {links.map((field, index) => {
             return (
-              <div key={field.id} className="flex my-1">
+              <div key={index} className="flex my-1">
                 <div className="w-full border-2 py-1 px-2 bg-Point text-white border-Point">
-                  {field.value}
+                  {field}
                 </div>
                 <button
                   type="button"
                   onClick={() => removeLink(index)}
-                  className="hufsLightBtn"
+                  className="border-2 text-Hufs py-1 text-center cursor-pointer w-[50%]"
                 >
                   삭제
                 </button>
               </div>
             );
           })}
-        </div>
-
-        <div>
-          <div>검색태그</div>
-          <div className="flex items-center gap-5">
-            {tagFields.map((field, index) => (
-              <input
-                key={field.id}
-                type="text"
-                placeholder={"태그" + (index + 1)}
-                className="input"
-                {...register(`tags.${index}.value` as const)}
-              />
-            ))}
-          </div>
         </div>
 
         <div className="border-t-2 flex gap-4 items-center justify-center pt-5">

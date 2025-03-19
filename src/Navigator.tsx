@@ -3,17 +3,32 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
 import { useEffect, useState } from "react";
 import MenuBar from "./Components/MenuBar";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isAdmin } from "./atom";
+import { LogOut } from "./utils/Auth";
 
 const Navigator = () => {
   const navigate = useNavigate();
   const user = useRecoilValue(isAdmin);
 
+  const setMode = useSetRecoilState(isAdmin);
+
   const [isMenu, setIsMenu] = useState(false);
   const [selected, setSelected] = useState("");
+  const [isLogged, setIsLogged] = useState(false);
   // let loc = location.pathname;
   let loc = useLocation().pathname;
+
+  useEffect(() => {
+    if (localStorage.getItem("admin_at")) {
+      setMode(true);
+      setIsLogged(true);
+    }
+    if (localStorage.getItem("at")) {
+      setIsLogged(true);
+    }
+  }, [localStorage]);
+
   useEffect(() => {
     if (loc.includes("petition")) {
       setSelected("petition");
@@ -35,10 +50,13 @@ const Navigator = () => {
     <>
       {isMenu ? (
         <MenuBar
+          setMode={setMode}
+          setIsLogged={setIsLogged}
           user={user}
           selected={selected}
           setter={setIsMenu}
           state={isMenu}
+          isLogged={isLogged}
         />
       ) : null}
       <div className="absolute z-50 px-5 phone:py-7 py-4 bg-white shadow-lg w-full text-black flex items-center justify-between">
@@ -115,14 +133,21 @@ const Navigator = () => {
             ) : null}
             {selected === "login" ? (
               <div className="px-2 py-1 text-Point font-G border-b-2">
-                로그인
+                {isLogged ? "로그아웃" : "로그인"}
               </div>
             ) : (
               <div
                 className="hover:bg-black/20 rounded-md px-2 py-1"
-                onClick={() => navigate("/login")}
+                onClick={() => {
+                  if (!isLogged) {
+                    navigate("/login");
+                  } else {
+                    setMode(false);
+                    LogOut();
+                  }
+                }}
               >
-                로그인
+                {isLogged ? "로그아웃" : "로그인"}
               </div>
             )}
           </div>

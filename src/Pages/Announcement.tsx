@@ -3,8 +3,7 @@ import AnnouncementList from "../Components/AnnouncementList";
 const Announcement = () => {
   const Announce = [
     {
-      title:
-        "공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목",
+      title: "공지제목",
       writer: "관리자",
       date: "2025-03-12",
       id: 0,

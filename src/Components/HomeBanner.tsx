@@ -3,11 +3,24 @@ import Banner from "../assets/Banner.png";
 import Status from "./Status";
 import { useGSAP } from "@gsap/react";
 import HomeSwiper from "./HomeSwiper";
+import { useEffect, useState } from "react";
+import { GetStats } from "../utils/Stats";
+import { PetitionStats } from "../Interfaces";
 
 const HomeBanner = () => {
   gsap.registerPlugin(useGSAP);
   useGSAP(() => {
     gsap.fromTo(".Banner", { opacity: 0 }, { opacity: 1, duration: 3 });
+  }, []);
+
+  const [stats, setStats] = useState<PetitionStats>();
+  useEffect(() => {
+    const getStatus = async () => {
+      const temp = await GetStats();
+      setStats(temp.data.result);
+    };
+
+    getStatus();
   }, []);
   return (
     <div>
@@ -21,7 +34,7 @@ const HomeBanner = () => {
           <Status />
         </div>
         <div className="relative phone:hidden w-full h-full bg-white/60">
-          <HomeSwiper />
+          <HomeSwiper {...stats} />
         </div>
       </div>
     </div>

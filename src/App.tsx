@@ -24,10 +24,6 @@ function App() {
           element: <Home />,
         },
         {
-          path: "/login",
-          element: <Login />,
-        },
-        {
           path: "/ongoing",
           element: <OnGoing />,
         },
@@ -43,7 +39,6 @@ function App() {
           path: "/petition",
           element: <Petition />,
         },
-
         {
           path: "/manager",
           element: <Service />,
@@ -74,6 +69,10 @@ function App() {
     {
       path: "/detail/:id",
       element: <PetitionDetail />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
     },
   ]);
   return (

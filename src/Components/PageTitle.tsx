@@ -1,12 +1,15 @@
+import { Dispatch, SetStateAction } from "react";
 import DropDown from "./DropDown";
 import { useNavigate } from "react-router-dom";
 
 const PageTitle = ({
   title,
   options,
+  setter,
 }: {
+  setter?: Dispatch<SetStateAction<string>>;
   title: string;
-  options: string[];
+  options?: string[];
 }) => {
   const navigate = useNavigate();
   return (
@@ -22,7 +25,7 @@ const PageTitle = ({
           </div>
         </div>
 
-        <DropDown options={options} />
+        {options ? <DropDown options={options} setter={setter} /> : null}
       </div>
     </div>
   );

@@ -5,8 +5,9 @@ import ReplyIcon from "../assets/Reply.svg";
 import { useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { PetitionStats } from "../Interfaces";
 
-const HomeSwiper = () => {
+const HomeSwiper = (props: PetitionStats) => {
   gsap.registerPlugin(useGSAP);
 
   const [now, setNow] = useState(0);
@@ -32,11 +33,15 @@ const HomeSwiper = () => {
         <div className="flex flex-col items-center justify-center gap-3 font-G pt-[30px]">
           <div className="text-Point px-10 text-[25px]">
             누적 동의 수 <br />
-            <span className="text-black text-[25px]">159,347 명</span>
+            <div className="text-black text-[25px] w-full text-center">
+              {props.totalAgreementCount} 명
+            </div>
           </div>
           <div className="text-Point px-10 font-G text-[25px]">
             5천건 이상 도달 청원 수 <br />
-            <div className="text-center text-black text-[25px]">194 건</div>
+            <div className="text-center text-black text-[25px]">
+              {props.thresholdReachedCount} 건
+            </div>
           </div>
         </div>
       );
@@ -46,12 +51,16 @@ const HomeSwiper = () => {
           <div className="font-G flex flex-col items-center justify-center pt-5">
             <div className="text-Point px-10 text-[30px]">진행중</div>
             <img src={OnGoingIcon} className="size-[100px] text-Point mx-10" />
-            <span className="text-black text-[25px] py-2">194 건</span>
+            <span className="text-black text-[25px] py-2">
+              {props.ongoingCount} 건
+            </span>
           </div>
           <div className="font-G flex flex-col items-center justify-center pt-5">
             <div className="text-Point px-10 text-[30px]">만료</div>
             <img src={CancelIcon} className="size-[100px] text-Point mx-10" />
-            <span className="text-black text-[25px] py-2">194 건</span>
+            <span className="text-black text-[25px] py-2">
+              {props.expiredCount} 건
+            </span>
           </div>
         </div>
       );
@@ -61,12 +70,16 @@ const HomeSwiper = () => {
           <div className="font-G flex flex-col items-center justify-center pt-5">
             <div className="text-Point px-10 text-[30px]">답변중</div>
             <img src={ReplyIcon} className="size-[100px] text-Point mx-10" />
-            <span className="text-black text-[25px] py-2">194 건</span>
+            <span className="text-black text-[25px] py-2">
+              {props.answeredCount} 건
+            </span>
           </div>
           <div className="font-G flex flex-col items-center justify-center pt-5">
             <div className="text-Point px-10 text-[30px]">답변 완료</div>
             <img src={DoneIcon} className="size-[100px] text-Point mx-10" />
-            <span className="text-black text-[25px] py-2">194 건</span>
+            <span className="text-black text-[25px] py-2">
+              {props.answeredCount} 건
+            </span>
           </div>
         </div>
       );

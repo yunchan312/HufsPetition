@@ -1,139 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PetitionCard from "../Components/PetitionCard";
 import PageTitle from "../Components/PageTitle";
+import { GetPetitionsOnGoing } from "../utils/GetPetitions";
+import Pagination from "../Components/Pagination";
+import { petitionsDataInterface } from "../Interfaces";
+import NoData from "../Components/NoData";
+import Search from "../Components/Search";
 
 const OnGoing = () => {
-  const types = [
-    "전체",
-    "분야1",
-    "분야2",
-    "분야3",
-    "분야4",
-    "분야5",
-    "분야1",
-    "분야2",
-    "분야3",
-    "분야4",
-    "분야5",
-    "분야1",
-    "분야2",
-    "분야3",
-    "분야4",
-    "분야5",
-    "기타",
-  ];
-  const petitions = [
-    {
-      types: "교육/인권",
-      title:
-        "우즈베키스탄 학생들을 울리며 등록금을 돌려주지 않은 **전문학교 김**을 고발합니다. (제발 등록금을 돌려받게 해주십시오).",
-      id: 1,
-      enddate: "2010-10-04",
-      count: 4556,
-    },
-    {
-      types: "교육/인권",
-      title:
-        "우즈베키스탄 학생들을 울리며 등록금을 돌려주지 않은 **전문학교 김**을 고발합니다. (제발 등록금을 돌려받게 해주십시오).",
-      id: 1,
-      enddate: "2010-10-04",
-      count: 4556,
-    },
-    {
-      types: "교육/인권",
-      title:
-        "우즈베키스탄 학생들을 울리며 등록금을 돌려주지 않은 **전문학교 김**을 고발합니다. (제발 등록금을 돌려받게 해주십시오).",
-      id: 1,
-      enddate: "2010-10-04",
-      count: 4556,
-    },
-    {
-      types: "교육/인권",
-      title:
-        "우즈베키스탄 학생들을 울리며 등록금을 돌려주지 않은 **전문학교 김**을 고발합니다. (제발 등록금을 돌려받게 해주십시오).",
-      id: 1,
-      enddate: "2010-10-04",
-      count: 4556,
-    },
-    {
-      types: "교육/인권",
-      title:
-        "우즈베키스탄 학생들을 울리며 등록금을 돌려주지 않은 **전문학교 김**을 고발합니다. (제발 등록금을 돌려받게 해주십시오).",
-      id: 1,
-      enddate: "2010-10-04",
-      count: 4556,
-    },
-    {
-      types: "교육/인권",
-      title:
-        "우즈베키스탄 학생들을 울리며 등록금을 돌려주지 않은 **전문학교 김**을 고발합니다. (제발 등록금을 돌려받게 해주십시오).",
-      id: 1,
-      enddate: "2010-10-04",
-      count: 4556,
-    },
-    {
-      types: "교육/인권",
-      title:
-        "우즈베키스탄 학생들을 울리며 등록금을 돌려주지 않은 **전문학교 김**을 고발합니다. (제발 등록금을 돌려받게 해주십시오).",
-      id: 1,
-      enddate: "2010-10-04",
-      count: 4556,
-    },
-    {
-      types: "교육/인권",
-      title:
-        "우즈베키스탄 학생들을 울리며 등록금을 돌려주지 않은 **전문학교 김**을 고발합니다. (제발 등록금을 돌려받게 해주십시오).",
-      id: 1,
-      enddate: "2010-10-04",
-      count: 4556,
-    },
-    {
-      types: "교육/인권",
-      title:
-        "우즈베키스탄 학생들을 울리며 등록금을 돌려주지 않은 **전문학교 김**을 고발합니다. (제발 등록금을 돌려받게 해주십시오).",
-      id: 1,
-      enddate: "2010-10-04",
-      count: 4556,
-    },
-  ];
-  const [typeNum, setTypeNum] = useState(0);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [petitions, setPetitions] = useState<petitionsDataInterface[]>([]);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await GetPetitionsOnGoing(page);
+        setPetitions(data.data.result.content);
+        setTotalPages(data.data.result.totalPages);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getData();
+  }, [page]);
   return (
-    <div className="phone:pt-[80px] pt-20 px-5 ">
+    <div className="phone:pt-[80px] pt-20 px-5 w-full phone:w-[900px]">
       <div>
-        <div className="text-[25px] mb-5 font-G">청원 분류 선택</div>
-        <div className="border-2 border-neutral-400 rounded-xl grid phone:grid-cols-6 grid-cols-3 py-3 px-3 w-full">
-          {types.map((t, i) => (
-            <div
-              onClick={() => setTypeNum(i)}
-              key={i}
-              id={`${i}`}
-              className="text-Point/50 my-2 select-none cursor-pointer px-2"
-              style={{
-                backgroundColor: typeNum === i ? "#00677F40" : "white",
-                color: typeNum === i ? "#00677F" : "#00677F40",
-                fontWeight: typeNum === i ? "bold" : "",
-                fontFamily: typeNum === i ? "G" : "",
-              }}
-            >
-              {t}
-            </div>
-          ))}
+        <div className="text-[25px] mb-5 font-G">청원 검색</div>
+        <div className="px-5">
+          <Search status="ONGOING" />
         </div>
       </div>
 
-      <PageTitle title="진행중인 청원" options={["a", "b", "c", "d"]} />
+      <PageTitle title="진행중인 청원" />
+
       <div>
-        {petitions.map((petition, i) => (
-          <div key={i}>
-            <PetitionCard
-              types={petition.types}
-              title={petition.title}
-              id={petition.id}
-              enddate={petition.enddate}
-              count={petition.count}
-            />
-          </div>
-        ))}
+        {petitions.length > 0 ? (
+          petitions.map((petition: petitionsDataInterface, i: number) => (
+            <div key={i}>
+              <PetitionCard {...petition} />
+            </div>
+          ))
+        ) : (
+          <NoData />
+        )}
+      </div>
+      <div>
+        <Pagination page={page} totalPages={totalPages} setter={setPage} />
       </div>
     </div>
   );
