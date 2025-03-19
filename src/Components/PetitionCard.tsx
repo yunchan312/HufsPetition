@@ -46,7 +46,7 @@ const PetitionCard = (props: petitionsDataInterface) => {
               className="adminBtn"
               onClick={(e) => {
                 e.stopPropagation();
-                navigate("/reply");
+                navigate(`/reply/${props.id}`);
               }}
             >
               답변하기

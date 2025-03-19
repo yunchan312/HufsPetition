@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { CertifyCode, Register, SendCode } from "../utils/SignUp";
 import { throwErr } from "../utils/ThrowErr";
 import { SignUpFormProps } from "../Interfaces";
-import { useCookies } from "react-cookie";
 import { SyncLoader } from "react-spinners";
 
 const SignUpForm = () => {
@@ -34,8 +33,6 @@ const SignUpForm = () => {
       console.log(err);
     }
   };
-
-  const [, setCookie] = useCookies(["email_token"]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
@@ -110,14 +107,6 @@ const SignUpForm = () => {
                       setIsLoading(true);
                       const temp = await CertifyCode(email, code);
                       console.log(temp);
-                      const et = temp.data.result
-                        .split("email_token=")[1]
-                        .split(";")[0];
-                      setCookie("email_token", et, {
-                        path: "/",
-                        secure: true,
-                        sameSite: "none",
-                      });
                       if (temp.data.isSuccess) {
                         alert(temp.data.message);
                         setIsCoded(true);

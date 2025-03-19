@@ -69,3 +69,14 @@ export const IsLogged = () => {
     return false;
   }
 };
+
+export const Reissue = () => {
+  const Reissue = instance.post(
+    "user/reissue",
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+  return Reissue;
+};

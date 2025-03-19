@@ -99,3 +99,7 @@ export interface BoardContent {
   updatedAt: string;
   boardType: string;
 }
+
+export interface ReplyProps {
+  reply: string;
+}

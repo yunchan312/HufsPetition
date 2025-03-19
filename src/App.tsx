@@ -44,7 +44,7 @@ function App() {
           element: <Service />,
         },
         {
-          path: "/reply",
+          path: "/reply/:id",
           element: <Reply />,
         },
         {

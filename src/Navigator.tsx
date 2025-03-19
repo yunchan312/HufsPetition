@@ -69,7 +69,7 @@ const Navigator = () => {
 
         <div className="phone:block hidden">
           <div className="flex gap-5 *:cursor-pointer">
-            {selected === "petition" ? (
+            {user ? null : selected === "petition" ? (
               <div className="px-2 py-1 text-Point font-G border-b-2">
                 청원하기
               </div>

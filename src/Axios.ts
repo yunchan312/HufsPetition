@@ -15,6 +15,7 @@ export const instance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 export const instanceRegister = axios.create({
@@ -31,6 +32,7 @@ export const adminInstance = axios.create({
   timeout: 5000, // 5초로 증가
   headers: {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("admin_at")}`,
   },
 });
 

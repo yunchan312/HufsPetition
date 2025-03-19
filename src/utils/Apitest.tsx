@@ -1,7 +1,19 @@
-import { instance } from "../Axios";
+import { useEffect } from "react";
+import { Reissue } from "./Auth";
+import { useCookies } from "react-cookie";
 
 const Apitest = () => {
-  instance.get("petitions").then((res) => console.log(res));
+  const [, setCookie] = useCookies();
+  useEffect(() => {
+    const rr = async () => {
+      const rt = localStorage.getItem("rt");
+      setCookie("refresh_token", rt);
+      const temp = await Reissue();
+      console.log(temp);
+    };
+
+    rr();
+  }, []);
   return <div></div>;
 };
 
