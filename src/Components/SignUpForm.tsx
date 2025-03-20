@@ -4,7 +4,7 @@ import { CertifyCode, Register, SendCode } from "../utils/SignUp";
 import { throwErr } from "../utils/ThrowErr";
 import { SignUpFormProps } from "../Interfaces";
 import { SyncLoader } from "react-spinners";
-import axios from "axios";
+// import axios from "axios";
 
 const SignUpForm = () => {
   const {
@@ -17,14 +17,14 @@ const SignUpForm = () => {
 
   const onSubmit = async (data: SignUpFormProps) => {
     try {
-      // const temp = await Register(data.email, data.password);
-      // console.log(temp);
-      const temp = axios.post(
-        `${import.meta.env.VITE_BASE_API_URL}user/register`,
-        { email: data.email, password: data.password },
-        { withCredentials: true }
-      );
+      const temp = await Register(data.email, data.password);
       console.log(temp);
+      // const temp = axios.post(
+      //   `${import.meta.env.VITE_BASE_API_URL}user/register`,
+      //   { email: data.email, password: data.password },
+      //   { withCredentials: true }
+      // );
+      // console.log(temp);
     } catch (err) {
       throwErr(err);
     }
