@@ -6,6 +6,7 @@ import HomeSwiper from "./HomeSwiper";
 import { useEffect, useState } from "react";
 import { GetStats } from "../utils/Stats";
 import { PetitionStats } from "../Interfaces";
+import { throwErr } from "../utils/ThrowErr";
 
 const HomeBanner = () => {
   gsap.registerPlugin(useGSAP);
@@ -16,8 +17,12 @@ const HomeBanner = () => {
   const [stats, setStats] = useState<PetitionStats>();
   useEffect(() => {
     const getStatus = async () => {
-      const temp = await GetStats();
-      setStats(temp.data.result);
+      try {
+        const temp = await GetStats();
+        setStats(temp.data.result);
+      } catch (err) {
+        throwErr(err);
+      }
     };
 
     getStatus();

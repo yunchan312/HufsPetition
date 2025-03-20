@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const instanceAuth = axios.create({
-  baseURL: "http://3.37.127.24:8080/",
+  baseURL: import.meta.env.VITE_BASE_API_URL,
   timeout: 5000, // 5초로 증가
   headers: {
     "Content-Type": "application/json",
@@ -10,7 +10,7 @@ export const instanceAuth = axios.create({
 });
 
 export const instance = axios.create({
-  baseURL: "http://3.37.127.24:8080/",
+  baseURL: import.meta.env.VITE_BASE_API_URL,
   timeout: 5000, // 5초로 증가
   headers: {
     "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export const instance = axios.create({
 });
 
 export const instanceRegister = axios.create({
-  baseURL: "http://3.37.127.24:8080/",
+  baseURL: import.meta.env.VITE_BASE_API_URL,
   timeout: 5000, // 5초로 증가
   headers: {
     "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const instanceRegister = axios.create({
 });
 
 export const adminInstance = axios.create({
-  baseURL: "http://3.37.127.24:8080/",
+  baseURL: import.meta.env.VITE_BASE_API_URL,
   timeout: 5000, // 5초로 증가
   headers: {
     "Content-Type": "application/json",
