@@ -87,13 +87,13 @@ adminInstance.interceptors.response.use(
   async (err) => {
     alert(err.response?.data.message);
     console.log("Axios", err);
-    if (err.response?.data.code == "USER4013") {
+    if (err.response?.data.code === "USER4013") {
       const temp = await Reissue();
       const newToken = temp.data.result.tokenDto;
       localStorage.setItem("admin_at", newToken.accessToken);
       localStorage.setItem("admin_rt", newToken.accessToken);
     }
-    if (err.response?.data.code == "COMMON4017") {
+    if (err.response?.data.code === "COMMON4017") {
       localStorage.removeItem("admin_at");
       localStorage.removeItem("admin_rt");
       alert(

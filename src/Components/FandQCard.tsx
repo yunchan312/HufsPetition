@@ -52,9 +52,9 @@ const FandQCard = () => {
             <li
               key={i}
               className="homeElementLists border-b-2 border-b-neutral-50"
-              onClick={() => navigate(`/announcement/${a.id}`)}
+              onClick={() => navigate(`/fq`)}
             >
-              <span>{a.title + (i + 1)}</span>
+              <span>{a.title}</span>
               <span className="text-black/20 text-[10px]">
                 {a.createdAt.split("T")[0]}
               </span>
