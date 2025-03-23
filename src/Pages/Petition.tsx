@@ -80,11 +80,19 @@ const Petition = () => {
           <div>청원 제목</div>
           <input
             type="text"
-            {...register("title", { required: true })}
-            placeholder="입력해주세요."
+            {...register("title", {
+              required: true,
+              minLength: {
+                value: 5,
+                message: "제목은 최소 5글자를 넘겨야 합니다.",
+              },
+            })}
+            placeholder="입력해주세요.(최소 5글자)"
             className="input"
           />
-          {errors.title ? <p className="error">제목을 입력해주세요</p> : null}
+          {errors.title ? (
+            <p className="error">{errors.title.message}</p>
+          ) : null}
         </div>
 
         <div>
@@ -122,11 +130,19 @@ const Petition = () => {
         <div>
           <div>청원 내용</div>
           <textarea
-            {...register("content", { required: true })}
-            placeholder="입력해주세요."
+            {...register("content", {
+              required: true,
+              minLength: {
+                value: 20,
+                message: "내용은 최소 20자를 넘겨야 합니다.",
+              },
+            })}
+            placeholder="입력해주세요.(최소 20글자)"
             className="input resize-none h-[300px]"
           />
-          {errors.content ? <p className="error">내용을 입력해주세요</p> : null}
+          {errors.content ? (
+            <p className="error">{errors.content.message}</p>
+          ) : null}
         </div>
 
         <div>
