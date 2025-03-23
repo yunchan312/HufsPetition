@@ -13,6 +13,7 @@ import Reply from "./Components/Reply";
 import Announcement from "./Pages/Announcement";
 import FandQ from "./Pages/FandQ";
 import AnnouncementDetail from "./Pages/AnnouncementDetail";
+import NotFound from "./NotFound";
 
 function App() {
   const router = createBrowserRouter([
@@ -66,6 +67,10 @@ function App() {
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path: "*",
+          element: <NotFound />,
         },
       ],
       element: <Layout />,
