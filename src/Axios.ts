@@ -86,6 +86,14 @@ adminInstance.interceptors.response.use(
   },
   async (err) => {
     alert(err.response?.data.message);
+    if (err.response?.data.code === "USER4015") {
+      localStorage.removeItem("admin_at");
+      localStorage.removeItem("admin_rt");
+      localStorage.removeItem("at");
+      localStorage.removeItem("rt");
+      alert("토큰이 만료되었습니다. 다시 로그인해주세요.");
+      window.location.replace(`${import.meta.env.VITE_BASE_URL}/login`);
+    }
     console.log("Axios", err);
     if (err.response?.data.code === "USER4013") {
       const temp = await Reissue();
