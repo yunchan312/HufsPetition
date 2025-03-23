@@ -59,20 +59,20 @@ function App() {
           path: "/fq",
           element: <FandQ />,
         },
+        {
+          path: "/detail/:id",
+          element: <PetitionDetail />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
       ],
       element: <Layout />,
     },
     {
       path: "/test",
       element: <Test />,
-    },
-    {
-      path: "/detail/:id",
-      element: <PetitionDetail />,
-    },
-    {
-      path: "/login",
-      element: <Login />,
     },
   ]);
   return (

@@ -59,7 +59,7 @@ const PetitionDetail = () => {
   }, []);
 
   return (
-    <div className="py-10 phone:px-10 px-3 w-full phone:w-[900px] mx-auto">
+    <div className="py-10 phone:px-10 px-3 w-full phone:w-[900px] mx-auto pt-[80px]">
       {isModal ? (
         <div className="overlay">
           <AgreeModal setter={setIsModal} />

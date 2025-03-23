@@ -18,9 +18,10 @@ const Navigator = () => {
   const [isLogged, setIsLogged] = useState(false);
   // let loc = location.pathname;
   let loc = useLocation().pathname;
+  const adminLs = localStorage.getItem("admin_at");
+  const ls = localStorage.getItem("at");
 
   const isSuper = Boolean(localStorage.getItem("isSuper"));
-
   useEffect(() => {
     if (localStorage.getItem("admin_at")) {
       setMode(true);
@@ -29,7 +30,7 @@ const Navigator = () => {
     if (localStorage.getItem("at")) {
       setIsLogged(true);
     }
-  }, [localStorage]);
+  }, [ls, adminLs]);
 
   useEffect(() => {
     if (loc.includes("petition")) {
