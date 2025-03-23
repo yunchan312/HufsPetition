@@ -6,12 +6,14 @@ import { CategoryEnum } from "../Enums";
 import { ReportPetition } from "../utils/Report";
 import ReportIcon from "../assets/Report.svg";
 import { throwErr } from "../utils/ThrowErr";
+import { DeletePetitions } from "../utils/Petitions";
 
 const categoryEnum = CategoryEnum;
 
 const PetitionCard = (props: petitionsDataInterface) => {
   const navigate = useNavigate();
   const user = useRecoilValue(isAdmin);
+  const isSuper = Boolean(localStorage.getItem("isSuper"));
   return (
     <div
       className="phone:mx-10 mx-5 phone:py-5 *:py-2 border-b-2 cursor-pointer"
@@ -28,8 +30,11 @@ const PetitionCard = (props: petitionsDataInterface) => {
               onClick={async (e) => {
                 e.stopPropagation();
                 try {
-                  const temp = await ReportPetition(props.id);
-                  console.log(temp);
+                  const ok = confirm("정말로 청원을 신고하겠습니까?");
+                  if (ok) {
+                    const temp = await ReportPetition(props.id);
+                    alert(temp.data.message);
+                  }
                 } catch (err) {
                   throwErr(err);
                 }
@@ -51,18 +56,22 @@ const PetitionCard = (props: petitionsDataInterface) => {
             >
               답변하기
             </div>
-            <div
-              className="adminBtnRed"
-              onClick={(e) => {
-                e.stopPropagation();
-                const ok = confirm("정말로 삭제하시겠습니까?");
-                if (ok) {
-                  alert("삭제되었습니다.");
-                }
-              }}
-            >
-              삭제
-            </div>
+            {isSuper ? (
+              <div
+                className="adminBtnRed"
+                onClick={async (e) => {
+                  e.stopPropagation();
+                  const ok = confirm("정말로 삭제하시겠습니까?");
+                  if (ok) {
+                    await DeletePetitions(props.id);
+                    alert("삭제되었습니다.");
+                    window.location.reload();
+                  }
+                }}
+              >
+                삭제
+              </div>
+            ) : null}
           </div>
         ) : null}
       </div>

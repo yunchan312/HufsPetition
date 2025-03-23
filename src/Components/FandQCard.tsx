@@ -13,8 +13,7 @@ const FandQCard = () => {
   useEffect(() => {
     const getBoard = async () => {
       try {
-        const temp = await GetBoard("NOTICE", 0);
-        console.log(temp.data.result.content);
+        const temp = await GetBoard("QNA", 0);
         setContent(temp.data.result.content);
       } catch (err) {
         throwErr(err);
@@ -47,12 +46,12 @@ const FandQCard = () => {
           </li>
         ))}
       </div> */}
-      <div className="border-y-2">
+      <div className="border-y-2  h-[350px]">
         {content.length > 0 ? (
           content.map((a, i) => (
             <li
               key={i}
-              className="homeElementLists"
+              className="homeElementLists border-b-2 border-b-neutral-50"
               onClick={() => navigate(`/announcement/${a.id}`)}
             >
               <span>{a.title + (i + 1)}</span>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Reissue } from "./utils/Auth";
 
 export const instanceAuth = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
@@ -10,15 +11,6 @@ export const instanceAuth = axios.create({
 });
 
 export const instance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_API_URL,
-  timeout: 5000, // 5초로 증가
-  headers: {
-    "Content-Type": "application/json",
-  },
-  withCredentials: true,
-});
-
-export const instanceRegister = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
   timeout: 5000, // 5초로 증가
   headers: {
@@ -62,5 +54,54 @@ instance.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => Promise.reject(error)
+  async (err) => {
+    alert(err.response?.data.message);
+    console.log("Axios", err);
+
+    Promise.reject(err);
+  }
+);
+
+instanceAuth.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (err) => {
+    alert(err.response?.data.message);
+    console.log("Axios", err);
+    if (err.response?.data.code == "USER4013") {
+      const temp = await Reissue();
+      const newToken = temp.data.result.tokenDto;
+      localStorage.setItem("at", newToken.accessToken);
+      localStorage.setItem("rt", newToken.accessToken);
+    }
+
+    Promise.reject(err);
+  }
+);
+
+adminInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (err) => {
+    alert(err.response?.data.message);
+    console.log("Axios", err);
+    if (err.response?.data.code == "USER4013") {
+      const temp = await Reissue();
+      const newToken = temp.data.result.tokenDto;
+      localStorage.setItem("admin_at", newToken.accessToken);
+      localStorage.setItem("admin_rt", newToken.accessToken);
+    }
+    if (err.response?.data.code == "COMMON4017") {
+      localStorage.removeItem("admin_at");
+      localStorage.removeItem("admin_rt");
+      alert(
+        "🥳기적적인 에러 극뽁!!!!!!!!🥳\n🎊🎉축하합니다 회원님!!🎊🎉\n로그아웃 되었습니다. 다시 로그인해주세요"
+      );
+      window.location.reload();
+    }
+
+    Promise.reject(err);
+  }
 );

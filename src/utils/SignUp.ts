@@ -1,4 +1,4 @@
-import { instance, instanceRegister } from "../Axios";
+import { instance } from "../Axios";
 
 export const SendCode = async (email: string) => {
   return await instance.post("user/code/send", { email: email });
@@ -12,7 +12,7 @@ export const CertifyCode = async (email: string, code: string) => {
 };
 
 export const Register = async (email: string, password: string) => {
-  return await instanceRegister.post("user/register", {
+  return await instance.post("user/register", {
     email: email,
     password: password,
   });

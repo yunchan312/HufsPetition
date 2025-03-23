@@ -1,4 +1,5 @@
 export interface petitionsDataInterface {
+  id: number;
   title: string;
   category: string;
   content: string;
@@ -7,7 +8,24 @@ export interface petitionsDataInterface {
   viewCount: number;
   reportCount: number;
   writerEmail: string;
-  id: number;
+  links: string[];
+  createDate: string;
+  endDate: string;
+  answerResponses: AnswerResponses[];
+}
+
+export interface AnswerResponses {
+  answerId: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  writerAdminInfo: {
+    adminId: number;
+    departure: string;
+    email: string;
+    phoneNumber: string;
+    role: string;
+  };
 }
 
 export interface LoginProps {
@@ -76,18 +94,12 @@ export interface PetitionStats {
   waitingCount?: number;
 }
 
-export interface AnswerResponses {
-  answerId: number;
-  content: string;
+export interface AgreementsProps {
+  agreementId: number;
+  petitionId: number;
+  agreementUserId: number;
+  agreementUserEmail: string;
   createdAt: string;
-  updatedAt: string;
-  writerAdminInfo: {
-    adminId: number;
-    departure: string;
-    email: string;
-    phoneNumber: string;
-    role: string;
-  };
 }
 
 export interface BoardContent {
@@ -102,4 +114,24 @@ export interface BoardContent {
 
 export interface ReplyProps {
   reply: string;
+}
+
+export interface BoardInterface {
+  boardType: string;
+  content: string;
+  createdAt: string;
+  id: number;
+  title: string;
+  updatedAt: string;
+  writer: string;
+}
+
+export interface NoticeDetailProps {
+  id: number;
+  writer: string;
+  title: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  boardType: string;
 }

@@ -1,34 +1,38 @@
+import { useEffect, useState } from "react";
+import { NoticeDetailProps } from "../Interfaces";
+import { useParams } from "react-router-dom";
+import { GetBoardDetail } from "../utils/GetBoard";
+import { throwErr } from "../utils/ThrowErr";
+
 const AnnouncementDetail = () => {
-  const Detail = {
-    title:
-      "공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목공지제목",
-    writer: "관리자",
-    date: "2025-03-12",
-    id: 0,
-    detail: `본래 일본의 인터넷 소설 투고 사이트인『소설가가 되자』에서 2012년 4월 20일부터 연재됐으며[20] 초기엔 1권 분량을 끝냈음에도 별 반응이 없는 등 저조한 성적이었지만, 6권 분량 연재차에 주목받게 되어 '이 Web 소설이 대단하다!'에서 소드 아트 온라인, 로그 호라이즌, 던전에서 만남을 추구하면 안 되는 걸까 같은 인기작들을 제치고 2위를 차지하였다.[21]
-    
-    이후 서적화되었으며 미디어 팩토리에는 『소설가가 되자』 출신의 인터넷 소설들을 전문적으로 출간하는 MF북스라는 브랜드가 있는데도 불구하고 《리제로》는 기존의 라이트 노벨 브랜드인 MF문고J에서 나왔다. 그밖에도 따로 공식 사이트와 트위터 계정도 마련하는 등, 다른 라이트 노벨로 출간된 인터넷 소설과는 다르게 출판사가 굉장히 밀어주는 작품이다.
-    
-    한국어판은 노블엔진 레이블로 발매됐다. 번역가는 정홍식. 한국 정발도 굉장히 빠른 편으로, 일본에서 6권이 나온지 3달만에 6권을 정발했다. 종이책뿐만 아니라 전자책판도 여러 플랫폼에서 서비스된다. 발매 현황 표에 서술된 전자책판 발매일은 선독점 업체인 리디 기준이다.
-    
-    외전을 많이 내는 편인데 웹 연재로 이후의 전개를 아는 독자들 중 일부는 "왜 단편집으로 재미있는 본편의 전개를 미루는 일을 하느냐" 같은 반응을 보이는 팬들도 있다. 리제로의 외전은 약간 가벼운 분위기인 단편집과 등장인물들의 과거를 그린 EX로 나뉘는데 일판의 단편집 2권을 기준으로 8권까지 나올 동안 외전, EX 포함해서 무려 네 권이 나왔다. 본편과 같이 정발되는 것이라면 몰라도 따로따로 나오는 것이라 외전 1권 = 스토리 전개 3달 연기나 다름없는 소리이기 때문이다.
-    
-    거기에 이런 단편집을 내는 것이 특히 비판받는 이유는 장점으로 꼽히면서도 스토리 전개가 시원하지 못하다는 비판점을 받는 리제로 특유의 세밀하고 꼼꼼한 설정에 있다. 이 꼼꼼한 설정과 복선으로 인해 단편집을 봐야만 본편에 나오는 등장인물들의 대사 및 행동의 진정한 의미나 속사정을 눈치챌 수 있는 경우가 많고, 일부 설정의 구체적인 부분은 단편집에서 공개되고 본편에서는 슬쩍 언급하는 식으로 넘어가는 경우도 많아 본편만 보는 다수의 독자 및 시청자들로서는 설정이 너무 허술하고 잘 잊힌다는 느낌을 받게 되는 아이러니함이 발생한다. 이렇듯 설정 간의 서술 거리가 너무 멀어 심할 경우에는 단편 하나에서 나온 대사의 의미를 알기 위해 다른 단편을 읽어야 할 정도.
-    
-    게다가 일부 조연들의 경우 작가는 단편집을 통해 먼저 보여주어 독자들로 하여금 낯설지 않게 한 후 본편에 출연시키려는 의도를 가지고 있는데, 단편집을 읽지 않은 대부분의 팬들로서는 처음 등장한 인물이 기존의 등장인물들과 아는 사이로 나오더니 아무 전조도 없이 갑작스레 대활약을 펼치니 작가의 의도와는 정반대로 이러한 전개에 의아함을 품게 된다. 이런 등장인물들의 대표적인 예로는 5장의 릴리아나 마스카레이드와 키리타카 뮤즈, 7장의 빈센트 볼라키아가 있다.`,
-  };
+  const [detail, setDetail] = useState<NoticeDetailProps>();
+  const { id } = useParams();
+
+  useEffect(() => {
+    const getNoticeDetail = async () => {
+      try {
+        if (id) {
+          const temp = await GetBoardDetail("NOTICE", id);
+          setDetail(temp.data.result);
+        }
+      } catch (err) {
+        throwErr(err);
+      }
+    };
+    getNoticeDetail();
+  }, []);
   return (
     <div className="w-full min-h-[70vh] phone:mt-[90px] mt-[50px] px-5">
       <div className="py-2 text-[20px] phone:text-[25px] font-G">
-        {Detail.title}
+        {detail?.title}
       </div>
       <div className="border-b-2  border-neutral-400 flex justify-between text-[13px] pb-2">
-        <div>작성자 | {Detail.writer}</div>
-        <div>작성일 | {Detail.date}</div>
+        <div>작성자 | {detail?.writer}</div>
+        <div>작성일 | {detail?.createdAt.split("T")[0]}</div>
       </div>
 
       <div>
-        {Detail.detail.split("\n").map((d, i) => (
+        {detail?.content.split("\n").map((d, i) => (
           <div key={i} className="py-2">
             {d}
           </div>

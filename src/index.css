@@ -16,7 +16,7 @@
 }
 
 .input {
-  @apply border-2 border-neutral-300 w-full px-2 py-1;
+  @apply border-2 border-neutral-300 w-full px-2 py-1 placeholder:text-Point/40;
 }
 
 .greenBtn {
@@ -36,7 +36,7 @@
 }
 
 .hufsBtn {
-  @apply border-2 border-Hufs bg-Hufs text-white w-full py-1 text-center cursor-pointer;
+  @apply border-2 border-Hufs bg-Hufs text-white w-full py-1 text-center cursor-pointer phone:hover:bg-Hufs/80 transition active:scale-[0.99];
 }
 .hufsLightBtn {
   @apply border-2 text-Hufs w-full py-1 text-center cursor-pointer;
@@ -51,7 +51,7 @@
   @apply w-full px-3 py-2 flex flex-col gap-3;
 }
 .homeElementLists {
-  @apply cursor-pointer transition phone:hover:font-G phone:hover:shadow-xl py-1 px-2 rounded-md flex items-center justify-between list-none;
+  @apply cursor-pointer transition phone:hover:font-G phone:hover:shadow-sm py-1 px-2 rounded-md flex items-center justify-between list-none;
 }
 .overlay {
   @apply bg-black/40 fixed top-0 left-0 w-screen h-screen flex items-center justify-center;

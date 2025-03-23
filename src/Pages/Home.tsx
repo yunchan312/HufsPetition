@@ -8,8 +8,8 @@ const Home = () => {
       <HomeBanner />
       <div className="w-full flex phone:flex-row flex-col items-center justify-center">
         <div className="phone:w-[900px] w-full gap-7 flex phone:flex-row flex-col px-10 py-10">
-          <FandQCard />
           <AnnouncementCard />
+          <FandQCard />
         </div>
       </div>
     </div>

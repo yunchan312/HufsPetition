@@ -23,6 +23,10 @@ const LoginForm = ({
     if (isAdminLogin) {
       try {
         const temp = await AdminAuth(data);
+        if (temp.data.result.role === "ROLE_SUPER") {
+          localStorage.setItem("isSuper", "true");
+        }
+
         if (temp) {
           const tokens = temp.data.result.tokenDto;
           localStorage.setItem("admin_rt", tokens.refreshToken);

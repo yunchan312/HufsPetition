@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { throwErr } from "../utils/ThrowErr";
 import { GetPetitionDetail } from "../utils/GetPetitions";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   AnswerResponses,
   PetitionDetailProps,
@@ -11,6 +11,7 @@ import {
 import { BeforeReply, ReplyPetition, UpdateAnswer } from "../utils/Reply";
 const Reply = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [contents, setContents] = useState<AnswerResponses>();
   const {
     register,
@@ -23,10 +24,16 @@ const Reply = () => {
       if (id) {
         if (!contents?.content) {
           const temp = await ReplyPetition(data.reply, id);
-          console.log("apply", temp);
+          if (temp.data.isSuccess) {
+            alert(temp.data.message);
+            navigate("/done");
+          }
         } else {
           const temp = await UpdateAnswer(data.reply, contents?.answerId);
-          console.log("update", temp);
+          if (temp.data.isSuccess) {
+            alert(temp.data.message);
+            navigate(`/detail/${id}`);
+          }
         }
       }
     } catch (e) {
@@ -40,6 +47,7 @@ const Reply = () => {
       try {
         if (id) {
           const temp = await BeforeReply(id);
+          console.log(temp);
           setContents(temp.data.result);
         }
       } catch (err) {
@@ -48,13 +56,14 @@ const Reply = () => {
     };
 
     beforeReply();
-  }, []);
+  }, [id]);
 
   const [detail, setDetail] = useState<PetitionDetailProps>();
   useEffect(() => {
     const getPetition = async () => {
       try {
         const temp = await GetPetitionDetail(id);
+        console.log(temp);
         setDetail(temp.data.result);
       } catch (err) {
         throwErr(err);
@@ -88,7 +97,7 @@ const Reply = () => {
         <textarea
           {...register("reply", { required: true })}
           className="w-full h-[300px] placeholder:text-Point/50 border-2 border-neutral-200 px-2 py-2 resize-none"
-          placeholder="답변을 입력해주세요"
+          placeholder="답변을 입력해주세요 (20자 이상)"
           defaultValue={contents?.content}
         />
         {errors.reply ? (

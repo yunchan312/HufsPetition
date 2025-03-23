@@ -23,8 +23,13 @@ const PetitionDetail = () => {
   const { id } = useParams();
   const onSubmit = async () => {
     try {
-      if (id) {
-        await AgreePetition(id);
+      const ok = confirm("정말로 동의하시겠습니까?");
+      if (ok) {
+        if (id) {
+          const temp = await AgreePetition(id);
+          alert(temp.data.message);
+          setIsModal(true);
+        }
       }
     } catch (err) {
       throwErr(err);
@@ -33,7 +38,7 @@ const PetitionDetail = () => {
   const [isModal, setIsModal] = useState(false);
   const [data, setData] = useState<PetitionDetailProps>();
   const [status, setStatus] = useState("waiting");
-  const [answer, setAnswer] = useState<AnswerResponses[]>();
+  const [answer, setAnswer] = useState<AnswerResponses>();
   const user = useRecoilValue(isAdmin);
   const navigate = useNavigate();
 
@@ -43,7 +48,7 @@ const PetitionDetail = () => {
       setStatus(
         statusEnum[temp.data.result.petitionStatus as keyof typeof statusEnum]
       );
-      setAnswer(temp.data.result.answerResponses);
+      setAnswer(temp.data.result.answerResponse);
       setData(temp.data.result);
     };
     try {
@@ -82,10 +87,22 @@ const PetitionDetail = () => {
       {status === "done" ? (
         <div>
           <div>
-            <div className="mt-10 text-[30px] font-G">답변 내용</div>
-            <div>
-              {answer?.map((a) => (
-                <div key={a.answerId}>
+            <div className="mt-10 text-[30px] font-G flex justify-between">
+              답변 내용
+              <div className="text-[10px] text-neutral-400">
+                <div>
+                  <span className="">by </span>
+                  {answer?.writerAdminInfo.email}
+                </div>
+                <div>{answer?.createdAt.split("T")[0]}</div>
+              </div>
+            </div>
+            <div className="">
+              <div key={answer?.answerId} className="">
+                <div className="py-5 break-all">{answer?.content}</div>
+              </div>
+              {/* {answer?.map((a) => (
+                <div key={a.answerId} className="rounded-lg shadow-lg">
                   <div className="flex flex-col items-end text-[13px] text-neutral-400">
                     <div>
                       <span className="">by </span>
@@ -93,9 +110,9 @@ const PetitionDetail = () => {
                     </div>
                     <div>{a.createdAt.split("T")[0]}</div>
                   </div>
-                  <div className="py-5">{a.content}</div>
+                  <div className="py-5 break-all">{a.content}</div>
                 </div>
-              ))}
+              ))} */}
             </div>
           </div>
         </div>
@@ -165,7 +182,11 @@ const PetitionDetail = () => {
       ) : null}
 
       {user ? (
-        <PetitionDetailBtn setter={setIsModal} status={status} />
+        <PetitionDetailBtn
+          setter={setIsModal}
+          status={status}
+          answerId={answer?.answerId}
+        />
       ) : (
         <div
           className="border-2 border-Point w-full text-center mx-auto py-1 px-2 cursor-pointer bg-Point text-white font-bold"

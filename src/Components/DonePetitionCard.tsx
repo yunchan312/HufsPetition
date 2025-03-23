@@ -4,19 +4,22 @@ import { useRecoilValue } from "recoil";
 import { isAdmin } from "../atom";
 import PDeparture from "../assets/PlaneDeparture.svg";
 import PeopleIcon from "../assets/Peaple.svg";
-import AnswerDateIcon from "../assets/AnswerDate.svg";
+// import AnswerDateIcon from "../assets/AnswerDate.svg";
 import PArrivalDone from "../assets/PlaneArrivalDone.svg";
 import { petitionsDataInterface } from "../Interfaces";
+import CategoryIcon from "../assets/Category.svg";
+import { CategoryEnum } from "../Enums";
 
 const DonePetitionCard = (props: petitionsDataInterface) => {
   const navigate = useNavigate();
   const user = useRecoilValue(isAdmin);
+
   return (
     <div
       className="flex phone:flex-row flex-col-reverse items-center phone:justify-between phone:py-5 py-3 border-b-2 cursor-pointer phone:w-[850px] gap-3"
       onClick={() => navigate(`/detail/${props.id}`)}
     >
-      <div className="flex flex-col justify-around gap-2 phone:w-[340px] w-full">
+      <div className="flex flex-col justify-around gap-2 w-[340px] phone:w-full">
         <div className="my-2">
           <div className="flex items-center justify-between">
             <div className="bg-Hufs text-white px-4 py-2 rounded-md w-[150px] text-center">
@@ -28,7 +31,7 @@ const DonePetitionCard = (props: petitionsDataInterface) => {
                   className="adminBtn"
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate("/reply");
+                    navigate(`/reply/${props.id}`);
                   }}
                 >
                   수정
@@ -49,7 +52,9 @@ const DonePetitionCard = (props: petitionsDataInterface) => {
             ) : null}
           </div>
           <div className="text-[20px] text-Hufs font-semibold mt-5">
-            {props.content}
+            {props.content.length > 20
+              ? props.content.slice(0, 20) + "..."
+              : props.content}
           </div>
         </div>
 
@@ -58,14 +63,14 @@ const DonePetitionCard = (props: petitionsDataInterface) => {
             <div className="flex flex-col items-center text-[13px]">
               <img src={PDeparture} className="size-[50px]" />
               <div>청원시작</div>
-              <div>[{`2020.03.12`}]</div>
+              <div className="text-[12px]">[{props.createDate}]</div>
             </div>
           </div>
           <div>
             <div className="flex flex-col items-center text-[13px]">
               <img src={PArrivalDone} className="size-[50px]" />
               <div>청원마감</div>
-              <div>[{`2020.03.12`}]</div>
+              <div className="text-[12px]">[{props.endDate}]</div>
             </div>
           </div>
 
@@ -83,11 +88,27 @@ const DonePetitionCard = (props: petitionsDataInterface) => {
 
           <div>
             <div className="flex flex-col items-center text-[13px]">
-              <img src={AnswerDateIcon} className="size-[50px]" />
-              <div>답변일</div>
-              <div>[{`2020.03.12`}]</div>
+              <img src={CategoryIcon} className="size-[50px]" />
+              <div>카테고리</div>
+              <div>
+                {CategoryEnum[props.category as keyof typeof CategoryEnum]}
+              </div>
             </div>
           </div>
+
+          {/* <div>
+            <div className="flex flex-col items-center text-[13px]">
+              <img src={AnswerDateIcon} className="size-[50px]" />
+              <div>답변일</div>
+              <div>
+                [
+                {props.answerResponses.length > 0
+                  ? props.answerResponses[0].createdAt
+                  : "알수없음"}
+                ]
+              </div>
+            </div>
+          </div> */}
         </div>
       </div>
 

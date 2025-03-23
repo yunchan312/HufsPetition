@@ -29,6 +29,7 @@ const MenuBar = ({
     }
   }, [state]);
   const navigate = useNavigate();
+  const isSuper = Boolean(localStorage.getItem("isSuper"));
   return (
     <div
       className="Overlay bg-black/30 fixed h-full z-60 w-full flex justify-end"
@@ -79,21 +80,23 @@ const MenuBar = ({
             </div>
           )}
           {user ? (
-            selected === "manager" ? (
-              <div className="px-2 py-1 text-white font-G border-b-2 bg-Point/40">
-                서비스 관리
-              </div>
-            ) : (
-              <div
-                className="hover:bg-black/20"
-                onClick={() => {
-                  setter(false);
-                  navigate("/manager");
-                }}
-              >
-                서비스 관리
-              </div>
-            )
+            isSuper ? (
+              selected === "manager" ? (
+                <div className="px-2 py-1 text-white font-G border-b-2 bg-Point/40">
+                  서비스 관리
+                </div>
+              ) : (
+                <div
+                  className="hover:bg-black/20"
+                  onClick={() => {
+                    setter(false);
+                    navigate("/manager");
+                  }}
+                >
+                  서비스 관리
+                </div>
+              )
+            ) : null
           ) : null}
           {selected === "waiting" ? (
             <div className="px-2 py-1 text-white font-G border-b-2 bg-Point/40">

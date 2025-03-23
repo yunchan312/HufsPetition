@@ -19,6 +19,8 @@ const Navigator = () => {
   // let loc = location.pathname;
   let loc = useLocation().pathname;
 
+  const isSuper = Boolean(localStorage.getItem("isSuper"));
+
   useEffect(() => {
     if (localStorage.getItem("admin_at")) {
       setMode(true);
@@ -118,18 +120,20 @@ const Navigator = () => {
               </div>
             )}
             {user ? (
-              selected === "manager" ? (
-                <div className="px-2 py-1 text-Point font-G border-b-2">
-                  서비스 관리
-                </div>
-              ) : (
-                <div
-                  className="hover:bg-black/20 rounded-md px-2 py-1"
-                  onClick={() => navigate("/manager")}
-                >
-                  서비스 관리
-                </div>
-              )
+              isSuper ? (
+                selected === "manager" ? (
+                  <div className="px-2 py-1 text-Point font-G border-b-2">
+                    서비스 관리
+                  </div>
+                ) : (
+                  <div
+                    className="hover:bg-black/20 rounded-md px-2 py-1"
+                    onClick={() => navigate("/manager")}
+                  >
+                    서비스 관리
+                  </div>
+                )
+              ) : null
             ) : null}
             {selected === "login" ? (
               <div className="px-2 py-1 text-Point font-G border-b-2">

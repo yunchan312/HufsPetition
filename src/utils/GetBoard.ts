@@ -8,3 +8,7 @@ export const GetBoard = (type: string, page: number) => {
     },
   });
 };
+
+export const GetBoardDetail = (type: string, boardId: string) => {
+  return instance.get(`boards/${type}/${boardId}`);
+};

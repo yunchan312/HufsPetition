@@ -9,6 +9,7 @@ import {
 } from "../utils/GetPetitions";
 import Pagination from "../Components/Pagination";
 import NoData from "../Components/NoData";
+import { SortEnum } from "../Enums";
 
 const Waiting = () => {
   // const petitions = [
@@ -89,6 +90,7 @@ const Waiting = () => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [petitions, setPetitions] = useState<petitionsDataInterface[]>([]);
+  const [sortType, setSortType] = useState("날짜순");
   const petitionType = {
     "만료된 청원": "expired",
     "답변중인 청원": "waiting",
@@ -96,21 +98,28 @@ const Waiting = () => {
   useEffect(() => {
     const current = petitionType[dropdown as keyof typeof petitionType];
     const getWaitingPetition = async () => {
-      const temp = await GetPetitionsWaiting(page);
+      const temp = await GetPetitionsWaiting(
+        page,
+        SortEnum[sortType as keyof typeof SortEnum]
+      );
       setTotalPages(temp.data.result.totalPages);
       setPetitions(temp.data.result.content);
     };
     const getExpiredPetition = async () => {
-      const temp = await GetPetitionsExpired(page);
+      const temp = await GetPetitionsExpired(
+        page,
+        SortEnum[sortType as keyof typeof SortEnum]
+      );
       setTotalPages(temp.data.result.totalPages);
       setPetitions(temp.data.result.content);
     };
+
     if (current === "waiting") {
       getWaitingPetition();
     } else if (current === "expired") {
       getExpiredPetition();
     }
-  }, [dropdown, page]);
+  }, [dropdown, page, sortType]);
 
   return (
     <div className="phone:pt-[80px] pt-20 px-5 w-full phone:w-[900px]">
@@ -124,6 +133,33 @@ const Waiting = () => {
         options={["답변중인 청원", "만료된 청원"]}
         setter={setDropdown}
       />
+
+      <div className="py-1 px-3 flex gap-3 justify-end">
+        <div
+          className="border-Hufs border-2 px-3 py-1 rounded-lg cursor-pointer"
+          onClick={() => {
+            setSortType("날짜순");
+          }}
+          style={{
+            backgroundColor: sortType === "날짜순" ? "#013642" : "white",
+            color: sortType === "날짜순" ? "white" : "black",
+          }}
+        >
+          날짜순
+        </div>
+        <div
+          className="border-Hufs border-2 px-3 py-1 rounded-lg cursor-pointer"
+          onClick={() => {
+            setSortType("동의순");
+          }}
+          style={{
+            backgroundColor: sortType === "동의순" ? "#013642" : "white",
+            color: sortType === "동의순" ? "white" : "black",
+          }}
+        >
+          동의순
+        </div>
+      </div>
 
       {petitions.length > 0 ? (
         petitions.map((petition, i) => (

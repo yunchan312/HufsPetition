@@ -25,11 +25,16 @@ const Petition = () => {
   });
 
   const onSubmit = async (data: PetitionFormProps) => {
-    try {
-      await RegisterPetition(data);
-      navigate("/ongoing");
-    } catch (err) {
-      throwErr(err);
+    const ok = confirm(
+      "청원에 등록하면 이후 수정이나 삭제가 어렵습니다.\n한번 더 확인 하셨습니까?"
+    );
+    if (ok) {
+      try {
+        await RegisterPetition(data);
+        navigate("/ongoing");
+      } catch (err) {
+        throwErr(err);
+      }
     }
   };
 

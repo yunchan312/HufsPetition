@@ -10,3 +10,8 @@ export const statusEnum = {
   EXPIRED: "expired",
   ANSWER_COMPLETED: "done",
 };
+
+export const SortEnum = {
+  날짜순: "CREATED_AT",
+  동의순: "AGREE_COUNT",
+};

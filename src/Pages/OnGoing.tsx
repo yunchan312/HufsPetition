@@ -6,24 +6,29 @@ import Pagination from "../Components/Pagination";
 import { petitionsDataInterface } from "../Interfaces";
 import NoData from "../Components/NoData";
 import Search from "../Components/Search";
+import { SortEnum } from "../Enums";
 
 const OnGoing = () => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [petitions, setPetitions] = useState<petitionsDataInterface[]>([]);
+  const [sortType, setSortType] = useState("날짜순");
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await GetPetitionsOnGoing(page);
+        const data = await GetPetitionsOnGoing(
+          page,
+          SortEnum[sortType as keyof typeof SortEnum]
+        );
         setPetitions(data.data.result.content);
         setTotalPages(data.data.result.totalPages);
       } catch (error) {
         console.log(error);
       }
     };
-
     getData();
-  }, [page]);
+  }, [page, sortType]);
+
   return (
     <div className="phone:pt-[80px] pt-20 px-5 w-full phone:w-[900px]">
       <div>
@@ -33,8 +38,11 @@ const OnGoing = () => {
         </div>
       </div>
 
-      <PageTitle title="진행중인 청원" />
-
+      <PageTitle
+        title="진행중인 청원"
+        options={["날짜순", "동의순"]}
+        setter={setSortType}
+      />
       <div>
         {petitions.length > 0 ? (
           petitions.map((petition: petitionsDataInterface, i: number) => (

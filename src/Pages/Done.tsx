@@ -4,6 +4,8 @@ import { petitionsDataInterface } from "../Interfaces";
 import { GetPetitionsAnswered } from "../utils/GetPetitions";
 import Pagination from "../Components/Pagination";
 import NoData from "../Components/NoData";
+import { SortEnum } from "../Enums";
+import PageTitle from "../Components/PageTitle";
 
 const Done = () => {
   // const DonePetitions = [
@@ -103,19 +105,28 @@ const Done = () => {
   );
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [sortType, setSortType] = useState("날짜순");
   useEffect(() => {
     const getPetitions = async () => {
-      const temp = await GetPetitionsAnswered(page);
+      const temp = await GetPetitionsAnswered(
+        page,
+        SortEnum[sortType as keyof typeof SortEnum]
+      );
       setDonePetitions(temp.data.result.content);
       setTotalPages(temp.data.result.totalPages);
     };
 
     getPetitions();
-  }, [page]);
+  }, [page, sortType]);
   return (
     <div className="phone:pt-[80px] pt-20 w-full phone:w-[900px]">
-      <div className="py-5 border-b-2 mx-5">
-        <div className="text-[25px] font-G">답변된 청원</div>
+      <div className="py-5 mx-5">
+        {/* <div className="text-[25px] font-G">답변된 청원</div> */}
+        <PageTitle
+          title="답변된 청원"
+          options={["날짜순", "동의순"]}
+          setter={setSortType}
+        />
       </div>
 
       <div className="flex flex-wrap justify-center gap-5 items-center w-full">

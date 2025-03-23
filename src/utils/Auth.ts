@@ -1,13 +1,9 @@
-import { AxiosError } from "axios";
 import { adminInstance, instanceAuth, instance } from "../Axios";
 import { LoginProps } from "../Interfaces";
 import { throwErr } from "./ThrowErr";
 
 export const AdminAuth = async (data: LoginProps) => {
-  const authRes = await instance
-    .post("admin/login", data)
-    .catch((err) => alert(err.message));
-
+  const authRes = await instance.post("admin/login", data);
   return authRes;
 };
 
@@ -40,24 +36,28 @@ export const LogOut = async () => {
           "admin/logout"
         );
         if (temp.data.isSuccess) {
+          if (localStorage.getItem("isSuper")) {
+            localStorage.removeItem("isSuper");
+          }
           localStorage.removeItem("admin_at");
           localStorage.removeItem("admin_rt");
           alert("로그아웃 되었습니다.");
           window.location.reload();
         }
       }
-    } catch (err) {
-      if (err instanceof AxiosError) {
-        if (err.response?.data.code === "COMMON4017") {
-          localStorage.removeItem("admin_at");
-          localStorage.removeItem("admin_rt");
-          localStorage.removeItem("at");
-          localStorage.removeItem("rt");
-          alert("로그아웃 되었습니다.");
-          window.location.pathname = "/login";
-        } else {
-          throwErr(err);
+    } catch (err: any) {
+      if (err.response?.data.code === "COMMON4017") {
+        localStorage.removeItem("admin_at");
+        localStorage.removeItem("admin_rt");
+        localStorage.removeItem("at");
+        localStorage.removeItem("rt");
+        if (localStorage.getItem("isSuper")) {
+          localStorage.removeItem("isSuper");
         }
+        alert("로그아웃 되었습니다.");
+        window.location.pathname = "/login";
+      } else {
+        throwErr(err);
       }
     }
   }

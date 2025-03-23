@@ -11,3 +11,7 @@ export const ReplyPetition = (data: string, id: string) => {
 export const UpdateAnswer = (data: string, id: number) => {
   return adminInstance.patch(`admin/answers/${id}/update`, { content: data });
 };
+
+export const DeleteReply = (answerId?: number) => {
+  return adminInstance.delete(`admin/answers/${answerId}/delete`);
+};

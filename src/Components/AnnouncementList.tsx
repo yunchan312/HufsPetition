@@ -1,14 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { BoardInterface } from "../Interfaces";
 
-interface AnnouncementListProps {
-  title: string;
-  writer: string;
-  date: string;
-  id: number;
-  detail: string;
-}
-
-const AnnouncementList = (f: AnnouncementListProps) => {
+const AnnouncementList = (f: BoardInterface) => {
   const navigate = useNavigate();
   return (
     <div
@@ -18,9 +11,11 @@ const AnnouncementList = (f: AnnouncementListProps) => {
       <div className="max-w-[200px] phone:max-w-[700px] text-[20px]">
         {f.title}
       </div>
-      <div>
-        <div>작성자 | {f.writer}</div>
-        <div>작성일 | {f.date}</div>
+      <div className="w-[120px] text-neutral-400">
+        <div className="w-full overflow-ellipsis truncate">
+          작성자 | {f.writer}
+        </div>
+        <div className="w-full">작성일 | {f.createdAt.split("T")[0]}</div>
       </div>
     </div>
   );
