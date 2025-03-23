@@ -2,14 +2,9 @@ import { useRef, useState } from "react";
 import ChevronR from "../assets/ChevronR.svg";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { BoardContent } from "../Interfaces";
 
-interface AnswerProps {
-  title: string;
-  id: number;
-  detail: string;
-}
-
-const Answer = (props: AnswerProps) => {
+const Answer = (props: BoardContent) => {
   gsap.registerPlugin(useGSAP);
   const [isSelected, setIsSelected] = useState(false);
   const chevronRef = useRef(null);
@@ -20,7 +15,7 @@ const Answer = (props: AnswerProps) => {
       gsap.to(chevronRef.current, { rotate: isSelected ? 90 : 0 });
     }
     if (toggleRef.current) {
-      gsap.to(toggleRef.current, { height: isSelected ? "250px" : 0 });
+      gsap.to(toggleRef.current, { height: isSelected ? "auto" : 0 });
     }
   }, [isSelected]);
   return (
@@ -44,7 +39,9 @@ const Answer = (props: AnswerProps) => {
       </div>
 
       <div className="bg-Hufs/10 overflow-y-scroll h-0" ref={toggleRef}>
-        <div className="pt-5 px-5">{isSelected ? props.detail : null}</div>
+        <div className="pt-5 px-5 py-5">
+          {isSelected ? props.content : null}
+        </div>
       </div>
     </div>
   );

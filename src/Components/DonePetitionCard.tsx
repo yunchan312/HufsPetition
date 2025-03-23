@@ -9,10 +9,12 @@ import PArrivalDone from "../assets/PlaneArrivalDone.svg";
 import { petitionsDataInterface } from "../Interfaces";
 import CategoryIcon from "../assets/Category.svg";
 import { CategoryEnum } from "../Enums";
+import { DeletePetitions } from "../utils/Petitions";
 
 const DonePetitionCard = (props: petitionsDataInterface) => {
   const navigate = useNavigate();
   const user = useRecoilValue(isAdmin);
+  const isSuper = Boolean(localStorage.getItem("isSuper"));
 
   return (
     <div
@@ -36,18 +38,24 @@ const DonePetitionCard = (props: petitionsDataInterface) => {
                 >
                   수정
                 </div>
-                <div
-                  className="adminBtnRed"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const ok = confirm("정말로 삭제하시겠습니까?");
-                    if (ok) {
-                      alert("삭제되었습니다.");
-                    }
-                  }}
-                >
-                  삭제
-                </div>
+                {isSuper ? (
+                  <div
+                    className="adminBtnRed"
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      const ok = confirm("정말로 삭제하시겠습니까?");
+                      if (ok) {
+                        const temp = await DeletePetitions(props.id);
+                        if (temp.data.isSuccess) {
+                          alert("삭제되었습니다.");
+                          window.location.reload();
+                        }
+                      }
+                    }}
+                  >
+                    삭제
+                  </div>
+                ) : null}
               </div>
             ) : null}
           </div>

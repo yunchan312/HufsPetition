@@ -135,3 +135,11 @@ export interface NoticeDetailProps {
   updatedAt: string;
   boardType: string;
 }
+
+export interface BoardFormInterface {
+  title: string;
+  detail: string;
+  writer: string;
+  key: string;
+  type: string;
+}

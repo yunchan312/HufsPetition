@@ -40,6 +40,7 @@ const Petition = () => {
 
   const [tempLink, setTempLink] = useState("");
   const [err, setErr] = useState(false);
+  const content = watch("content");
 
   useEffect(() => {
     const isLogged = IsLogged();
@@ -81,10 +82,10 @@ const Petition = () => {
           <input
             type="text"
             {...register("title", {
-              required: true,
+              required: "제목을 입력해주세요",
               minLength: {
                 value: 5,
-                message: "제목은 최소 5글자를 넘겨야 합니다.",
+                message: "제목은 최소 5글자를 넘겨야 합니다",
               },
             })}
             placeholder="입력해주세요.(최소 5글자)"
@@ -136,12 +137,29 @@ const Petition = () => {
                 value: 20,
                 message: "내용은 최소 20자를 넘겨야 합니다.",
               },
+              maxLength: {
+                value: 2000,
+                message: "내용은 최대 2000자입니다.",
+              },
             })}
             placeholder="입력해주세요.(최소 20글자)"
             className="input resize-none h-[300px]"
           />
-          {errors.content ? (
-            <p className="error">{errors.content.message}</p>
+          {content ? (
+            <div className="flex justify-between">
+              <div>
+                {errors.content ? (
+                  <p className="error">{errors.content.message}</p>
+                ) : null}
+              </div>
+              <div className="text-[13px] text-right">
+                {content.length > 2000 ? (
+                  <p className="error">{content.length}/2000</p>
+                ) : (
+                  <p>{content.length}/2000</p>
+                )}
+              </div>
+            </div>
           ) : null}
         </div>
 

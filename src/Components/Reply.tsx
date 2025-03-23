@@ -13,12 +13,14 @@ const Reply = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [contents, setContents] = useState<AnswerResponses>();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<ReplyProps>();
-
+  const reply = watch("reply");
   const onSubmit = async (data: ReplyProps) => {
     try {
       if (id) {
@@ -94,15 +96,41 @@ const Reply = () => {
       </section>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <textarea
-          {...register("reply", { required: true })}
-          className="w-full h-[300px] placeholder:text-Point/50 border-2 border-neutral-200 px-2 py-2 resize-none"
-          placeholder="답변을 입력해주세요 (20자 이상)"
-          defaultValue={contents?.content}
-        />
-        {errors.reply ? (
-          <div className="error">답변을 작성해주세요.</div>
-        ) : null}
+        <div className="">
+          <textarea
+            {...register("reply", {
+              required: true,
+              minLength: {
+                value: 20,
+                message: "내용은 20자 이상 입력해야 합니다.",
+              },
+              maxLength: {
+                value: 2000,
+                message: "내용은 2000자 이하로 입력해야 합니다.",
+              },
+            })}
+            className="w-full h-[300px] placeholder:text-Point/50 border-2 border-neutral-200 px-2 py-2 resize-none"
+            placeholder="답변을 입력해주세요 (20자 이상)"
+            defaultValue={contents?.content}
+          />
+          {reply ? (
+            <div className="flex justify-between">
+              <div>
+                {errors.reply ? (
+                  <div className="error">답변을 작성해주세요.</div>
+                ) : null}
+              </div>
+              <div className="text-right text-[13px]">
+                {reply.length > 2000 ? (
+                  <p className="error">{reply.length}/2000</p>
+                ) : (
+                  <p>{reply.length}/2000</p>
+                )}
+              </div>
+            </div>
+          ) : null}
+        </div>
+
         <input
           type="submit"
           value={contents?.content ? "수정하기" : "등록하기"}
