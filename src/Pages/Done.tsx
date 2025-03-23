@@ -105,7 +105,7 @@ const Done = () => {
   );
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const [sortType, setSortType] = useState("날짜순");
+  const [sortType, setSortType] = useState("동의순");
   useEffect(() => {
     const getPetitions = async () => {
       const temp = await GetPetitionsAnswered(
@@ -124,7 +124,7 @@ const Done = () => {
         {/* <div className="text-[25px] font-G">답변된 청원</div> */}
         <PageTitle
           title="답변된 청원"
-          options={["날짜순", "동의순"]}
+          options={["동의순", "날짜순"]}
           setter={setSortType}
         />
       </div>

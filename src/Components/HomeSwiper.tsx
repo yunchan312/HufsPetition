@@ -30,16 +30,16 @@ const HomeSwiper = (props: PetitionStats) => {
   const SelectCard = (target: number) => {
     if (target === 0) {
       return (
-        <div className="flex flex-col items-center justify-center gap-3 font-G pt-[30px]">
-          <div className="text-Point px-10 text-[25px]">
+        <div className="flex flex-col items-center justify-center gap-3 font-G pt-[20px]">
+          <div className="text-Point px-10 text-[20px]">
             누적 동의 수 <br />
-            <div className="text-black text-[25px] w-full text-center">
+            <div className="text-black text-[20px] w-full text-center">
               {props.totalAgreementCount} 명
             </div>
           </div>
-          <div className="text-Point px-10 font-G text-[25px]">
+          <div className="text-Point px-10 font-G text-[20px]">
             5천건 이상 도달 청원 수 <br />
-            <div className="text-center text-black text-[25px]">
+            <div className="text-center text-black text-[20px]">
               {props.thresholdReachedCount} 건
             </div>
           </div>
@@ -49,16 +49,16 @@ const HomeSwiper = (props: PetitionStats) => {
       return (
         <div className="flex items-center justify-center gap-3">
           <div className="font-G flex flex-col items-center justify-center pt-5">
-            <div className="text-Point px-10 text-[30px]">진행중</div>
-            <img src={OnGoingIcon} className="size-[100px] text-Point mx-10" />
-            <span className="text-black text-[25px] py-2">
+            <div className="text-Point px-10 text-[20px]">진행중</div>
+            <img src={OnGoingIcon} className="size-[80px] text-Point mx-10" />
+            <span className="text-black text-[20px] py-2">
               {props.ongoingCount} 건
             </span>
           </div>
           <div className="font-G flex flex-col items-center justify-center pt-5">
-            <div className="text-Point px-10 text-[30px]">만료</div>
-            <img src={CancelIcon} className="size-[100px] text-Point mx-10" />
-            <span className="text-black text-[25px] py-2">
+            <div className="text-Point px-10 text-[20px]">만료</div>
+            <img src={CancelIcon} className="size-[80px] text-Point mx-10" />
+            <span className="text-black text-[20px] py-2">
               {props.expiredCount} 건
             </span>
           </div>
@@ -68,16 +68,16 @@ const HomeSwiper = (props: PetitionStats) => {
       return (
         <div className="flex items-center justify-center gap-3">
           <div className="font-G flex flex-col items-center justify-center pt-5">
-            <div className="text-Point px-10 text-[30px]">답변중</div>
-            <img src={ReplyIcon} className="size-[100px] text-Point mx-10" />
-            <span className="text-black text-[25px] py-2">
+            <div className="text-Point px-10 text-[20px]">답변중</div>
+            <img src={ReplyIcon} className="size-[80px] text-Point mx-10" />
+            <span className="text-black text-[20px] py-2">
               {props.answeredCount} 건
             </span>
           </div>
           <div className="font-G flex flex-col items-center justify-center pt-5">
-            <div className="text-Point px-10 text-[30px]">답변 완료</div>
-            <img src={DoneIcon} className="size-[100px] text-Point mx-10" />
-            <span className="text-black text-[25px] py-2">
+            <div className="text-Point px-10 text-[20px]">답변 완료</div>
+            <img src={DoneIcon} className="size-[80px] text-Point mx-10" />
+            <span className="text-black text-[20px] py-2">
               {props.answeredCount} 건
             </span>
           </div>
@@ -88,7 +88,7 @@ const HomeSwiper = (props: PetitionStats) => {
 
   return (
     <div className="relative overflow-hidden w-full">
-      <div className="h-[300px] *:pt-[50px]">
+      <div className="h-[300px] *:pt-[70px]">
         <div className="now w-full h-full">{SelectCard(now)}</div>
       </div>
     </div>

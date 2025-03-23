@@ -130,34 +130,34 @@ const Waiting = () => {
 
       <PageTitle
         title="답변중/만료 청원"
-        options={["답변중인 청원", "만료된 청원"]}
-        setter={setDropdown}
+        options={["동의순", "날짜순"]}
+        setter={setSortType}
       />
-
+      {/* ["답변중인 청원", "만료된 청원"] */}
       <div className="py-1 px-3 flex gap-3 justify-end">
         <div
           className="border-Hufs border-2 px-3 py-1 rounded-lg cursor-pointer"
           onClick={() => {
-            setSortType("날짜순");
+            setDropdown("답변중인 청원");
           }}
           style={{
-            backgroundColor: sortType === "날짜순" ? "#013642" : "white",
-            color: sortType === "날짜순" ? "white" : "black",
+            backgroundColor: dropdown === "답변중인 청원" ? "#013642" : "white",
+            color: dropdown === "답변중인 청원" ? "white" : "black",
           }}
         >
-          날짜순
+          답변중
         </div>
         <div
           className="border-Hufs border-2 px-3 py-1 rounded-lg cursor-pointer"
           onClick={() => {
-            setSortType("동의순");
+            setDropdown("만료된 청원");
           }}
           style={{
-            backgroundColor: sortType === "동의순" ? "#013642" : "white",
-            color: sortType === "동의순" ? "white" : "black",
+            backgroundColor: dropdown === "만료된 청원" ? "#013642" : "white",
+            color: dropdown === "만료된 청원" ? "white" : "black",
           }}
         >
-          동의순
+          만료
         </div>
       </div>
 

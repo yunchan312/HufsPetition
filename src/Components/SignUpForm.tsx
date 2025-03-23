@@ -4,10 +4,8 @@ import { CertifyCode, Register, SendCode } from "../utils/SignUp";
 import { throwErr } from "../utils/ThrowErr";
 import { SignUpFormProps } from "../Interfaces";
 import { SyncLoader } from "react-spinners";
-import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -22,7 +20,7 @@ const SignUpForm = () => {
       console.log(temp);
       if (temp.data.isSuccess) {
         alert(temp.data.message);
-        navigate("/login");
+        window.location.reload();
       }
     } catch (err) {
       throwErr(err);
@@ -58,7 +56,7 @@ const SignUpForm = () => {
             className="flex flex-col items-center gap-2"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className="grid grid-cols-[3fr_1fr] w-full">
+            <div className="grid grid-cols-[2fr_1fr] w-full">
               {isEmailSent ? (
                 <div className="input bg-Point/20 text-black rounded-l-md">
                   {email}
@@ -92,7 +90,7 @@ const SignUpForm = () => {
                 <p className="error">이메일을 확인해주세요</p>
               ) : null}
             </div>
-            <div className="w-full grid grid-cols-[3fr_1fr]">
+            <div className="w-full grid grid-cols-[2fr_1fr]">
               {isCoded ? (
                 <div className="input bg-Point/20 text-black rounded-l-md">
                   {code}
@@ -106,7 +104,7 @@ const SignUpForm = () => {
                 />
               )}
               <div
-                className="w-full py-1 rounded-r-md bg-Point text-white border-2 border-Point active:bg-Point/50 cursor-pointer transition text-center"
+                className="w-full py-1 rounded-r-md bg-Point text-white border-2 border-Point active:bg-Point/50 cursor-pointer transition text-center text-[15px]"
                 onClick={async () => {
                   if (!isCoded) {
                     try {
@@ -132,10 +130,28 @@ const SignUpForm = () => {
               <>
                 <input
                   type="password"
-                  {...register("password", { required: true })}
+                  {...register("password", {
+                    required: "비밀번호를 입력해주세요!",
+                    minLength: {
+                      value: 8,
+                      message: "비밀번호는 8자 이상이어야 합니다.",
+                    },
+                    pattern: {
+                      value:
+                        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
+                      message:
+                        "영어+숫자+특수문자(@$!%*?&#)를 포함해야 합니다!",
+                    },
+                    validate: (value) =>
+                      !/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(value) ||
+                      "한글은 사용할 수 없습니다!",
+                  })}
                   className="input"
                   placeholder="비밀번호"
                 />
+                {errors.password ? (
+                  <p className="error text-[13px]">{errors.password.message}</p>
+                ) : null}
                 <input
                   type="password"
                   {...register("passwordCheck", {
@@ -152,7 +168,9 @@ const SignUpForm = () => {
                   placeholder="비밀번호 확인"
                 />
                 {errors.passwordCheck ? (
-                  <p className="error">{errors.passwordCheck.message}</p>
+                  <p className="error text-[13px]">
+                    {errors.passwordCheck.message}
+                  </p>
                 ) : null}
               </>
             ) : (

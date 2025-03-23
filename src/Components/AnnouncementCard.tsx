@@ -35,7 +35,7 @@ const AnnouncementCard = () => {
         <img src={MoreIcon} alt="icon" className="size-[30px]" />
       </div>
 
-      <div className="border-y-2 h-[350px]">
+      <div className="border-y-2 min-h-[300px]">
         {content.length > 0 ? (
           content.map((a, i) => (
             <li
@@ -50,7 +50,7 @@ const AnnouncementCard = () => {
             </li>
           ))
         ) : (
-          <div className="min-h-[350px] w-full flex justify-center items-center">
+          <div className="min-h-[300px] w-full flex justify-center items-center">
             공지사항이 없습니다.
           </div>
         )}

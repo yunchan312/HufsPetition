@@ -12,7 +12,7 @@ const OnGoing = () => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [petitions, setPetitions] = useState<petitionsDataInterface[]>([]);
-  const [sortType, setSortType] = useState("날짜순");
+  const [sortType, setSortType] = useState("동의순");
   useEffect(() => {
     const getData = async () => {
       try {
@@ -32,15 +32,15 @@ const OnGoing = () => {
   return (
     <div className="phone:pt-[80px] pt-20 px-5 w-full phone:w-[900px]">
       <div>
-        <div className="text-[25px] mb-5 font-G">청원 검색</div>
-        <div className="px-5">
+        <div className="text-[25px] mb-2 font-G">청원 검색</div>
+        <div className="px-5 mb-5">
           <Search status="ONGOING" />
         </div>
       </div>
 
       <PageTitle
         title="진행중인 청원"
-        options={["날짜순", "동의순"]}
+        options={["동의순", "날짜순"]}
         setter={setSortType}
       />
       <div>

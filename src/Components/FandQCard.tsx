@@ -46,7 +46,7 @@ const FandQCard = () => {
           </li>
         ))}
       </div> */}
-      <div className="border-y-2  h-[350px]">
+      <div className="border-y-2  h-[300px]">
         {content.length > 0 ? (
           content.map((a, i) => (
             <li
@@ -61,7 +61,7 @@ const FandQCard = () => {
             </li>
           ))
         ) : (
-          <div className="min-h-[350px] w-full flex justify-center items-center">
+          <div className="min-h-[300px] w-full flex justify-center items-center">
             F & Q가 없습니다.
           </div>
         )}

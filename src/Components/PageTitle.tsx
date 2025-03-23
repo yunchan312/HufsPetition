@@ -16,7 +16,7 @@ const PageTitle = ({
   // const navigate = useNavigate();
   // const user = useRecoilValue(isAdmin);
   return (
-    <div className="mt-10 px-3">
+    <div className="phone:px-3">
       <div className="flex flex-col phone:flex-row phone:items-center gap-5 phone:gap-0 justify-between border-b-2 pb-3">
         {/* <div className="flex items-center gap-4">
           <div className="phone:text-[25px] text-[20px] font-G">{title}</div>
