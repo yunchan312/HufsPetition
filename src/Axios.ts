@@ -68,12 +68,26 @@ instanceAuth.interceptors.response.use(
   },
   async (err) => {
     alert(err.response?.data.message);
+    if (err.response?.data.code === "USER4015") {
+      localStorage.removeItem("at");
+      localStorage.removeItem("rt");
+      alert("토큰이 만료되었습니다. 다시 로그인해주세요.");
+      window.location.replace(`${import.meta.env.VITE_BASE_URL}/login`);
+    }
     console.log("Axios", err);
-    if (err.response?.data.code == "USER4013") {
+    if (err.response?.data.code === "USER4013") {
       const temp = await Reissue();
       const newToken = temp.data.result.tokenDto;
       localStorage.setItem("at", newToken.accessToken);
       localStorage.setItem("rt", newToken.accessToken);
+    }
+    if (err.response?.data.code === "COMMON4017") {
+      localStorage.removeItem("at");
+      localStorage.removeItem("rt");
+      alert(
+        "🥳기적적인 에러 극뽁!!!!!!!!🥳\n🎊🎉축하합니다 회원님!!🎊🎉\n로그아웃 되었습니다. 다시 로그인해주세요"
+      );
+      window.location.reload();
     }
 
     Promise.reject(err);
@@ -89,8 +103,6 @@ adminInstance.interceptors.response.use(
     if (err.response?.data.code === "USER4015") {
       localStorage.removeItem("admin_at");
       localStorage.removeItem("admin_rt");
-      localStorage.removeItem("at");
-      localStorage.removeItem("rt");
       alert("토큰이 만료되었습니다. 다시 로그인해주세요.");
       window.location.replace(`${import.meta.env.VITE_BASE_URL}/login`);
     }
