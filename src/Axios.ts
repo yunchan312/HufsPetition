@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Reissue } from "./utils/Auth";
+import { Controller } from "react-hook-form";
 
 export const instanceAuth = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
@@ -55,8 +56,17 @@ instance.interceptors.response.use(
     return response;
   },
   async (err) => {
-    alert(err.response?.data.message);
-    console.log("Axios", err);
+    console.log("errInstance", err);
+    if (err.response?.data.code === "USER4015") {
+      localStorage.removeItem("at");
+      localStorage.removeItem("rt");
+      localStorage.removeItem("admin_at");
+      localStorage.removeItem("admin_rt");
+      alert("토큰이 만료되었습니다. 다시 로그인해주세요.");
+      window.location.replace(`${import.meta.env.VITE_BASE_URL}/login`);
+    } else {
+      alert(err.response?.data.message);
+    }
 
     Promise.reject(err);
   }
@@ -68,7 +78,6 @@ instanceAuth.interceptors.response.use(
   },
   async (err) => {
     alert(err.response?.data.message);
-    console.log("Axios", err);
     if (err.response?.data.code === "USER4013") {
       try {
         const temp = await Reissue();
@@ -76,12 +85,7 @@ instanceAuth.interceptors.response.use(
         localStorage.setItem("at", newToken.accessToken);
         localStorage.setItem("rt", newToken.accessToken);
       } catch (errs: any) {
-        if (errs.response?.data.code === "USER4015") {
-          localStorage.removeItem("at");
-          localStorage.removeItem("rt");
-          alert("토큰이 만료되었습니다. 다시 로그인해주세요.");
-          window.location.replace(`${import.meta.env.VITE_BASE_URL}/login`);
-        }
+        console.log("Axiossssss", errs);
       }
     }
     if (err.response?.data.code === "COMMON4017") {
@@ -104,7 +108,6 @@ adminInstance.interceptors.response.use(
   async (err) => {
     alert(err.response?.data.message);
 
-    console.log("Axios", err);
     if (err.response?.data.code === "USER4013") {
       try {
         const temp = await Reissue();
@@ -112,12 +115,7 @@ adminInstance.interceptors.response.use(
         localStorage.setItem("admin_at", newToken.accessToken);
         localStorage.setItem("admin_rt", newToken.accessToken);
       } catch (errs: any) {
-        if (errs.response?.data.code === "USER4015") {
-          localStorage.removeItem("admin_at");
-          localStorage.removeItem("admin_rt");
-          alert("토큰이 만료되었습니다. 다시 로그인해주세요.");
-          window.location.replace(`${import.meta.env.VITE_BASE_URL}/login`);
-        }
+        console.log("Axios", errs);
       }
     }
     if (err.response?.data.code === "COMMON4017") {
