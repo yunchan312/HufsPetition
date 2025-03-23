@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Reissue } from "./utils/Auth";
-import { Controller } from "react-hook-form";
 
 export const instanceAuth = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
