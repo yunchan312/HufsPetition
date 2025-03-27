@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { throwErr } from "../utils/ThrowErr";
 import { GetPetitionDetail } from "../utils/GetPetitions";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -22,38 +21,29 @@ const Reply = () => {
   } = useForm<ReplyProps>();
   const reply = watch("reply");
   const onSubmit = async (data: ReplyProps) => {
-    try {
-      if (id) {
-        if (!contents?.content) {
-          const temp = await ReplyPetition(data.reply, id);
-          if (temp.data.isSuccess) {
-            alert(temp.data.message);
-            navigate("/done");
-          }
-        } else {
-          const temp = await UpdateAnswer(data.reply, contents?.answerId);
-          if (temp.data.isSuccess) {
-            alert(temp.data.message);
-            navigate(`/detail/${id}`);
-          }
+    if (id) {
+      if (!contents?.content) {
+        const temp = await ReplyPetition(data.reply, id);
+        if (temp.data.isSuccess) {
+          alert(temp.data.message);
+          navigate("/done");
+        }
+      } else {
+        const temp = await UpdateAnswer(data.reply, contents?.answerId);
+        if (temp.data.isSuccess) {
+          alert(temp.data.message);
+          navigate(`/detail/${id}`);
         }
       }
-    } catch (e) {
-      console.log(e);
-      throwErr(e);
     }
   };
 
   useEffect(() => {
     const beforeReply = async () => {
-      try {
-        if (id) {
-          const temp = await BeforeReply(id);
-          console.log(temp);
-          setContents(temp.data.result);
-        }
-      } catch (err) {
-        throwErr(err);
+      if (id) {
+        const temp = await BeforeReply(id);
+        console.log(temp);
+        setContents(temp.data.result);
       }
     };
 
@@ -63,13 +53,9 @@ const Reply = () => {
   const [detail, setDetail] = useState<PetitionDetailProps>();
   useEffect(() => {
     const getPetition = async () => {
-      try {
-        const temp = await GetPetitionDetail(id);
-        console.log(temp);
-        setDetail(temp.data.result);
-      } catch (err) {
-        throwErr(err);
-      }
+      const temp = await GetPetitionDetail(id);
+      console.log(temp);
+      setDetail(temp.data.result);
     };
     getPetition();
   }, []);

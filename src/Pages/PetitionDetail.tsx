@@ -1,9 +1,8 @@
 import { useForm } from "react-hook-form";
 import StatusBar from "../Components/StatusBar";
 import { useEffect, useState } from "react";
-import AgreeModal from "../Components/AgreeModal";
-import { useRecoilValue } from "recoil";
-import { isAdmin } from "../atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isAdmin, isModal } from "../atom";
 import PetitionDetailBtn from "../Components/PetitionDetailBtn";
 import BackIcon from "../assets/Back.svg";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,7 +10,6 @@ import { AgreeForm, AnswerResponses, PetitionDetailProps } from "../Interfaces";
 import { GetPetitionDetail } from "../utils/GetPetitions";
 import { statusEnum } from "../Enums";
 import { AgreePetition } from "../utils/Petitions";
-import { throwErr } from "../utils/ThrowErr";
 
 const PetitionDetail = () => {
   const {
@@ -22,20 +20,16 @@ const PetitionDetail = () => {
 
   const { id } = useParams();
   const onSubmit = async () => {
-    try {
-      const ok = confirm("정말로 동의하시겠습니까?");
-      if (ok) {
-        if (id) {
-          const temp = await AgreePetition(id);
-          alert(temp.data.message);
-          setIsModal(true);
-        }
+    const ok = confirm("정말로 동의하시겠습니까?");
+    if (ok) {
+      if (id) {
+        const temp = await AgreePetition(id);
+        alert(temp.data.message);
+        setModal(true);
       }
-    } catch (err) {
-      throwErr(err);
     }
   };
-  const [isModal, setIsModal] = useState(false);
+  const setModal = useSetRecoilState(isModal);
   const [data, setData] = useState<PetitionDetailProps>();
   const [status, setStatus] = useState("waiting");
   const [answer, setAnswer] = useState<AnswerResponses>();
@@ -60,11 +54,6 @@ const PetitionDetail = () => {
 
   return (
     <div className="py-10 phone:px-10 px-3 w-full phone:w-[900px] mx-auto pt-[80px]">
-      {isModal ? (
-        <div className="overlay">
-          <AgreeModal setter={setIsModal} />
-        </div>
-      ) : null}
       <div
         className="flex items-center cursor-pointer phone:hover:scale-[1.01] transition"
         onClick={() => navigate(-1)}
@@ -183,7 +172,7 @@ const PetitionDetail = () => {
 
       {user ? (
         <PetitionDetailBtn
-          setter={setIsModal}
+          setter={setModal}
           status={status}
           answerId={answer?.answerId}
         />
@@ -191,7 +180,7 @@ const PetitionDetail = () => {
         <div
           className="border-2 border-Point w-full text-center mx-auto py-1 px-2 cursor-pointer bg-Point text-white font-bold"
           onClick={() => {
-            setIsModal(true);
+            setModal(true);
           }}
         >
           동의 내용 보기

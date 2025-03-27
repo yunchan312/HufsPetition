@@ -76,7 +76,6 @@ instanceAuth.interceptors.response.use(
     return response;
   },
   async (err) => {
-    alert(err.response?.data.message);
     if (err.response?.data.code === "USER4013") {
       try {
         const temp = await Reissue();
@@ -84,16 +83,17 @@ instanceAuth.interceptors.response.use(
         localStorage.setItem("at", newToken.accessToken);
         localStorage.setItem("rt", newToken.accessToken);
       } catch (errs: any) {
-        console.log("Axiossssss", errs);
+        console.log("Axios", errs);
       }
-    }
-    if (err.response?.data.code === "COMMON4017") {
+    } else if (err.response?.data.code === "COMMON4017") {
       localStorage.removeItem("at");
       localStorage.removeItem("rt");
       alert(
         "🥳기적적인 에러 극뽁!!!!!!!!🥳\n🎊🎉축하합니다 회원님!!🎊🎉\n로그아웃 되었습니다. 다시 로그인해주세요"
       );
       window.location.reload();
+    } else {
+      alert(err.response?.data.message);
     }
 
     Promise.reject(err);

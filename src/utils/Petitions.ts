@@ -1,8 +1,8 @@
 import { adminInstance, instance, instanceAuth } from "../Axios";
 import { PetitionFormProps } from "../Interfaces";
 
-export const RegisterPetition = async (data: PetitionFormProps) => {
-  return await instanceAuth.post("petitions/new", data);
+export const RegisterPetition = (data: PetitionFormProps) => {
+  return instanceAuth.post("petitions/new", data);
 };
 
 export const AgreePetition = (id: string) => {

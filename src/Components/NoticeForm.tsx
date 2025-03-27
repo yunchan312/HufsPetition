@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { throwErr } from "../utils/ThrowErr";
 import { Board } from "../utils/Notice";
 import { useNavigate } from "react-router-dom";
 import { BoardFormInterface } from "../Interfaces";
@@ -12,20 +11,16 @@ const NoticeForm = () => {
   } = useForm<BoardFormInterface>();
   const navigate = useNavigate();
   const onSubmit = async (data: BoardFormInterface) => {
-    try {
-      const temp = await Board(
-        data.title,
-        data.detail,
-        data.writer,
-        data.key,
-        "NOTICE"
-      );
-      if (temp.data.isSuccess) {
-        alert(temp.data.message);
-        navigate("/announcement");
-      }
-    } catch (err) {
-      throwErr(err);
+    const temp = await Board(
+      data.title,
+      data.detail,
+      data.writer,
+      data.key,
+      "NOTICE"
+    );
+    if (temp.data.isSuccess) {
+      alert(temp.data.message);
+      navigate("/announcement");
     }
   };
 

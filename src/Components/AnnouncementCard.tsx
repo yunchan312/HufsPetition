@@ -3,7 +3,6 @@ import MicIcon from "../assets/Mic.svg";
 import MoreIcon from "../assets/More.svg";
 import { useEffect, useState } from "react";
 import { GetBoard } from "../utils/GetBoard";
-import { throwErr } from "../utils/ThrowErr";
 import { BoardContent } from "../Interfaces";
 
 const AnnouncementCard = () => {
@@ -12,12 +11,8 @@ const AnnouncementCard = () => {
   const [content, setContent] = useState<BoardContent[]>([]);
   useEffect(() => {
     const getBoard = async () => {
-      try {
-        const temp = await GetBoard("NOTICE", 0);
-        setContent(temp.data.result.content);
-      } catch (err) {
-        throwErr(err);
-      }
+      const temp = await GetBoard("NOTICE", 0);
+      setContent(temp.data.result.content);
     };
 
     getBoard();

@@ -62,7 +62,7 @@ const Navigator = () => {
           isLogged={isLogged}
         />
       ) : null}
-      <div className="absolute z-50 px-5 phone:py-7 py-4 bg-white shadow-lg w-full text-black flex items-center justify-between">
+      <div className="absolute z-40 px-5 phone:py-7 py-4 bg-white shadow-lg w-full text-black flex items-center justify-between">
         <div
           className="text-[25px] font-G flex items-center gap-1 select-none cursor-pointer"
           onClick={() => navigate("/")}

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { NoticeDetailProps } from "../Interfaces";
 import { useParams } from "react-router-dom";
 import { GetBoardDetail } from "../utils/GetBoard";
-import { throwErr } from "../utils/ThrowErr";
 
 const AnnouncementDetail = () => {
   const [detail, setDetail] = useState<NoticeDetailProps>();
@@ -10,13 +9,9 @@ const AnnouncementDetail = () => {
 
   useEffect(() => {
     const getNoticeDetail = async () => {
-      try {
-        if (id) {
-          const temp = await GetBoardDetail("NOTICE", id);
-          setDetail(temp.data.result);
-        }
-      } catch (err) {
-        throwErr(err);
+      if (id) {
+        const temp = await GetBoardDetail("NOTICE", id);
+        setDetail(temp.data.result);
       }
     };
     getNoticeDetail();

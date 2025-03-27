@@ -1,16 +1,14 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { GetAgreements } from "../utils/Petitions";
 import Pagination from "./Pagination";
 import { AgreementsProps } from "../Interfaces";
 import WarningIcon from "../assets/Warning.svg";
+import { useSetRecoilState } from "recoil";
+import { isModal } from "../atom";
 
-const AgreeModal = ({
-  setter,
-}: {
-  setter: Dispatch<SetStateAction<boolean>>;
-}) => {
+const AgreeModal = () => {
   // const list = [
   //   {
   //     StdNum: "202000299",
@@ -86,6 +84,7 @@ const AgreeModal = ({
   //   },
   // ];
   const [lists, setLists] = useState<AgreementsProps[]>([]);
+  const setModal = useSetRecoilState(isModal);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const { id } = useParams();
@@ -107,7 +106,7 @@ const AgreeModal = ({
         <div className="flex justify-end">
           <FaXmark
             className="text-[30px] text-neutral-400 cursor-pointer"
-            onClick={() => setter(false)}
+            onClick={() => setModal(false)}
           />
         </div>
         {lists.length > 0 ? (

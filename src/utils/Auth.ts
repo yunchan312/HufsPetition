@@ -1,6 +1,5 @@
 import { adminInstance, instanceAuth, instance } from "../Axios";
 import { LoginProps } from "../Interfaces";
-import { throwErr } from "./ThrowErr";
 
 export const AdminAuth = async (data: LoginProps) => {
   const authRes = await instance.post("admin/login", data);
@@ -56,8 +55,6 @@ export const LogOut = async () => {
         }
         alert("로그아웃 되었습니다.");
         window.location.pathname = "/login";
-      } else {
-        throwErr(err);
       }
     }
   }

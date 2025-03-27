@@ -54,7 +54,7 @@
   @apply cursor-pointer transition phone:hover:font-G phone:hover:shadow-sm py-1 px-2 rounded-md flex items-center justify-between list-none;
 }
 .overlay {
-  @apply bg-black/40 fixed top-0 left-0 w-screen h-screen flex items-center justify-center;
+  @apply bg-black/40 fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-50;
 }
 @font-face {
   font-family: "G";

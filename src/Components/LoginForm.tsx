@@ -44,8 +44,8 @@ const LoginForm = ({
           const tokens = temp.data.result.tokenDto;
           localStorage.setItem("rt", tokens.refreshToken);
           localStorage.setItem("at", tokens.accessToken);
+          navigate("/");
         }
-        navigate("/");
       } catch (err) {
         console.log(err);
       }

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { PetitionFormProps } from "../Interfaces";
 import { CategoryEnum } from "../Enums";
 import { RegisterPetition } from "../utils/Petitions";
-import { throwErr } from "../utils/ThrowErr";
 
 const Petition = () => {
   const navigate = useNavigate();
@@ -29,11 +28,9 @@ const Petition = () => {
       "청원에 등록하면 이후 수정이나 삭제가 어렵습니다.\n한번 더 확인 하셨습니까?"
     );
     if (ok) {
-      try {
-        await RegisterPetition(data);
+      const temp = await RegisterPetition(data);
+      if (temp.data.isSuccess) {
         navigate("/ongoing");
-      } catch (err) {
-        throwErr(err);
       }
     }
   };
@@ -41,6 +38,8 @@ const Petition = () => {
   const [tempLink, setTempLink] = useState("");
   const [err, setErr] = useState(false);
   const content = watch("content");
+  const links = watch("links");
+  const title = watch("title");
 
   useEffect(() => {
     const isLogged = IsLogged();
@@ -67,8 +66,6 @@ const Petition = () => {
     );
   };
 
-  const links = watch("links");
-
   return (
     <div className="pt-[70px] px-10 w-full phone:w-[900px]">
       <div className="text-[25px] py-3 border-b-2 font-G">청원하기</div>
@@ -87,13 +84,30 @@ const Petition = () => {
                 value: 5,
                 message: "제목은 최소 5글자를 넘겨야 합니다",
               },
+              maxLength: {
+                value: 40,
+                message: "제목은 최대 40자입니다",
+              },
             })}
-            placeholder="입력해주세요.(최소 5글자)"
+            placeholder="입력해주세요(최소 5글자)"
             className="input"
           />
-          {errors.title ? (
-            <p className="error">{errors.title.message}</p>
-          ) : null}
+          <div className="flex items-center w-full">
+            <div className="w-full">
+              {errors.title ? (
+                <p className="error">{errors.title.message}</p>
+              ) : null}
+            </div>
+            <div className="text-[13px] text-right w-full">
+              {title ? (
+                title.length <= 40 ? (
+                  <p className="">{title.length}/40</p>
+                ) : (
+                  <p className="error">{title.length}/40</p>
+                )
+              ) : null}
+            </div>
+          </div>
         </div>
 
         <div>
@@ -135,11 +149,11 @@ const Petition = () => {
               required: true,
               minLength: {
                 value: 20,
-                message: "내용은 최소 20자를 넘겨야 합니다.",
+                message: "내용은 최소 20자를 넘겨야 합니다",
               },
               maxLength: {
                 value: 2000,
-                message: "내용은 최대 2000자입니다.",
+                message: "내용은 최대 2000자입니다",
               },
             })}
             placeholder="입력해주세요.(최소 20글자)"

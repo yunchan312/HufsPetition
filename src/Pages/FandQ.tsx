@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Answer from "../Components/Answer";
 import { BoardInterface } from "../Interfaces";
-import { throwErr } from "../utils/ThrowErr";
 import { GetBoard } from "../utils/GetBoard";
 import Pagination from "../Components/Pagination";
 import WarningIcon from "../assets/Warning.svg";
@@ -84,13 +83,9 @@ const FandQ = () => {
   const [totalPages, setTotalPages] = useState(0);
   useEffect(() => {
     const getBoard = async () => {
-      try {
-        const temp = await GetBoard("QNA", page);
-        setFq(temp.data.result.content);
-        setTotalPages(temp.data.result.totalPages);
-      } catch (err) {
-        throwErr(err);
-      }
+      const temp = await GetBoard("QNA", page);
+      setFq(temp.data.result.content);
+      setTotalPages(temp.data.result.totalPages);
     };
 
     getBoard();

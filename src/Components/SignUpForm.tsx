@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { CertifyCode, Register, SendCode } from "../utils/SignUp";
-import { throwErr } from "../utils/ThrowErr";
 import { SignUpFormProps } from "../Interfaces";
 import { SyncLoader } from "react-spinners";
 
@@ -15,27 +14,19 @@ const SignUpForm = () => {
   } = useForm<SignUpFormProps>();
 
   const onSubmit = async (data: SignUpFormProps) => {
-    try {
-      const temp = await Register(data.email, data.password);
-      console.log(temp);
-      if (temp.data.isSuccess) {
-        alert(temp.data.message);
-        window.location.reload();
-      }
-    } catch (err) {
-      throwErr(err);
+    const temp = await Register(data.email, data.password);
+    console.log(temp);
+    if (temp.data.isSuccess) {
+      alert(temp.data.message);
+      window.location.reload();
     }
   };
 
   const onSendCode = async (email: string) => {
-    try {
-      setIsLoading(true);
-      const temp = await SendCode(email);
-      alert(temp.data.message);
-      setIsLoading(false);
-    } catch (err) {
-      throwErr(err);
-    }
+    setIsLoading(true);
+    const temp = await SendCode(email);
+    alert(temp.data.message);
+    setIsLoading(false);
   };
 
   const [isLoading, setIsLoading] = useState(false);
@@ -116,7 +107,7 @@ const SignUpForm = () => {
                         setIsCoded(true);
                       }
                     } catch (err) {
-                      throwErr(err);
+                      console.log(err);
                     } finally {
                       setIsLoading(false);
                     }
