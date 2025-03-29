@@ -51,7 +51,7 @@
   @apply w-full px-3 py-2 flex flex-col gap-3;
 }
 .homeElementLists {
-  @apply cursor-pointer transition phone:hover:font-G phone:hover:shadow-sm py-1 px-2 rounded-md flex items-center justify-between list-none;
+  @apply cursor-pointer transition phone:hover:font-G py-1 px-2 grid grid-cols-[4fr_1fr] list-none phone:hover:text-Point;
 }
 .overlay {
   @apply bg-black/40 fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-50;

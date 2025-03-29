@@ -1,10 +1,10 @@
 import { instance } from "../Axios";
 
-export const GetBoard = (type: string, page: number) => {
+export const GetBoard = (type: string, page: number, size?: number) => {
   return instance.get(`boards/${type}`, {
     params: {
       page: page,
-      size: 10,
+      size: size ? size : 12,
     },
   });
 };

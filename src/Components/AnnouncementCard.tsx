@@ -4,9 +4,12 @@ import MoreIcon from "../assets/More.svg";
 import { useEffect, useState } from "react";
 import { GetBoard } from "../utils/GetBoard";
 import { BoardContent } from "../Interfaces";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const AnnouncementCard = () => {
   const navigate = useNavigate();
+  gsap.registerPlugin(useGSAP);
 
   const [content, setContent] = useState<BoardContent[]>([]);
   useEffect(() => {
@@ -17,20 +20,31 @@ const AnnouncementCard = () => {
 
     getBoard();
   }, []);
+  const [isHover, setIsHover] = useState(false);
+
+  useGSAP(() => {
+    if (isHover) {
+      gsap.fromTo(".more-iconN", { rotate: 0 }, { rotate: 360, scale: 1.3 });
+    } else {
+      gsap.fromTo(".more-iconN", { rotate: 360 }, { rotate: 0, scale: 1 });
+    }
+  }, [isHover]);
   return (
     <div className="homeElement">
       <div
-        className="font-G flex items-center justify-between cursor-pointer phone:hover:scale-[1.01] transition"
+        className="font-G flex items-center justify-between gap-2 cursor-pointer"
         onClick={() => navigate("/announcement")}
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
       >
         <div className="flex items-start gap-2 ">
           <img src={MicIcon} alt="icon" className="size-[25px]" />
-          <span className="text-[25px]">공지사항</span>
+          <span className="text-[20px]">공지사항</span>
         </div>
-        <img src={MoreIcon} alt="icon" className="size-[30px]" />
+        <img src={MoreIcon} alt="icon" className="size-[30px] more-iconN" />
       </div>
 
-      <div className="border-y-2 min-h-[300px]">
+      <div className="border-y-2 h-full">
         {content.length > 0 ? (
           content.map((a, i) => (
             <li
@@ -38,10 +52,12 @@ const AnnouncementCard = () => {
               className="homeElementLists border-b-2 border-b-neutral-50"
               onClick={() => navigate(`/announcement/${a.id}`)}
             >
-              <span>{a.title}</span>
-              <span className="text-black/20 text-[10px]">
-                {a.createdAt.split("T")[0]}
+              <span className="text-[14px] overflow-ellipsis truncate">
+                {a.title}
               </span>
+              <div className="text-black/20 text-[10px] text-right pt-1">
+                {a.createdAt.split("T")[0]}
+              </div>
             </li>
           ))
         ) : (

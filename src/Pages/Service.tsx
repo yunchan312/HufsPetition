@@ -6,31 +6,40 @@ import QNAForm from "../Components/QNAForm";
 const Service = () => {
   const [form, setForm] = useState(0);
   return (
-    <div className="phone:w-[900px] w-[90%] pt-[80px] flex flex-col gap-3">
-      <div className="flex mx-5 border-b-2 text-[20px] font-G *:cursor-pointer">
+    <div className="phone:w-[900px] w-[90%] pt-[80px] flex flex-col">
+      <div className="grid grid-cols-[1fr_1fr_3fr] mx-5 text-[20px] font-G *:cursor-pointer relative top-[2px]">
         <div
           onClick={() => setForm(0)}
           style={{
-            boxShadow: form === 0 ? "0px -1px 10px #a1a1a1" : "none",
-            color: form === 0 ? "black" : "#a1a1a1",
+            color: form === 0 ? "black" : "#d5d5d5",
+            borderBottom: form === 0 ? "none" : "2px solid #e3e3e3",
+            borderTop: form === 0 ? "2px solid #e3e3e3" : "none",
+            borderLeft: form === 0 ? "2px solid #e3e3e3" : "none",
+            borderRight: form === 0 ? "2px solid #e3e3e3" : "none",
           }}
-          className="border-neutral-50 px-3 py-1 rounded-t-md"
+          className="border-neutral-50 px-3 py-1 rounded-t-md text-center bg-white"
         >
           공지사항 작성
         </div>
         <div
           onClick={() => setForm(1)}
           style={{
-            boxShadow: form === 1 ? "0px -1px 10px #a1a1a1" : "none",
-            color: form === 1 ? "black" : "#a1a1a1",
+            color: form === 1 ? "black" : "#d5d5d5",
+            borderTop: form === 1 ? "2px solid #e3e3e3" : "none",
+            borderLeft: form === 1 ? "2px solid #e3e3e3" : "none",
+            borderRight: form === 1 ? "2px solid #e3e3e3" : "none",
+            borderBottom: form === 1 ? "none" : "2px solid #e3e3e3",
           }}
-          className="border-neutral-50 px-3 py-1 rounded-t-md"
+          className="border-neutral-50 px-3 py-1 rounded-t-md text-center bg-white"
         >
           QNA 작성
         </div>
+        <div className="w-full" />
       </div>
 
-      <div>{form === 0 ? <NoticeForm /> : <QNAForm />}</div>
+      <div className="border-2 border-[#e3e3e3] px-10 py-5 rounded-xl">
+        {form === 0 ? <NoticeForm /> : <QNAForm />}
+      </div>
     </div>
   );
 };
