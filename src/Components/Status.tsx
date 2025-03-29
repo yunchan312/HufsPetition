@@ -43,6 +43,7 @@ const Status = () => {
     const getStatus = async () => {
       const temp = await GetStats();
       setStats(temp.data.result);
+      console.log(temp);
     };
     getStatus();
   }, []);
@@ -57,7 +58,7 @@ const Status = () => {
             </span>
           </div>
           <div className="text-Point w-full px-10 font-G">
-            5천건 이상 <br />
+            {stats?.thresholdAgreeCount}건 이상 <br />
             도달 청원 수 <br />
             <span className="text-black text-[20px] font-GL">
               {stats?.thresholdReachedCount} 건

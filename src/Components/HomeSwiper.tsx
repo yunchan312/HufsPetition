@@ -38,7 +38,7 @@ const HomeSwiper = (props: PetitionStats) => {
             </div>
           </div>
           <div className="text-Point px-10 font-G text-[20px]">
-            5천건 이상 도달 청원 수 <br />
+            {props.thresholdAgreeCount}건 이상 도달 청원 수 <br />
             <div className="text-center text-black text-[20px]">
               {props.thresholdReachedCount} 건
             </div>
