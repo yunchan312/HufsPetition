@@ -42,7 +42,6 @@ const Reply = () => {
     const beforeReply = async () => {
       if (id) {
         const temp = await BeforeReply(id);
-        console.log(temp);
         setContents(temp.data.result);
       }
     };
@@ -54,7 +53,6 @@ const Reply = () => {
   useEffect(() => {
     const getPetition = async () => {
       const temp = await GetPetitionDetail(id);
-      console.log(temp);
       setDetail(temp.data.result);
     };
     getPetition();

@@ -43,20 +43,16 @@ const OnGoing = () => {
         options={["동의순", "날짜순"]}
         setter={setSortType}
       />
-      <div className="px-5 flex flex-wrap gap-2 justify-center">
-        <div className="flex flex-col gap-3">
-          {petitions.length > 0 ? (
-            petitions.map((petition: petitionsDataInterface, i: number) => (
-              <div key={i}>
-                <PetitionCard {...petition} />
-              </div>
-            ))
-          ) : (
-            <NoData />
-          )}
-        </div>
-      </div>
       <div>
+        {petitions.length > 0 ? (
+          petitions.map((petition: petitionsDataInterface, i: number) => (
+            <div key={i}>
+              <PetitionCard {...petition} />
+            </div>
+          ))
+        ) : (
+          <NoData />
+        )}
         <Pagination page={page} totalPages={totalPages} setter={setPage} />
       </div>
     </div>

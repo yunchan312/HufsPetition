@@ -8,8 +8,7 @@ const Apitest = () => {
     const rr = async () => {
       const rt = localStorage.getItem("rt");
       setCookie("refresh_token", rt);
-      const temp = await Reissue();
-      console.log(temp);
+      await Reissue();
     };
 
     rr();

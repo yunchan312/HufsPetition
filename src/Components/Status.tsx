@@ -43,7 +43,6 @@ const Status = () => {
     const getStatus = async () => {
       const temp = await GetStats();
       setStats(temp.data.result);
-      console.log(temp);
     };
     getStatus();
   }, []);

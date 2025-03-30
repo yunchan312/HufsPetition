@@ -14,11 +14,9 @@ const PetitionCard = (props: petitionsDataInterface) => {
   const user = useRecoilValue(isAdmin);
   const isSuper = Boolean(localStorage.getItem("isSuper"));
 
-  console.log(isSuper);
-
   return (
     <div
-      className="phone:py-2 py-2 px-5 *:py-2 border-b-2 cursor-pointer phone:w-full flex flex-col justify-between"
+      className="phone:py-2 py-2 phone:px-5 *:py-2 border-b-2 cursor-pointer flex flex-col justify-between"
       onClick={() => {
         navigate(`/detail/${props.id}`);
       }}
@@ -80,9 +78,9 @@ const PetitionCard = (props: petitionsDataInterface) => {
         </div>
         <div className="text-[20px] text-black font-G mt-2">
           <div className="line-clamp-1">{props.title}</div>
-          <p className="text-[13px] text-neutral-300 line-clamp-4">
+          <div className="text-[13px] text-neutral-300 line-clamp-4">
             {props.content}
-          </p>
+          </div>
         </div>
       </div>
       <div className="flex items-center justify-between text-[13px]">

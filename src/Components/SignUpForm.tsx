@@ -15,7 +15,6 @@ const SignUpForm = () => {
 
   const onSubmit = async (data: SignUpFormProps) => {
     const temp = await Register(data.email, data.password);
-    console.log(temp);
     if (temp.data.isSuccess) {
       alert(temp.data.message);
       window.location.reload();
@@ -101,7 +100,6 @@ const SignUpForm = () => {
                     try {
                       setIsLoading(true);
                       const temp = await CertifyCode(email, code);
-                      console.log(temp);
                       if (temp.data.isSuccess) {
                         alert(temp.data.message);
                         setIsCoded(true);
