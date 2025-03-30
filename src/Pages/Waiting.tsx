@@ -161,7 +161,7 @@ const Waiting = () => {
         </div>
       </div>
 
-      {petitions.length > 0 ? (
+      {/* {petitions.length > 0 ? (
         petitions.map((petition, i) => (
           <div key={i}>
             <PetitionCard {...petition} />
@@ -169,7 +169,20 @@ const Waiting = () => {
         ))
       ) : (
         <NoData />
-      )}
+      )} */}
+      <div className="px-5 flex flex-wrap gap-2 justify-center">
+        <div className="flex flex-col phone:flex-row phone:flex-wrap gap-2 phone:items-stretch">
+          {petitions.length > 0 ? (
+            petitions.map((petition: petitionsDataInterface, i: number) => (
+              <div key={i}>
+                <PetitionCard {...petition} />
+              </div>
+            ))
+          ) : (
+            <NoData />
+          )}
+        </div>
+      </div>
       <Pagination setter={setPage} page={page} totalPages={totalPages} />
     </div>
   );
