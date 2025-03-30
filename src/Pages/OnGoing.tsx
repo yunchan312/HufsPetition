@@ -44,7 +44,7 @@ const OnGoing = () => {
         setter={setSortType}
       />
       <div className="px-5 flex flex-wrap gap-2 justify-center">
-        <div className="flex flex-col phone:flex-row phone:flex-wrap gap-2 phone:items-stretch">
+        <div className="flex flex-col gap-3">
           {petitions.length > 0 ? (
             petitions.map((petition: petitionsDataInterface, i: number) => (
               <div key={i}>
