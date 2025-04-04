@@ -12,10 +12,16 @@ const Answer = (props: BoardContent) => {
 
   useGSAP(() => {
     if (chevronRef.current) {
-      gsap.to(chevronRef.current, { rotate: isSelected ? 90 : 0 });
+      gsap.to(chevronRef.current, {
+        rotate: isSelected ? 90 : 0,
+        duration: 0.2,
+      });
     }
     if (toggleRef.current) {
-      gsap.to(toggleRef.current, { height: isSelected ? "auto" : 0 });
+      gsap.to(toggleRef.current, {
+        height: isSelected ? "auto" : 0,
+        duration: 0.2,
+      });
     }
   }, [isSelected]);
   return (
@@ -23,12 +29,7 @@ const Answer = (props: BoardContent) => {
       className="border-b-2 border-neutral-300 cursor-pointer"
       onClick={() => setIsSelected((prev) => !prev)}
     >
-      <div
-        className="flex items-end py-3 phone:hover:bg-Hufs/10 transition"
-        style={{
-          backgroundColor: isSelected ? "rgb(233 237 238)" : "",
-        }}
-      >
+      <div className="flex items-end py-3 phone:hover:bg-Hufs/10 transition">
         <img
           ref={chevronRef}
           src={ChevronR}
@@ -38,9 +39,11 @@ const Answer = (props: BoardContent) => {
         <div className="font-G">{props.title}</div>
       </div>
 
-      <div className="bg-Hufs/10 overflow-y-scroll h-0" ref={toggleRef}>
+      <div className="overflow-y-scroll h-0" ref={toggleRef}>
         <div className="pt-5 px-5 py-5">
-          {isSelected ? props.content : null}
+          {isSelected
+            ? props.content.split("\n").map((c) => <div>{c}</div>)
+            : null}
         </div>
       </div>
     </div>

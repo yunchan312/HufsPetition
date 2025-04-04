@@ -7,7 +7,7 @@ const Service = () => {
   const [form, setForm] = useState(0);
   return (
     <div className="phone:w-[900px] w-[90%] pt-[80px] flex flex-col">
-      <div className="grid grid-cols-[1fr_1fr_3fr] mx-5 text-[20px] font-G *:cursor-pointer relative top-[2px]">
+      <div className="grid phone:grid-cols-[1fr_1fr_3fr] grid-cols-[1fr_1fr] mx-5 font-G *:cursor-pointer relative top-[2px] text-xl">
         <div
           onClick={() => setForm(0)}
           style={{
@@ -34,10 +34,10 @@ const Service = () => {
         >
           QNA 작성
         </div>
-        <div className="w-full" />
+        <div className="w-full phone:block hidden" />
       </div>
 
-      <div className="border-2 border-[#e3e3e3] px-10 py-5 rounded-xl">
+      <div className="border-2 border-[#e3e3e3] phone:px-10 py-5 rounded-xl">
         {form === 0 ? <NoticeForm /> : <QNAForm />}
       </div>
     </div>
