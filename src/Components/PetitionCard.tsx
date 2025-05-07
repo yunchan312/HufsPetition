@@ -20,6 +20,11 @@ const PetitionCard = (props: petitionsDataInterface) => {
   const isSuper = Boolean(localStorage.getItem("isSuper"));
   const [isShare, setIsShare] = useState(false);
 
+  const time = Math.ceil(
+    (new Date(props.endDate).getTime() - new Date().getTime()) /
+      (1000 * 60 * 60 * 24)
+  );
+
   return (
     <>
       {isShare ? (
@@ -54,13 +59,12 @@ const PetitionCard = (props: petitionsDataInterface) => {
                     신고
                   </div>
                 ) : null}
-                <div className="text-[13px] text-white font-G bg-Point rounded-full size-10 flex items-center justify-center">
-                  D-
-                  {Math.ceil(
-                    (new Date(props.endDate).getTime() - new Date().getTime()) /
-                      (1000 * 60 * 60 * 24)
-                  )}
-                </div>
+                {time > 0 ? (
+                  <div className="text-[13px] text-white font-G bg-Point rounded-full size-10 flex items-center justify-center">
+                    D-
+                    {time}
+                  </div>
+                ) : null}
               </div>
             </div>
             {props.petitionStatus === "WAITING" ? (
