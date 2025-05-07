@@ -4,7 +4,7 @@ import { SyncLoader } from "react-spinners";
 import PetitionCard from "./PetitionCard";
 import Pagination from "./Pagination";
 import { GetMyPetition } from "../utils/GetMyPage";
-import Chevron from "../assets/ChevronR.svg";
+import Chevron from "../assets/ChevronRWhite.svg";
 import Warning from "../assets/Warning.svg";
 import { useNavigate } from "react-router-dom";
 
@@ -34,7 +34,7 @@ const MyPetitions = ({ pagination }: { pagination: boolean }) => {
   return (
     <>
       <div
-        className="text-[20px] font-G flex justify-between items-center w-full py-1 px-1 transition phone:hover:bg-neutral-100 rounded-md cursor-pointer"
+        className="mt-10 text-[20px] font-G flex justify-between items-center w-full py-1 px-1 transition border-y-2 bg-Point text-white"
         onClick={() => navigate("agreement")}
       >
         내가 동의한 청원
@@ -46,7 +46,7 @@ const MyPetitions = ({ pagination }: { pagination: boolean }) => {
             <SyncLoader color="#00677f" />
           ) : (
             myAgree.map((b, i) => (
-              <div key={i}>
+              <div key={i} className="w-full">
                 <PetitionCard {...b} />
               </div>
             ))
@@ -74,7 +74,7 @@ const MyPetitions = ({ pagination }: { pagination: boolean }) => {
       )}
 
       <div
-        className="text-[20px] mt-3 font-G flex justify-between items-center w-full py-1 px-1 transition phone:hover:bg-neutral-100 rounded-md cursor-pointer"
+        className="mt-10 text-[20px] font-G flex justify-between items-center w-full py-1 px-1 transition border-y-2 bg-Point text-white"
         onClick={() => navigate("mypet")}
       >
         내가 건의한 청원
@@ -86,7 +86,7 @@ const MyPetitions = ({ pagination }: { pagination: boolean }) => {
             <SyncLoader color="#00677f" />
           ) : (
             myPetitions.map((b, i) => (
-              <div key={i}>
+              <div key={i} className="w-full">
                 <PetitionCard {...b} />
               </div>
             ))

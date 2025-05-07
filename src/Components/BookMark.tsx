@@ -36,7 +36,7 @@ const BookMark = ({ pagination }: { pagination: boolean }) => {
             <SyncLoader color="#00677f" />
           ) : (
             bookmarks.map((b, i) => (
-              <div key={i}>
+              <div key={i} className="w-full">
                 <PetitionCard {...b} />
               </div>
             ))
