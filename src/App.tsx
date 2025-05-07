@@ -14,6 +14,10 @@ import Announcement from "./Pages/Announcement";
 import FandQ from "./Pages/FandQ";
 import AnnouncementDetail from "./Pages/AnnouncementDetail";
 import NotFound from "./NotFound";
+import MyPage from "./Pages/MyPage";
+import MyBookmark from "./Pages/MyBookmark";
+import MyAgreement from "./Pages/MyAgreement";
+import MyPetition from "./Pages/MyPetition";
 
 function App() {
   const router = createBrowserRouter([
@@ -67,6 +71,22 @@ function App() {
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path: "/mypage",
+          element: <MyPage />,
+        },
+        {
+          path: "/mypage/bookmark",
+          element: <MyBookmark />,
+        },
+        {
+          path: "/mypage/agreement",
+          element: <MyAgreement />,
+        },
+        {
+          path: "/mypage/mypet",
+          element: <MyPetition />,
         },
         {
           path: "*",

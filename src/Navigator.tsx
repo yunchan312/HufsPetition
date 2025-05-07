@@ -45,6 +45,8 @@ const Navigator = () => {
       setSelected("login");
     } else if (loc.includes("manager")) {
       setSelected("manager");
+    } else if (loc.includes("mypage")) {
+      setSelected("mypage");
     } else {
       setSelected("");
     }
@@ -135,6 +137,20 @@ const Navigator = () => {
                   </div>
                 )
               ) : null
+            ) : null}
+            {isLogged ? (
+              isSuper ? null : selected === "mypage" ? (
+                <div className="px-2 py-1 text-Point font-G border-b-2">
+                  마이페이지
+                </div>
+              ) : (
+                <div
+                  className="hover:bg-black/20 rounded-md px-2 py-1"
+                  onClick={() => navigate(`/mypage`)}
+                >
+                  마이페이지
+                </div>
+              )
             ) : null}
             {selected === "login" ? (
               <div className="px-2 py-1 text-Point font-G border-b-2">

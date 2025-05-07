@@ -44,7 +44,7 @@ const AnnouncementCard = () => {
         <img src={MoreIcon} alt="icon" className="size-[30px] more-iconN" />
       </div>
 
-      <div className="border-y-2 h-full">
+      <div className="border-y-2 h-[300px]">
         {content.length > 0 ? (
           content.map((a, i) => (
             <li

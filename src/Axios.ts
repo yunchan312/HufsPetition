@@ -3,7 +3,7 @@ import { Reissue } from "./utils/Auth";
 
 export const instanceAuth = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
-  timeout: 5000, // 5초로 증가
+  timeout: 5000,
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${localStorage.getItem("at")}`,

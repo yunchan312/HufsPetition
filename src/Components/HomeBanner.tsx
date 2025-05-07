@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import Banner from "../assets/Banner.png";
+import Banner from "../assets/Banner2.png";
 import Status from "./Status";
 import { useGSAP } from "@gsap/react";
 import HomeSwiper from "./HomeSwiper";
@@ -14,6 +14,7 @@ const HomeBanner = () => {
   }, []);
 
   const [stats, setStats] = useState<PetitionStats>();
+
   useEffect(() => {
     const getStatus = async () => {
       const temp = await GetStats();
@@ -23,9 +24,9 @@ const HomeBanner = () => {
     getStatus();
   }, []);
   return (
-    <div>
+    <div className="phone:pt-[45px] pt-[30px]">
       <div
-        className="Banner phone:h-[600px] h-[300px] flex flex-col justify-end gap-10 bg-cover bg-center w-[99vw]"
+        className="Banner flex flex-col justify-end h-[300px] phone:h-[600px] gap-10 bg-cover bg-center w-[99vw]"
         style={{
           backgroundImage: `url(${Banner})`,
         }}

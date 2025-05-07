@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navigator from "./Navigator";
 import Footer from "./Footer";
-import AgreeModal from "./Components/AgreeModal";
+import AgreeModal from "./Components/Modals/AgreeModal";
 import { useRecoilValue } from "recoil";
 import { isModal } from "./atom";
 import { useEffect } from "react";

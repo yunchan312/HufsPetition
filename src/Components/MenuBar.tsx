@@ -98,6 +98,7 @@ const MenuBar = ({
               )
             ) : null
           ) : null}
+
           {selected === "waiting" ? (
             <div className="px-2 py-1 text-white font-G border-b-2 bg-Point/40">
               답변 대기 / 만료 청원
@@ -128,6 +129,23 @@ const MenuBar = ({
               답변된 청원
             </div>
           )}
+          {!user ? (
+            isSuper ? null : selected === "mypage" ? (
+              <div
+                className="px-2 py-1 text-white font-G border-b-2 bg-Point/40"
+                onClick={() => navigate(`/mypage`)}
+              >
+                마이페이지
+              </div>
+            ) : (
+              <div
+                className="hover:bg-black/20 px-2 py-1"
+                onClick={() => navigate(`/mypage`)}
+              >
+                마이페이지
+              </div>
+            )
+          ) : null}
           {selected === "login" ? (
             <div className="px-2 py-1 text-white font-G border-b-2 bg-Point/40">
               {isLogged ? "로그아웃" : "로그인"}

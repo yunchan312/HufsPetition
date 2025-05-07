@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
-import { GetAgreements } from "../utils/Petitions";
-import Pagination from "./Pagination";
-import { AgreementsProps } from "../Interfaces";
-import WarningIcon from "../assets/Warning.svg";
+import { GetAgreements } from "../../utils/Petitions";
+import Pagination from "../Pagination";
+import { AgreementsProps } from "../../Interfaces";
+import WarningIcon from "../../assets/Warning.svg";
 import { useSetRecoilState } from "recoil";
-import { isModal } from "../atom";
+import { isModal } from "../../atom";
 
 const AgreeModal = () => {
   // const list = [
