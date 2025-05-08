@@ -3,7 +3,7 @@ import BookMark from "../Components/BookMark";
 
 const MyBookmark = () => {
   return (
-    <div className="container pt-[80px]">
+    <div className="pt-[80px] px-5 w-full">
       <PageTitle title="내 북마크" />
       <BookMark pagination={true} size={10} />
     </div>
