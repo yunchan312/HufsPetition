@@ -7,7 +7,13 @@ import { SyncLoader } from "react-spinners";
 import Warning from "../assets/Warning.svg";
 import { useNavigate } from "react-router-dom";
 
-const BookMark = ({ pagination }: { pagination: boolean }) => {
+const BookMark = ({
+  pagination,
+  size,
+}: {
+  pagination: boolean;
+  size: number;
+}) => {
   const [bookmarks, setBookMarks] = useState<petitionsDataInterface[]>([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -17,7 +23,7 @@ const BookMark = ({ pagination }: { pagination: boolean }) => {
     const getData = async () => {
       try {
         setIsLoading(true);
-        const data = await GetBookmark(0, 5);
+        const data = await GetBookmark(page, size);
         setTotalPages(data.result.totalPages);
         setBookMarks(data.result.content);
       } catch (err) {
@@ -47,7 +53,7 @@ const BookMark = ({ pagination }: { pagination: boolean }) => {
         </div>
       ) : (
         <div
-          className="py-10 border-b-2 flex flex-col items-center"
+          className="py-10 border-b-2 flex flex-col items-center w-full"
           onClick={() => navigate("/ongoing")}
         >
           <div className="flex items-center justify-center gap-5">

@@ -17,11 +17,11 @@ const MyPage = () => {
         >
           내 북마크 <img src={Chevron} alt="chevronR" className="size-[30px]" />
         </div>
-        <BookMark pagination={false} />
+        <BookMark pagination={false} size={5} />
       </div>
 
       <div className="phone:px-3 my-2">
-        <MyAgreedPetitions pagination={false} />
+        <MyAgreedPetitions pagination={false} all={true} size={5} />
       </div>
     </div>
   );
