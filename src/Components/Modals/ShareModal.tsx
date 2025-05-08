@@ -6,10 +6,12 @@ const ShareModal = ({
   isShare,
   setIsShare,
   id,
+  title,
 }: {
   isShare: boolean;
   setIsShare: Dispatch<SetStateAction<boolean>>;
   id: number;
+  title: string;
 }) => {
   const link = `${import.meta.env.VITE_BASE_URL}/detail/${id}`;
 
@@ -27,12 +29,12 @@ const ShareModal = ({
 
   return (
     <div
-      className="bg-black/10 absolute w-full h-full top-0 left-0 flex items-center justify-center"
+      className="bg-black/10 fixed w-full h-full top-0 left-0 flex items-center justify-center"
       onClick={() => setIsShare(false)}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white phone:w-1/2 w-[60%] phone:h-[40%] h-[30%] rounded-md py-2 px-5 flex flex-col items-center justify-around"
+        className="bg-white phone:w-1/2 w-[90%] phone:h-[40%] h-[40%] rounded-md py-2 px-5 flex flex-col items-center justify-around"
       >
         <div className="w-full flex items-end justify-end">
           <img
@@ -44,6 +46,7 @@ const ShareModal = ({
         </div>
         <div>
           <div className="text-center w-full font-G text-xl">공유하기</div>
+          <div className="text-Point text-center font-G w-full">{title}</div>
           <div className="text-center">
             청원을 공유해서 더 많은 학생들의 의견을 들려주세요.
           </div>

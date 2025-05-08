@@ -28,7 +28,12 @@ const PetitionCard = (props: petitionsDataInterface) => {
   return (
     <>
       {isShare ? (
-        <ShareModal isShare={isShare} setIsShare={setIsShare} id={props.id} />
+        <ShareModal
+          isShare={isShare}
+          setIsShare={setIsShare}
+          id={props.id}
+          title={props.title}
+        />
       ) : null}
       <div
         className="phone:py-2 py-2 phone:px-5 *:py-2 border-b-2 cursor-pointer flex flex-col justify-between"
