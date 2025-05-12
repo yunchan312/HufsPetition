@@ -53,7 +53,7 @@ const AgreeModal = () => {
           </div>
         )}
       </div>
-      {page === totalPages - 1 ? null : (
+      {page === totalPages - 1 || lists.length <= 0 ? null : (
         <div
           onClick={() => setPage((prev) => (prev += 1))}
           className="bg-Hufs text-white cursor-pointer active:scale-[0.99] transition phone:hover:bg-Hufs/90 py-2 px-5 my-5 rounded-md"
