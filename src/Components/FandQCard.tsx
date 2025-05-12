@@ -43,7 +43,7 @@ const FandQCard = () => {
         <img src={MoreIcon} alt="icon" className="size-[30px] more-icon" />
       </div>
 
-      <div className="border-y-2  h-[300px]">
+      <div className="border-y-2">
         {content.length > 0 ? (
           content.map((a, i) => (
             <li
@@ -54,9 +54,6 @@ const FandQCard = () => {
               <span className="text-[14px] overflow-ellipsis truncate">
                 {a.title}
               </span>
-              <div className="text-black/20 text-[10px] text-right pt-1">
-                {a.createdAt.split("T")[0]}
-              </div>
             </li>
           ))
         ) : (

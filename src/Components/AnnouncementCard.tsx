@@ -14,7 +14,7 @@ const AnnouncementCard = () => {
   const [content, setContent] = useState<BoardContent[]>([]);
   useEffect(() => {
     const getBoard = async () => {
-      const temp = await GetBoard("NOTICE", 0);
+      const temp = await GetBoard("NOTICE", 0, 8);
       setContent(temp.data.result.content);
     };
 
@@ -44,12 +44,12 @@ const AnnouncementCard = () => {
         <img src={MoreIcon} alt="icon" className="size-[30px] more-iconN" />
       </div>
 
-      <div className="border-y-2 h-[300px]">
+      <div className="border-y-2 h-full">
         {content.length > 0 ? (
           content.map((a, i) => (
             <li
               key={i}
-              className="homeElementLists border-b-2 border-b-neutral-50"
+              className="homeElementLists grid grid-cols-[4fr_1fr] border-b-2 border-b-neutral-50"
               onClick={() => navigate(`/announcement/${a.id}`)}
             >
               <span className="text-[14px] overflow-ellipsis truncate">

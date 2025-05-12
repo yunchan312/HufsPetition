@@ -1,7 +1,10 @@
 export const CategoryEnum = {
-  ALL: "전체",
-  EDUCATION: "교육",
-  ELSE: "기타",
+  ACADEMIC: "학사/교육",
+  WELFARE: "행정/복지",
+  IT_SERVER: "IT/정보 서비스",
+  ACTIVITIES: "학생 활동",
+  CAREER: "취업/진로",
+  GUITAR: "기타",
 };
 
 export const statusEnum = {

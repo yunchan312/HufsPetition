@@ -18,6 +18,7 @@ import MyPage from "./Pages/MyPage";
 import MyBookmark from "./Pages/MyBookmark";
 import MyAgreement from "./Pages/MyAgreement";
 import MyPetition from "./Pages/MyPetition";
+import Legals from "./Pages/Legals";
 
 function App() {
   const router = createBrowserRouter([
@@ -87,6 +88,10 @@ function App() {
         {
           path: "/mypage/mypet",
           element: <MyPetition />,
+        },
+        {
+          path: "/legals",
+          element: <Legals />,
         },
         {
           path: "*",

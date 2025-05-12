@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <div className="bg-neutral-200 text-neutral-600 h-[300px] py-5 px-10 mt-10">
       <div className="flex items-center phone:text-[30px] text-[25px] font-bold mb-5">
@@ -8,15 +11,25 @@ const Footer = () => {
 
       <div className="grid grid-cols-2 py-4 text-[13px]">
         <div>
-          <div>외청 서비스 소개</div>
-          <div>이용약관</div>
-          <div>개인정보처리방침</div>
-          <div>운영정책</div>
+          <div
+            onClick={() => navigate("/legals?policy=false")}
+            className="phone:hover:underline underline-offset-3 phone:hover:font-G cursor-pointer"
+          >
+            개인정보처리방침
+          </div>
+          <div
+            onClick={() => navigate("/legals?policy=true")}
+            className="phone:hover:underline underline-offset-3 phone:hover:font-G cursor-pointer"
+          >
+            운영정책
+          </div>
         </div>
 
         <div className="">
-          <div>Follow us</div>
-          <div></div>
+          <div className="">About us</div>
+          <div>BE 융떠</div>
+          <div>BE 떼여니</div>
+          <div>FE 구윤찬</div>
         </div>
       </div>
     </div>
