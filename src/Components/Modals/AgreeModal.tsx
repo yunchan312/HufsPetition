@@ -2,87 +2,12 @@ import { useEffect, useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { GetAgreements } from "../../utils/Petitions";
-import Pagination from "../Pagination";
 import { AgreementsProps } from "../../Interfaces";
 import WarningIcon from "../../assets/Warning.svg";
 import { useSetRecoilState } from "recoil";
 import { isModal } from "../../atom";
 
 const AgreeModal = () => {
-  // const list = [
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  //   {
-  //     StdNum: "202000299",
-  //     text: "동의합니다.",
-  //   },
-  // ];
   const [lists, setLists] = useState<AgreementsProps[]>([]);
   const setModal = useSetRecoilState(isModal);
   const [page, setPage] = useState(0);
@@ -128,7 +53,14 @@ const AgreeModal = () => {
           </div>
         )}
       </div>
-      <Pagination totalPages={totalPages} setter={setPage} page={page} />
+      {page === totalPages - 1 ? null : (
+        <div
+          onClick={() => setPage((prev) => (prev += 1))}
+          className="bg-Hufs text-white cursor-pointer active:scale-[0.99] transition phone:hover:bg-Hufs/90 py-2 px-5 my-5 rounded-md"
+        >
+          더보기
+        </div>
+      )}
     </div>
   );
 };

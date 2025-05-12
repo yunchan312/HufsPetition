@@ -73,7 +73,7 @@ const MenuBar = ({
               className="hover:bg-black/20"
               onClick={() => {
                 setter(false);
-                navigate("/ongoing");
+                navigate("/ongoing?page=0&size=10");
               }}
             >
               진행중인 청원
@@ -108,7 +108,7 @@ const MenuBar = ({
               className="hover:bg-black/20"
               onClick={() => {
                 setter(false);
-                navigate("/waiting");
+                navigate("/waiting?page=0&size=10");
               }}
             >
               답변 대기 / 만료 청원
@@ -123,7 +123,7 @@ const MenuBar = ({
               className="hover:bg-black/20"
               onClick={() => {
                 setter(false);
-                navigate("/done");
+                navigate("/done?page=0&size=10");
               }}
             >
               답변된 청원
@@ -133,14 +133,20 @@ const MenuBar = ({
             isSuper ? null : selected === "mypage" ? (
               <div
                 className="px-2 py-1 text-white font-G border-b-2 bg-Point/40"
-                onClick={() => navigate(`/mypage`)}
+                onClick={() => {
+                  setter(false);
+                  navigate(`/mypage`);
+                }}
               >
                 마이페이지
               </div>
             ) : (
               <div
                 className="hover:bg-black/20 px-2 py-1"
-                onClick={() => navigate(`/mypage`)}
+                onClick={() => {
+                  setter(false);
+                  navigate(`/mypage`);
+                }}
               >
                 마이페이지
               </div>

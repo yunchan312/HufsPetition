@@ -93,7 +93,7 @@ const Navigator = () => {
             ) : (
               <div
                 className="hover:bg-black/20 rounded-md px-2 py-1"
-                onClick={() => navigate("/ongoing")}
+                onClick={() => navigate("/ongoing?page=0&size=10")}
               >
                 진행중인 청원
               </div>
@@ -105,7 +105,7 @@ const Navigator = () => {
             ) : (
               <div
                 className="hover:bg-black/20 rounded-md px-2 py-1"
-                onClick={() => navigate("/waiting")}
+                onClick={() => navigate("/waiting?page=0&size=10")}
               >
                 답변 대기 / 만료 청원
               </div>
@@ -117,7 +117,7 @@ const Navigator = () => {
             ) : (
               <div
                 className="hover:bg-black/20 rounded-md px-2 py-1"
-                onClick={() => navigate("/done")}
+                onClick={() => navigate("/done?page=0&size=10")}
               >
                 답변된 청원
               </div>

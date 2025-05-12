@@ -1,7 +1,7 @@
 export const CategoryEnum = {
   ACADEMIC: "학사/교육",
   WELFARE: "행정/복지",
-  IT_SERVER: "IT/정보 서비스",
+  IT_SERVICE: "IT/정보 서비스",
   ACTIVITIES: "학생 활동",
   CAREER: "취업/진로",
   GUITAR: "기타",

@@ -7,9 +7,11 @@ import { petitionsDataInterface } from "../Interfaces";
 import NoData from "../Components/NoData";
 import Search from "../Components/Search";
 import { SortEnum } from "../Enums";
+import { useSearchParams } from "react-router-dom";
 
 const OnGoing = () => {
-  const [page, setPage] = useState(0);
+  const [params] = useSearchParams();
+  // const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [petitions, setPetitions] = useState<petitionsDataInterface[]>([]);
   const [sortType, setSortType] = useState("동의순");
@@ -17,7 +19,7 @@ const OnGoing = () => {
     const getData = async () => {
       try {
         const data = await GetPetitionsOnGoing(
-          page,
+          Number(params.get("page")),
           SortEnum[sortType as keyof typeof SortEnum]
         );
         setPetitions(data.data.result.content);
@@ -27,7 +29,7 @@ const OnGoing = () => {
       }
     };
     getData();
-  }, [page, sortType]);
+  }, [params.get("page"), sortType]);
 
   return (
     <div className="phone:pt-[80px] pt-20 px-5 w-full phone:w-[900px]">
@@ -53,7 +55,11 @@ const OnGoing = () => {
         ) : (
           <NoData />
         )}
-        <Pagination page={page} totalPages={totalPages} setter={setPage} />
+        <Pagination
+          page={Number(params.get("page")) ?? 0}
+          totalPages={totalPages}
+          pathname="ongoing"
+        />
       </div>
     </div>
   );

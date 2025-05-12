@@ -2,22 +2,18 @@ import { useEffect, useState } from "react";
 import Answer from "../Components/Answer";
 import { BoardInterface } from "../Interfaces";
 import { GetBoard } from "../utils/GetBoard";
-import Pagination from "../Components/Pagination";
 import WarningIcon from "../assets/Warning.svg";
 
 const FandQ = () => {
   const [fq, setFq] = useState<BoardInterface[]>([]);
-  const [page, setPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
   useEffect(() => {
     const getBoard = async () => {
-      const temp = await GetBoard("QNA", page);
+      const temp = await GetBoard("QNA", 0);
       setFq(temp.data.result.content);
-      setTotalPages(temp.data.result.totalPages);
     };
 
     getBoard();
-  }, [page]);
+  }, []);
   return (
     <div className="w-full min-h-[70vh] phone:mt-[90px] mt-[50px] px-5 flex flex-col justify-between">
       <div>
@@ -43,7 +39,6 @@ const FandQ = () => {
           )}
         </div>
       </div>
-      <Pagination page={page} setter={setPage} totalPages={totalPages} />
     </div>
   );
 };

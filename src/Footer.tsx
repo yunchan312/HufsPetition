@@ -27,9 +27,9 @@ const Footer = () => {
 
         <div className="">
           <div className="">About us</div>
-          <div>BE 융떠</div>
-          <div>BE 떼여니</div>
-          <div>FE 구윤찬</div>
+          <div>BE 융떠니 (Yoong Tteoni)</div>
+          <div>BE 떼여니 (Ttae Yeoni) </div>
+          <div>FE 융따니 (Yoong Ttaani)</div>
         </div>
       </div>
     </div>

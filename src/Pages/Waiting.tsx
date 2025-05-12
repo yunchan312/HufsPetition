@@ -10,6 +10,7 @@ import {
 import Pagination from "../Components/Pagination";
 import NoData from "../Components/NoData";
 import { SortEnum } from "../Enums";
+import { useSearchParams } from "react-router-dom";
 
 const Waiting = () => {
   // const petitions = [
@@ -86,8 +87,8 @@ const Waiting = () => {
   //     count: 4556,
   //   },
   // ];
+  const [params] = useSearchParams();
   const [dropdown, setDropdown] = useState("답변중인 청원");
-  const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [petitions, setPetitions] = useState<petitionsDataInterface[]>([]);
   const [sortType, setSortType] = useState("날짜순");
@@ -99,7 +100,7 @@ const Waiting = () => {
     const current = petitionType[dropdown as keyof typeof petitionType];
     const getWaitingPetition = async () => {
       const temp = await GetPetitionsWaiting(
-        page,
+        Number(params.get("page")) ?? 0,
         SortEnum[sortType as keyof typeof SortEnum]
       );
       setTotalPages(temp.data.result.totalPages);
@@ -107,7 +108,7 @@ const Waiting = () => {
     };
     const getExpiredPetition = async () => {
       const temp = await GetPetitionsExpired(
-        page,
+        Number(params.get("page")) ?? 0,
         SortEnum[sortType as keyof typeof SortEnum]
       );
       setTotalPages(temp.data.result.totalPages);
@@ -119,7 +120,7 @@ const Waiting = () => {
     } else if (current === "expired") {
       getExpiredPetition();
     }
-  }, [dropdown, page, sortType]);
+  }, [dropdown, Number(params.get("page")), sortType]);
 
   return (
     <div className="phone:pt-[80px] pt-20 px-5 w-full phone:w-[900px]">
@@ -172,7 +173,11 @@ const Waiting = () => {
           <NoData />
         )}
       </div>
-      <Pagination setter={setPage} page={page} totalPages={totalPages} />
+      <Pagination
+        page={Number(params.get("page"))}
+        totalPages={totalPages}
+        pathname="waiting"
+      />
     </div>
   );
 };

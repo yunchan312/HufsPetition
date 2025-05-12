@@ -6,7 +6,7 @@ import Pagination from "./Pagination";
 import { GetMyPetition } from "../utils/GetMyPage";
 import Chevron from "../assets/ChevronRWhite.svg";
 import Warning from "../assets/Warning.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const MyPetitions = ({
   pagination,
@@ -19,9 +19,9 @@ const MyPetitions = ({
   all: boolean;
   mypetition?: boolean;
 }) => {
+  const [params] = useSearchParams();
   const [myAgree, setMyAgree] = useState<petitionsDataInterface[]>([]);
   const [myPetitions, setMyPetitions] = useState<petitionsDataInterface[]>([]);
-  const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const MyPetitions = ({
     const getData = async () => {
       try {
         setIsLoading(true);
-        const data = await GetMyPetition(0, size);
+        const data = await GetMyPetition(Number(params.get("page")), size);
         setTotalPages(data.result.agreedPetitions.totalPages);
         setMyAgree(data.result.agreedPetitions.content);
         setMyPetitions(data.result.writtenPetitions.content);
@@ -40,7 +40,7 @@ const MyPetitions = ({
       }
     };
     getData();
-  }, []);
+  }, [params.get("page")]);
   return (
     <>
       {all || mypetition ? (
@@ -48,7 +48,7 @@ const MyPetitions = ({
           {all ? (
             <div
               className="mt-10 text-[20px] font-G flex justify-between items-center w-full py-1 px-1 transition border-y-2 bg-Point text-white"
-              onClick={() => navigate("agreement")}
+              onClick={() => navigate("agreement?page=0&size=10")}
             >
               내가 동의한 청원
               <img src={Chevron} alt="chevronR" className="size-[30px]" />
@@ -68,15 +68,15 @@ const MyPetitions = ({
               {pagination ? (
                 <Pagination
                   totalPages={totalPages}
-                  setter={setPage}
-                  page={page}
+                  pathname="mypage/agreement"
+                  page={Number(params.get("page"))}
                 />
               ) : null}
             </div>
           ) : (
             <div
               className="py-10 border-b-2 flex flex-col items-center"
-              onClick={() => navigate("/ongoing")}
+              onClick={() => navigate("/ongoing?page=0&size=10")}
             >
               <div className="flex items-center justify-center gap-5">
                 <img src={Warning} alt="warning" className="size-[50px]" />
@@ -98,7 +98,7 @@ const MyPetitions = ({
           {all ? (
             <div
               className="mt-10 text-[20px] font-G flex justify-between items-center w-full py-1 px-1 transition border-y-2 bg-Point text-white"
-              onClick={() => navigate("mypet")}
+              onClick={() => navigate("mypet?page=0&size=10")}
             >
               내가 건의한 청원
               <img src={Chevron} alt="chevronR" className="size-[30px]" />
@@ -118,8 +118,8 @@ const MyPetitions = ({
               {pagination ? (
                 <Pagination
                   totalPages={totalPages}
-                  setter={setPage}
-                  page={page}
+                  pathname="mypage/mypet"
+                  page={Number(params.get("page"))}
                 />
               ) : null}
             </div>

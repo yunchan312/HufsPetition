@@ -6,6 +6,7 @@ import Pagination from "../Components/Pagination";
 import NoData from "../Components/NoData";
 import { SortEnum } from "../Enums";
 import PageTitle from "../Components/PageTitle";
+import { useSearchParams } from "react-router-dom";
 
 const Done = () => {
   // const DonePetitions = [
@@ -100,16 +101,16 @@ const Done = () => {
   //     donedate: "2020.03.01",
   //   },
   // ];
+  const [params] = useSearchParams();
   const [donePetitions, setDonePetitions] = useState<petitionsDataInterface[]>(
     []
   );
-  const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [sortType, setSortType] = useState("동의순");
   useEffect(() => {
     const getPetitions = async () => {
       const temp = await GetPetitionsAnswered(
-        page,
+        Number(params.get("page") ?? 0),
         SortEnum[sortType as keyof typeof SortEnum]
       );
       setDonePetitions(temp.data.result.content);
@@ -117,7 +118,7 @@ const Done = () => {
     };
 
     getPetitions();
-  }, [page, sortType]);
+  }, [params.get("page"), sortType]);
   return (
     <div className="phone:pt-[80px] pt-20 w-full phone:w-[900px]">
       <div className="py-5 mx-5">
@@ -140,7 +141,11 @@ const Done = () => {
           <NoData />
         )}
       </div>
-      <Pagination page={page} setter={setPage} totalPages={totalPages} />
+      <Pagination
+        page={Number(params.get("page")) ?? 0}
+        pathname="done"
+        totalPages={totalPages}
+      />
     </div>
   );
 };
