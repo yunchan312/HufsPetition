@@ -25,7 +25,6 @@ const Pagination = ({
   useEffect(() => {
     const temp = getBtnLists();
     setList(temp);
-    console.log(page);
   }, [totalPages, page]);
 
   return (

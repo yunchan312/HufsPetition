@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Hufstory from "./assets/hufstory_black.png";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ const Footer = () => {
       </div>
       <div className="pb-5 border-b-2 text-[13px]">© Team Hufstory. 2025.</div>
 
-      <div className="grid grid-cols-2 py-4 text-[13px]">
+      <div className="py-4 text-[13px]">
         <div>
           <div
             onClick={() => navigate("/legals?policy=false")}
@@ -25,12 +26,16 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="">
-          <div className="">About us</div>
-          <div>BE 융떠니 (Yoong Tteoni)</div>
-          <div>BE 떼여니 (Ttae Yeoni) </div>
-          <div>FE 융따니 (Yoong Ttaani)</div>
-        </div>
+        <Link
+          to="https://www.google.com"
+          className="w-full flex items-center justify-between flex-row-reverse"
+        >
+          <img
+            src={Hufstory}
+            alt="logoo"
+            className="size-22 opacity-50 cursor-pointer phone:hover:opacity-30 transition duration-500"
+          />
+        </Link>
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import Warning from "../assets/Warning.svg";
 const NoData = () => {
   const navigate = useNavigate();
   const isSuper = localStorage.getItem("isSuper");
-  console.log(isSuper);
   return (
     <div className="h-[50vh]">
       <div className="flex flex-col items-center justify-center gap-2 h-full">

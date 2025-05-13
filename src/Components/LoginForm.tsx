@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({
   setter,
+  setIsBoo,
 }: {
   setter: Dispatch<SetStateAction<boolean>>;
+  setIsBoo: Dispatch<SetStateAction<boolean>>;
 }) => {
   const {
     register,
@@ -69,8 +71,14 @@ const LoginForm = ({
         />
         {errors.email ? <p className="error">이메일을 확인해주세요</p> : null}
         <input
+          onFocus={() => setIsBoo(true)}
           type="password"
-          {...register("password", { required: true })}
+          {...register("password", {
+            required: true,
+            onBlur: () => {
+              setIsBoo(false);
+            },
+          })}
           className="input"
           placeholder="비밀번호"
         />
