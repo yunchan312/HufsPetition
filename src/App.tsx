@@ -19,6 +19,7 @@ import MyBookmark from "./Pages/MyBookmark";
 import MyAgreement from "./Pages/MyAgreement";
 import MyPetition from "./Pages/MyPetition";
 import Legals from "./Pages/Legals";
+import SearchPwd from "./Pages/SearchPwd";
 
 function App() {
   const router = createBrowserRouter([
@@ -92,6 +93,10 @@ function App() {
         {
           path: "/legals",
           element: <Legals />,
+        },
+        {
+          path: "/search-pwd",
+          element: <SearchPwd />,
         },
         {
           path: "*",

@@ -78,3 +78,23 @@ export const Reissue = () => {
   );
   return Reissue;
 };
+
+export const Withdraw = () => {
+  const withdraw = instanceAuth.post("user/withdraw");
+  return withdraw;
+};
+
+export const UpdatePassword = (email: string, pwd: string) => {
+  const data = instance.post(
+    "user/pwd/update",
+    {
+      email: email,
+      password: pwd,
+    },
+    {
+      withCredentials: true,
+    }
+  );
+
+  return data;
+};

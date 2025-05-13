@@ -101,6 +101,12 @@ const LoginForm = ({
           </label>
         </div>
       </form>
+      <div
+        onClick={() => navigate("/search-pwd")}
+        className="w-full text-center text-Point underline underline-offset-4 cursor-pointer phone:hover:text-Point/70 transition"
+      >
+        비밀번호를 잃어버렸어요
+      </div>
     </div>
   );
 };

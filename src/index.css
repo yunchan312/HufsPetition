@@ -16,7 +16,7 @@
 }
 
 .input {
-  @apply border-2 border-neutral-300 w-full px-2 py-1 placeholder:text-Point/40;
+  @apply border-2 border-neutral-300 w-full px-2 py-1 placeholder:text-Point/40 focus:outline-Point/40;
 }
 
 .greenBtn {
@@ -28,7 +28,7 @@
 }
 
 .error {
-  @apply self-start text-red-400;
+  @apply self-start text-red-400 text-[13px];
 }
 
 .option {
@@ -36,7 +36,7 @@
 }
 
 .hufsBtn {
-  @apply border-2 border-Hufs bg-Hufs text-white w-full py-1 text-center cursor-pointer phone:hover:bg-Hufs/80 transition active:scale-[0.99];
+  @apply border-2 rounded-md border-Hufs bg-Hufs text-white w-full py-1 text-center cursor-pointer phone:hover:bg-Hufs/80 transition active:scale-[0.99];
 }
 .hufsLightBtn {
   @apply border-2 text-Hufs w-full py-1 text-center cursor-pointer;

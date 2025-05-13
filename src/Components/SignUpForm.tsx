@@ -32,7 +32,7 @@ const SignUpForm = () => {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [isCoded, setIsCoded] = useState(false);
   const [email, setEmail] = useState("");
-  const code = watch("code");
+  let code = watch("code");
   return (
     <div className="border-2 rounded-md phone:w-[900px] w-[90%] phone:px-10 px-3 border-neutral-300 h-[400px] phone:h-[400px] flex flex-col justify-around">
       {isLoading ? (
