@@ -105,7 +105,9 @@ const Navigator = () => {
             ) : (
               <div
                 className="hover:bg-black/20 rounded-md px-2 py-1"
-                onClick={() => navigate("/waiting?page=0&size=10")}
+                onClick={() =>
+                  navigate("/waiting?page=0&size=10&expired=false")
+                }
               >
                 답변 대기 / 만료 청원
               </div>

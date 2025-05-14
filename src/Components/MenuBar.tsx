@@ -108,7 +108,7 @@ const MenuBar = ({
               className="hover:bg-black/20"
               onClick={() => {
                 setter(false);
-                navigate("/waiting?page=0&size=10");
+                navigate("/waiting?page=0&size=10&expired=false");
               }}
             >
               답변 대기 / 만료 청원

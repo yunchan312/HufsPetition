@@ -7,10 +7,12 @@ import ReplyIcon from "../assets/Reply.svg";
 import { PetitionStats } from "../Interfaces";
 import { useEffect, useState } from "react";
 import { GetStats } from "../utils/Stats";
+import { useNavigate } from "react-router-dom";
 
 const Status = () => {
   gsap.registerPlugin(useGSAP);
   const [stats, setStats] = useState<PetitionStats>();
+  const navigate = useNavigate();
   useGSAP(() => {
     const tl = gsap.timeline({});
     tl.fromTo(
@@ -65,7 +67,10 @@ const Status = () => {
           </div>
         </div>
 
-        <div className="S2 flex flex-col items-center justify-center">
+        <div
+          onClick={() => navigate("/ongoing?page=0&size=10")}
+          className="S2 flex flex-col items-center justify-center rounded-xl cursor-pointer phone:hover:bg-black/20 transition duration-300"
+        >
           <img src={OnGoingIcon} className="size-[80px] text-Point mx-10" />
           <div className="text-Point px-10 font-G">
             진행중 <br />
@@ -75,7 +80,10 @@ const Status = () => {
           </div>
         </div>
 
-        <div className="S3 flex flex-col items-center justify-center">
+        <div
+          onClick={() => navigate("/waiting?page=0&size=10")}
+          className="S3 flex flex-col items-center justify-center rounded-xl cursor-pointer phone:hover:bg-black/20 transition duration-300"
+        >
           <img src={CancelIcon} className="size-[80px] text-Point mx-10" />
           <div className="text-Point px-10 font-G">
             만료 <br />
@@ -85,7 +93,10 @@ const Status = () => {
           </div>
         </div>
 
-        <div className="S4 flex flex-col items-center justify-center">
+        <div
+          onClick={() => navigate("/waiting?page=0&size=10")}
+          className="S4 flex flex-col items-center justify-center rounded-xl cursor-pointer phone:hover:bg-black/20 transition duration-300"
+        >
           <img src={ReplyIcon} className="size-[80px] text-Point mx-10" />
           <div className="text-Point px-10 font-G">
             답변중 <br />
@@ -95,7 +106,10 @@ const Status = () => {
           </div>
         </div>
 
-        <div className="S5 flex flex-col items-center justify-center">
+        <div
+          onClick={() => navigate("/done?page=0&size=10")}
+          className="S5 flex flex-col items-center justify-center rounded-xl cursor-pointer phone:hover:bg-black/20 transition duration-300"
+        >
           <img src={DoneIcon} className="size-[80px] text-Point mx-10" />
           <div className="text-Point px-10 font-G">
             답변 완료 <br />
