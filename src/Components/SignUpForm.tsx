@@ -26,9 +26,17 @@ const SignUpForm = () => {
 
   const onSendCode = async (email: string) => {
     setIsLoading(true);
-    const temp = await SendCode(email);
-    alert(temp.data.message);
-    setIsLoading(false);
+    try {
+      const temp = await SendCode(email);
+      if (temp.data.isSuccess) {
+        setIsEmailSent(true);
+        alert(temp.data.message);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const [isLoading, setIsLoading] = useState(false);
@@ -68,7 +76,7 @@ const SignUpForm = () => {
                 <input
                   type="email"
                   {...register("email", { required: true })}
-                  className="input  rounded-l-md"
+                  className="input rounded-l-md"
                   placeholder="이메일"
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -78,7 +86,6 @@ const SignUpForm = () => {
                 onClick={() => {
                   if (!isEmailSent) {
                     onSendCode(email);
-                    setIsEmailSent(true);
                   } else {
                     alert(
                       "이미 전송되었습니다. 만약 오지 않았다면, 스팸메일함을 확인해주세요."
