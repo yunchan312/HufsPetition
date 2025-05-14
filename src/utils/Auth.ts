@@ -83,7 +83,7 @@ export const Reissue = () => {
 
 export const Withdraw = () => {
   const withdraw = instanceAuth.post("user/withdraw");
-  localStorage.clear();
+
   return withdraw;
 };
 

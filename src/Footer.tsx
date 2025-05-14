@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="flex items-center phone:text-[30px] text-[25px] font-bold mb-5">
         한국외대 신문고
       </div>
-      <div className="pb-5 border-b-2 text-[13px]">© Team VOZ. 2025.</div>
+      <div className="pb-5 border-b-2 text-[13px]">© Team la VOZ. 2025.</div>
 
       <div className="py-4 text-[13px]">
         <div>
@@ -36,6 +36,7 @@ const Footer = () => {
                     const res = await Withdraw();
                     if (res.data.isSuccess) {
                       localStorage.clear();
+                      window.location.reload();
                       navigate(`/`);
                     }
                   } else {
@@ -56,7 +57,7 @@ const Footer = () => {
         >
           <div className="opacity-50 cursor-pointer phone:hover:opacity-30 transition duration-500">
             <img src={Hufstory} alt="logoo" className="w-22" />
-            <div className="text-center font-G">V O Z</div>
+            <div className="text-center font-G">la VOZ</div>
           </div>
         </Link>
       </div>

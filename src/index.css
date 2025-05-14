@@ -15,6 +15,16 @@
   --font-GB: GB;
 }
 
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Chrome, Safari, Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .input {
   @apply border-2 border-neutral-300 w-full px-2 py-1 placeholder:text-Point/40 focus:outline-Point/40;
 }

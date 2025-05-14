@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CertifyCode, Register, SendCode } from "../utils/SignUp";
 import { SignUpFormProps } from "../Interfaces";
 import { SyncLoader } from "react-spinners";
-import { useCookies } from "react-cookie";
+import BrowserInfo from "../utils/BrowserInfo";
+import { useSetRecoilState } from "recoil";
+import { isSafariModal } from "../atom";
 
 const SignUpForm = () => {
   const {
@@ -13,8 +15,6 @@ const SignUpForm = () => {
     watch,
     getValues,
   } = useForm<SignUpFormProps>();
-
-  const [, setCookie] = useCookies(["email_token"]);
 
   const onSubmit = async (data: SignUpFormProps) => {
     const temp = await Register(data.email, data.password);
@@ -35,7 +35,16 @@ const SignUpForm = () => {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [isCoded, setIsCoded] = useState(false);
   const [email, setEmail] = useState("");
+  const setIsSafariModal = useSetRecoilState(isSafariModal);
+
   let code = watch("code");
+
+  useEffect(() => {
+    const browserInfo = BrowserInfo();
+    console.log(browserInfo);
+
+    setIsSafariModal(true);
+  }, []);
   return (
     <div className="border-2 rounded-md phone:w-[900px] w-[90%] phone:px-10 px-3 border-neutral-300 h-[400px] phone:h-[400px] flex flex-col justify-around">
       {isLoading ? (
@@ -104,10 +113,6 @@ const SignUpForm = () => {
                       setIsLoading(true);
                       const temp = await CertifyCode(email, code);
                       if (temp.data.isSuccess) {
-                        console.log(temp.data);
-                        setCookie("email_token", temp.data.result, {
-                          sameSite: "none",
-                        });
                         alert(temp.data.message);
                         setIsCoded(true);
                       }

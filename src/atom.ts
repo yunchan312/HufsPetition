@@ -9,3 +9,8 @@ export const isModal = atom({
   key: "isModal",
   default: false,
 });
+
+export const isSafariModal = atom({
+  key: "isSafariModal",
+  default: false,
+});
