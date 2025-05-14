@@ -17,7 +17,6 @@ export const UserAuth = async (data: LoginProps) => {
 export const LogOut = async () => {
   const ok = confirm("정말로 로그아웃 하시겠습니까?");
   if (ok) {
-    console.log("ok");
     try {
       if (localStorage.getItem("at")) {
         const temp: { data: { isSuccess: boolean } } = await instanceAuth.post(
@@ -56,6 +55,9 @@ export const LogOut = async () => {
         alert("로그아웃 되었습니다.");
         window.location.pathname = "/login";
       }
+    } finally {
+      localStorage.clear();
+      window.location.pathname = "/";
     }
   }
 };
@@ -81,6 +83,7 @@ export const Reissue = () => {
 
 export const Withdraw = () => {
   const withdraw = instanceAuth.post("user/withdraw");
+  localStorage.clear();
   return withdraw;
 };
 

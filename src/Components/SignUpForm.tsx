@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { CertifyCode, Register, SendCode } from "../utils/SignUp";
 import { SignUpFormProps } from "../Interfaces";
 import { SyncLoader } from "react-spinners";
+import { useCookies } from "react-cookie";
 
 const SignUpForm = () => {
   const {
@@ -12,6 +13,8 @@ const SignUpForm = () => {
     watch,
     getValues,
   } = useForm<SignUpFormProps>();
+
+  const [, setCookie] = useCookies(["email_token"]);
 
   const onSubmit = async (data: SignUpFormProps) => {
     const temp = await Register(data.email, data.password);
@@ -101,6 +104,10 @@ const SignUpForm = () => {
                       setIsLoading(true);
                       const temp = await CertifyCode(email, code);
                       if (temp.data.isSuccess) {
+                        console.log(temp.data);
+                        setCookie("email_token", temp.data.result, {
+                          sameSite: "none",
+                        });
                         alert(temp.data.message);
                         setIsCoded(true);
                       }
@@ -167,9 +174,7 @@ const SignUpForm = () => {
                 메일 인증을 먼저 해주세요
               </div>
             )}
-            {errors.email ? (
-              <p className="error">이메일을 확인해주세요</p>
-            ) : null}
+
             <div className="flex phone:flex-row flex-col gap-1 self-start w-full">
               <input
                 type="submit"
