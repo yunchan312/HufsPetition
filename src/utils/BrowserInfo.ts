@@ -1,7 +1,7 @@
 const BrowserInfo = () => {
   const userAgent = navigator.userAgent.toLowerCase();
 
-  if (userAgent.includes("Chrome")) {
+  if (userAgent.includes("chrome")) {
     return "Chrome";
   } else if (userAgent.includes("firefox")) {
     return "Firefox";

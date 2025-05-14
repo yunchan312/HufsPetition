@@ -41,9 +41,10 @@ const SignUpForm = () => {
 
   useEffect(() => {
     const browserInfo = BrowserInfo();
-    console.log(browserInfo);
 
-    setIsSafariModal(true);
+    if (browserInfo === "Safari") {
+      setIsSafariModal(true);
+    }
   }, []);
   return (
     <div className="border-2 rounded-md phone:w-[900px] w-[90%] phone:px-10 px-3 border-neutral-300 h-[400px] phone:h-[400px] flex flex-col justify-around">
