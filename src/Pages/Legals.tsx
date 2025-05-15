@@ -149,7 +149,7 @@ const Legals = () => {
   }, [params.get("policy")]);
 
   return (
-    <div className="w-full pt-[80px]">
+    <div className="w-full pt-[80px] px-10">
       <PageTitle
         title={
           legal
@@ -157,7 +157,7 @@ const Legals = () => {
             : "한국외국어대학교 청원 웹 서비스 개인정보처리방침"
         }
       />
-      <div className="markdown px-10">
+      <div className="markdown">
         <Markdown>{legal ? use : personal}</Markdown>
       </div>
     </div>

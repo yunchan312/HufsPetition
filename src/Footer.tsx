@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Hufstory from "./assets/hufstory_black.png";
 import { Withdraw } from "./utils/Auth";
 
@@ -51,7 +51,7 @@ const Footer = () => {
           ) : null}
         </div>
 
-        <Link
+        {/* <Link
           to="https://www.google.com"
           className="w-full flex items-center justify-between flex-row-reverse"
         >
@@ -59,7 +59,14 @@ const Footer = () => {
             <img src={Hufstory} alt="logoo" className="w-22" />
             <div className="text-center font-G">la VOZ</div>
           </div>
-        </Link>
+        </Link> */}
+
+        <div className="w-full flex items-center justify-between flex-row-reverse">
+          <div className="opacity-50 cursor-pointer phone:hover:opacity-30 transition duration-500">
+            <img src={Hufstory} alt="logoo" className="w-22" />
+            <div className="text-center font-G">la VOZ</div>
+          </div>
+        </div>
       </div>
     </div>
   );
